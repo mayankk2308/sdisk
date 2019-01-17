@@ -1,0 +1,614 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05B262387EC83D015F08433044D5F472 /* SwiptCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C5ADD5F60C1502FFF698E9E08F1153 /* SwiptCore.swift */; };
+		1B92927A3C715E4D2B12871B99C46B1E /* SwiptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E57CE6A86C5429F7592E97A13263E79 /* SwiptManager.swift */; };
+		2CE71B51C1FFDFB18421DB590E32B5F4 /* Swipt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8DB02B9C152E892F050741A57BFD2 /* Swipt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5ADE09019EBC66EA10EDEC7F5BCED5CF /* Constants+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAFE4C450252FE7FF2F9D8339F0607C /* Constants+Aliases.swift */; };
+		6C08AC21D6824E2D804DC09F93533997 /* Privileges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0460D14BF289110B4A59EECFBE7674E7 /* Privileges.swift */; };
+		719F17F3E9BBC2F7851251E8A4E18383 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CC88E25F6D1F1785EE5E167F1D891 /* Errors.swift */; };
+		79215B6FF28858A46B7A489875F0A58A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		8000E5DD24D734CB2CB801CB88EE3E46 /* Pods-SDisk-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F3C91D21912FA7FD89CE3FBF102FB7 /* Pods-SDisk-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88F4438265BD56E1AA1164323058B7AE /* Swipt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2715423C969EF2EEA98594D81FC598 /* Swipt-dummy.m */; };
+		96E6CB8246C88E46ED3FBB5ACDC359BF /* Pods-SDisk-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0C801844F8A105B84E576A901B6228 /* Pods-SDisk-dummy.m */; };
+		AFAD2D3E647FAFFBD14656D169B5F85C /* ShellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC8ED97FECED4A4974EF79BE638BBE /* ShellType.swift */; };
+		E5368FBA9E00F0CD8E8E96252F0E4B25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9846C5EBFF1BAF9FC31937935FE0A1F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7C9B8764290F7C86934BFF01DB7D442F;
+			remoteInfo = Swipt;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0460D14BF289110B4A59EECFBE7674E7 /* Privileges.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Privileges.swift; path = Swipt/Privileges.swift; sourceTree = "<group>"; };
+		07ACC63ADE1DFDAC7018F4902EF3D367 /* Swipt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swipt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C0C801844F8A105B84E576A901B6228 /* Pods-SDisk-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SDisk-dummy.m"; sourceTree = "<group>"; };
+		1E57CE6A86C5429F7592E97A13263E79 /* SwiptManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiptManager.swift; path = Swipt/SwiptManager.swift; sourceTree = "<group>"; };
+		1EECD86C4E2CDAF88152E6ED748F478F /* Swipt-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swipt-prefix.pch"; sourceTree = "<group>"; };
+		2B2C6F0CDADF4A88E34786D22CE6C91E /* Pods-SDisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDisk.release.xcconfig"; sourceTree = "<group>"; };
+		2DFF979B231A9575C94AE85D7D933964 /* Pods-SDisk-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SDisk-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2F2715423C969EF2EEA98594D81FC598 /* Swipt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Swipt-dummy.m"; sourceTree = "<group>"; };
+		37B58ED1B7A75C7217417D65A35B4C1C /* Swipt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Swipt.modulemap; sourceTree = "<group>"; };
+		37D8DB02B9C152E892F050741A57BFD2 /* Swipt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swipt-umbrella.h"; sourceTree = "<group>"; };
+		3F19379266B5CA69E92170976725FEF5 /* Swipt-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Swipt-Info.plist"; sourceTree = "<group>"; };
+		5AAFE4C450252FE7FF2F9D8339F0607C /* Constants+Aliases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Constants+Aliases.swift"; path = "Swipt/Constants+Aliases.swift"; sourceTree = "<group>"; };
+		6089630D6D4CEE0A024CAD0D16DCDC8F /* Swipt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swipt.xcconfig; sourceTree = "<group>"; };
+		768CC88E25F6D1F1785EE5E167F1D891 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Swipt/Errors.swift; sourceTree = "<group>"; };
+		8236420C8D246A562077780369231447 /* Pods-SDisk-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SDisk-frameworks.sh"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		98A41849C28C021F81C1B557688D031A /* Pods-SDisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDisk.debug.xcconfig"; sourceTree = "<group>"; };
+		A4CC8ED97FECED4A4974EF79BE638BBE /* ShellType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShellType.swift; path = Swipt/ShellType.swift; sourceTree = "<group>"; };
+		B3C0E894339964C42F984EBFCFA924C7 /* Pods-SDisk-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDisk-Info.plist"; sourceTree = "<group>"; };
+		B9C5ADD5F60C1502FFF698E9E08F1153 /* SwiptCore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiptCore.swift; path = Swipt/SwiptCore.swift; sourceTree = "<group>"; };
+		C141E35A6ADF11BCC4334E1C6F0046C2 /* Pods-SDisk-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDisk-acknowledgements.plist"; sourceTree = "<group>"; };
+		CDFA2538FC1BE1071A088302CE6C5AB6 /* Pods_SDisk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SDisk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4F3C91D21912FA7FD89CE3FBF102FB7 /* Pods-SDisk-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SDisk-umbrella.h"; sourceTree = "<group>"; };
+		D94ED04BF89747681E60DE1EF964D9C6 /* Pods-SDisk.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SDisk.modulemap"; sourceTree = "<group>"; };
+		DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F0D3640358FB1905C5B45D11E885EE3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5368FBA9E00F0CD8E8E96252F0E4B25 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF8F62093F3EF2932011288F0B4F766B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79215B6FF28858A46B7A489875F0A58A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28486D7BF652CD6F0BDC937B0074623C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CDFA2538FC1BE1071A088302CE6C5AB6 /* Pods_SDisk.framework */,
+				07ACC63ADE1DFDAC7018F4902EF3D367 /* Swipt.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA7AC8429882A95AA0810A9DCDED54FF /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E858F86E366DB82426D044DD8E8591D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8A3BCE8427F9FFD855D5A838DA564CFB /* Pods-SDisk */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */,
+				9ADA46DBAD74C358FF69DA26E58A4402 /* Pods */,
+				28486D7BF652CD6F0BDC937B0074623C /* Products */,
+				6E858F86E366DB82426D044DD8E8591D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8A3BCE8427F9FFD855D5A838DA564CFB /* Pods-SDisk */ = {
+			isa = PBXGroup;
+			children = (
+				D94ED04BF89747681E60DE1EF964D9C6 /* Pods-SDisk.modulemap */,
+				2DFF979B231A9575C94AE85D7D933964 /* Pods-SDisk-acknowledgements.markdown */,
+				C141E35A6ADF11BCC4334E1C6F0046C2 /* Pods-SDisk-acknowledgements.plist */,
+				1C0C801844F8A105B84E576A901B6228 /* Pods-SDisk-dummy.m */,
+				8236420C8D246A562077780369231447 /* Pods-SDisk-frameworks.sh */,
+				B3C0E894339964C42F984EBFCFA924C7 /* Pods-SDisk-Info.plist */,
+				D4F3C91D21912FA7FD89CE3FBF102FB7 /* Pods-SDisk-umbrella.h */,
+				98A41849C28C021F81C1B557688D031A /* Pods-SDisk.debug.xcconfig */,
+				2B2C6F0CDADF4A88E34786D22CE6C91E /* Pods-SDisk.release.xcconfig */,
+			);
+			name = "Pods-SDisk";
+			path = "Target Support Files/Pods-SDisk";
+			sourceTree = "<group>";
+		};
+		9ADA46DBAD74C358FF69DA26E58A4402 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D2074067019A9E39AE97EDAB0CAD74E1 /* Swipt */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D2074067019A9E39AE97EDAB0CAD74E1 /* Swipt */ = {
+			isa = PBXGroup;
+			children = (
+				5AAFE4C450252FE7FF2F9D8339F0607C /* Constants+Aliases.swift */,
+				768CC88E25F6D1F1785EE5E167F1D891 /* Errors.swift */,
+				0460D14BF289110B4A59EECFBE7674E7 /* Privileges.swift */,
+				A4CC8ED97FECED4A4974EF79BE638BBE /* ShellType.swift */,
+				B9C5ADD5F60C1502FFF698E9E08F1153 /* SwiptCore.swift */,
+				1E57CE6A86C5429F7592E97A13263E79 /* SwiptManager.swift */,
+				FDFB23B4BD28D620071423F516FAF774 /* Support Files */,
+			);
+			path = Swipt;
+			sourceTree = "<group>";
+		};
+		FA7AC8429882A95AA0810A9DCDED54FF /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		FDFB23B4BD28D620071423F516FAF774 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				37B58ED1B7A75C7217417D65A35B4C1C /* Swipt.modulemap */,
+				6089630D6D4CEE0A024CAD0D16DCDC8F /* Swipt.xcconfig */,
+				2F2715423C969EF2EEA98594D81FC598 /* Swipt-dummy.m */,
+				3F19379266B5CA69E92170976725FEF5 /* Swipt-Info.plist */,
+				1EECD86C4E2CDAF88152E6ED748F478F /* Swipt-prefix.pch */,
+				37D8DB02B9C152E892F050741A57BFD2 /* Swipt-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Swipt";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CA6FEF964B3241F5BE020C5E01FA5A98 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CE71B51C1FFDFB18421DB590E32B5F4 /* Swipt-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA2E29A535045E732581D181605A623 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8000E5DD24D734CB2CB801CB88EE3E46 /* Pods-SDisk-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7C9B8764290F7C86934BFF01DB7D442F /* Swipt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 398046E8668785ED36A68E2ED6207E7D /* Build configuration list for PBXNativeTarget "Swipt" */;
+			buildPhases = (
+				CA6FEF964B3241F5BE020C5E01FA5A98 /* Headers */,
+				0CE837271B9A913C7654AC9D60A5F8C0 /* Sources */,
+				FF8F62093F3EF2932011288F0B4F766B /* Frameworks */,
+				7B5F32F689BF21A52250F71D46030ADB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Swipt;
+			productName = Swipt;
+			productReference = 07ACC63ADE1DFDAC7018F4902EF3D367 /* Swipt.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FD789FFFB8FA316C5519DBECDDFA85DA /* Pods-SDisk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33287A31F56C554A567335C073EEA7A7 /* Build configuration list for PBXNativeTarget "Pods-SDisk" */;
+			buildPhases = (
+				DCA2E29A535045E732581D181605A623 /* Headers */,
+				4D50123C2EED89DF1ADF023A7A2E2DA9 /* Sources */,
+				F0D3640358FB1905C5B45D11E885EE3C /* Frameworks */,
+				9CC2A8F3AE10DCBB6239918EE72F0435 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1655DADE40B6F993B68B7F9B4DD38FA3 /* PBXTargetDependency */,
+			);
+			name = "Pods-SDisk";
+			productName = "Pods-SDisk";
+			productReference = CDFA2538FC1BE1071A088302CE6C5AB6 /* Pods_SDisk.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 1010;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 28486D7BF652CD6F0BDC937B0074623C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FD789FFFB8FA316C5519DBECDDFA85DA /* Pods-SDisk */,
+				7C9B8764290F7C86934BFF01DB7D442F /* Swipt */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7B5F32F689BF21A52250F71D46030ADB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CC2A8F3AE10DCBB6239918EE72F0435 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0CE837271B9A913C7654AC9D60A5F8C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5ADE09019EBC66EA10EDEC7F5BCED5CF /* Constants+Aliases.swift in Sources */,
+				719F17F3E9BBC2F7851251E8A4E18383 /* Errors.swift in Sources */,
+				6C08AC21D6824E2D804DC09F93533997 /* Privileges.swift in Sources */,
+				AFAD2D3E647FAFFBD14656D169B5F85C /* ShellType.swift in Sources */,
+				88F4438265BD56E1AA1164323058B7AE /* Swipt-dummy.m in Sources */,
+				05B262387EC83D015F08433044D5F472 /* SwiptCore.swift in Sources */,
+				1B92927A3C715E4D2B12871B99C46B1E /* SwiptManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D50123C2EED89DF1ADF023A7A2E2DA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E6CB8246C88E46ED3FBB5ACDC359BF /* Pods-SDisk-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1655DADE40B6F993B68B7F9B4DD38FA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Swipt;
+			target = 7C9B8764290F7C86934BFF01DB7D442F /* Swipt */;
+			targetProxy = 9846C5EBFF1BAF9FC31937935FE0A1F6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3EE98F7F6380051FB2DBD21BB0F95F6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6089630D6D4CEE0A024CAD0D16DCDC8F /* Swipt.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/Swipt/Swipt-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Swipt/Swipt-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Swipt/Swipt.modulemap";
+				PRODUCT_MODULE_NAME = Swipt;
+				PRODUCT_NAME = Swipt;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		569EE39FB6A5F23DE4C005BD113E9E0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6089630D6D4CEE0A024CAD0D16DCDC8F /* Swipt.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/Swipt/Swipt-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Swipt/Swipt-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Swipt/Swipt.modulemap";
+				PRODUCT_MODULE_NAME = Swipt;
+				PRODUCT_NAME = Swipt;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		58D7559C63B4C26E495EF7D047C31783 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B2C6F0CDADF4A88E34786D22CE6C91E /* Pods-SDisk.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULEMAP_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9992CE2C5F65320F0081E9A0ACAFFF91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		AD234315F0181E396356F4CC9A2CD262 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98A41849C28C021F81C1B557688D031A /* Pods-SDisk.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULEMAP_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D79C9CF82E0503B6800775A4C33DD9A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D79C9CF82E0503B6800775A4C33DD9A7 /* Debug */,
+				9992CE2C5F65320F0081E9A0ACAFFF91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33287A31F56C554A567335C073EEA7A7 /* Build configuration list for PBXNativeTarget "Pods-SDisk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD234315F0181E396356F4CC9A2CD262 /* Debug */,
+				58D7559C63B4C26E495EF7D047C31783 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		398046E8668785ED36A68E2ED6207E7D /* Build configuration list for PBXNativeTarget "Swipt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				569EE39FB6A5F23DE4C005BD113E9E0A /* Debug */,
+				3EE98F7F6380051FB2DBD21BB0F95F6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

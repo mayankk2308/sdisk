@@ -1,0 +1,16 @@
+PODS:
+  - Swipt (1.1.0)
+
+DEPENDENCIES:
+  - Swipt
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Swipt
+
+SPEC CHECKSUMS:
+  Swipt: 88dea3d81f5117ffad107d9c8668e68a993fef35
+
+PODFILE CHECKSUM: 3f63efe827d3c577fe7a9715e56c79861a918206
+
+COCOAPODS: 1.6.0.beta.1

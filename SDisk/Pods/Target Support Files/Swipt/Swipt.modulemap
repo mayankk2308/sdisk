@@ -1,0 +1,6 @@
+framework module Swipt {
+  umbrella header "Swipt-umbrella.h"
+
+  export *
+  module * { export * }
+}
