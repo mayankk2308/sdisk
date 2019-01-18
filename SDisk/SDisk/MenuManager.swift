@@ -7,11 +7,13 @@
 //
 
 import Cocoa
+import Swipt
 
 /// Manages the macOS menubar item for the application.
 class MenuManager {
     
     private static var instance: MenuManager?
+    private let swiptManager = SwiptManager()
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let statusMenuItem = NSMenuItem(title: "Status: Not Configured", action: nil, keyEquivalent: "")
@@ -25,6 +27,11 @@ class MenuManager {
         let openAtLogin = NSMenuItem(title: "Open At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
         openAtLogin.target = self
         prefItem.target = self
+        swiptManager.execute(appleScriptText: "tell application \"System Events\" to get login item \"SDisk\"") { error, _ in
+            DispatchQueue.main.async {
+                openAtLogin.state = error == nil ? .on : .off
+            }
+        }
         menu.addItem(statusMenuItem)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(openAtLogin)
@@ -50,6 +57,33 @@ class MenuManager {
     /// - Parameter sender: The element responsible for the action.
     @objc func toggleOpenAtLogin(_ sender: Any) {
         guard let item = sender as? NSMenuItem else { return }
+        let appPath = Bundle.main.bundlePath
+        let alert = NSAlert()
+        alert.messageText = "Permissions Required"
+        alert.informativeText = "Unable to toggle permissions. Please allow SDisk to control System Events in System Preferences > Privacy > Automation."
+        alert.addButton(withTitle: "Ok")
+        alert.alertStyle = .critical
+        if item.state == .off {
+            swiptManager.execute(appleScriptText: "tell application \"System Events\" to make login item at end with properties {path:\"\(appPath)\", hidden:false}") { error, _ in
+                DispatchQueue.main.async {
+                    if error == nil {
+                        item.state = .on
+                    } else {
+                        alert.runModal()
+                    }
+                }
+            }
+        } else {
+            swiptManager.execute(appleScriptText: "tell application \"System Events\" to delete login item \"SDisk\"") { error, _ in
+                DispatchQueue.main.async {
+                    if error == nil {
+                        item.state = .off
+                    } else {
+                        alert.runModal()
+                    }
+                }
+            }
+        }
         item.state = item.state == .on ? .off : .on
     }
     
