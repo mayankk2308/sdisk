@@ -92,8 +92,8 @@ class SDTaskManager {
     /// - Parameters:
     ///   - diskName: Target disk name.
     ///   - taskCompletionHandler: Handle task after completion.
-    func performTasks(specifiedDiskName diskName: String, handler: @escaping (SDTask) -> Void) {
-        for task in tasks where task.diskName == diskName {
+    func performTasks(specifiedDiskName diskName: String, withTaskType type: TaskType, handler: @escaping (SDTask) -> Void) {
+        for task in tasks where task.diskName == diskName && task.taskType == type.rawValue {
             if TaskLanguage(rawValue: task.taskLanguage) == .bash {
                 swiptManager.asyncExecute(unixScriptText: task.taskScript ?? "echo \"No script provided.\"") { error, result in
                     self.perTaskCompletionHandler(task: task, error: error, result: result, handler: handler)

@@ -15,9 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         SDTaskManager.shared.fetchTasks()
-        SDTaskManager.shared.performTasks(specifiedDiskName: "Test") { task in
-            print(task.taskLog!)
-        }
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {

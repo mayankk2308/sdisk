@@ -101,8 +101,9 @@ class MenuManager {
     ///
     /// - Parameter sender: The element responsible for the action.
     @objc func showPreferences(_ sender: Any) {
-        preferencesWindowController.showWindow(sender)
-        
+        preferencesWindowController.window?.center()
+        preferencesWindowController.window?.makeKeyAndOrderFront(sender)
+        NSApplication.shared.activate(ignoringOtherApps: true)
     }
     
     /// Returns a shared instance of MenuManager.
