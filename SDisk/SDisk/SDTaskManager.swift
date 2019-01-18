@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Swipt
 
 /// Manages scheduled tasks for disks with persistence.
 class SDTaskManager {
@@ -17,6 +18,7 @@ class SDTaskManager {
     
     private static var instance: SDTaskManager?
     private let managedContext = CDS.persistentContainer.viewContext
+    private let swiptManager = SwiptManager()
     
     /// Singleton object for `SDTaskManager`.
     static var shared: SDTaskManager {
@@ -54,11 +56,28 @@ class SDTaskManager {
         }
     }
     
+    /// Removes specified task.
+    ///
+    /// - Parameter task: `SDTask` to remove.
     func removeTask(_ task: SDTask) {
         guard let index = tasks.index(of: task) else { return }
         managedContext.delete(tasks[index])
         saveContext {
             tasks.remove(at: index)
+        }
+    }
+    
+    /// Perform specified task based on disk name.
+    ///
+    /// - Parameters:
+    ///   - diskName: Target disk name.
+    ///   - taskCompletionHandler: Handle task after completion.
+    func performTasks(specifiedDiskName diskName: String, taskCompletionHandler: @escaping (SDTask) -> Void) {
+        for task in tasks where task.diskName == diskName {
+            swiptManager.asyncExecute(unixScriptText: task.taskScript ?? "echo \"No script provided.\"") { error, result in
+                task.taskLog = "\nOutputs:\n\(result ?? "No output.")\n\nErrors:\n\(error.debugDescription)"
+                taskCompletionHandler(task)
+            }
         }
     }
     
@@ -73,5 +92,4 @@ class SDTaskManager {
             print("Could not save.")
         }
     }
-    
 }
