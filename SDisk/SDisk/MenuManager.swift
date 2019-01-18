@@ -22,9 +22,12 @@ class MenuManager {
         let quitItem = NSMenuItem(title: "Quit", action: #selector(quit(_:)), keyEquivalent: "q")
         quitItem.target = self
         let prefItem = NSMenuItem(title: "Preferences...", action: #selector(quit(_:)), keyEquivalent: ",")
+        let openAtLogin = NSMenuItem(title: "Open At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
+        openAtLogin.target = self
         prefItem.target = self
         menu.addItem(statusMenuItem)
         menu.addItem(NSMenuItem.separator())
+        menu.addItem(openAtLogin)
         menu.addItem(prefItem)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(quitItem)
@@ -40,6 +43,14 @@ class MenuManager {
     /// - Parameter status: Status description.
     func update(withStatus status: String) {
         statusMenuItem.title = "Status: " + status
+    }
+    
+    /// Toggle open at login.
+    ///
+    /// - Parameter sender: The element responsible for the action.
+    @objc func toggleOpenAtLogin(_ sender: Any) {
+        guard let item = sender as? NSMenuItem else { return }
+        item.state = item.state == .on ? .off : .on
     }
     
     /// Quits the application.
