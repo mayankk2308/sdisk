@@ -17,6 +17,7 @@
 		A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */; };
 		A860311E21F195C800EF7AE4 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */; };
 		A87A568221F142B600B72611 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87A568121F142B600B72611 /* MenuManager.swift */; };
+		A8918C4621F280A600F434CC /* SDTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4521F280A600F434CC /* SDTaskManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		A87A568121F142B600B72611 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
+		A8918C4521F280A600F434CC /* SDTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDTaskManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				A860310721F1897400EF7AE4 /* TaskType.swift */,
+				A8918C4521F280A600F434CC /* SDTaskManager.swift */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */,
 				A80FA5F321F12C90000A3CC4 /* SDisk.xcdatamodeld in Sources */,
+				A8918C4621F280A600F434CC /* SDTaskManager.swift in Sources */,
 				A87A568221F142B600B72611 /* MenuManager.swift in Sources */,
 				A860310821F1897400EF7AE4 /* TaskType.swift in Sources */,
 				A80FA60521F12E37000A3CC4 /* CDS.swift in Sources */,

@@ -18,6 +18,7 @@ class MenuManager {
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let statusMenuItem = NSMenuItem(title: "Status: Not Configured", action: nil, keyEquivalent: "")
+    private let aboutMenuItem = NSMenuItem(title: "SDisk Version: \(String(describing: Bundle.main.infoDictionary!["CFBundleShortVersionString"]!))", action: nil, keyEquivalent: "")
     private let menu = NSMenu()
     
     /// Prepares the menu item.
@@ -33,6 +34,7 @@ class MenuManager {
                 openAtLogin.state = error == nil ? .on : .off
             }
         }
+        menu.addItem(aboutMenuItem)
         menu.addItem(statusMenuItem)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(openAtLogin)

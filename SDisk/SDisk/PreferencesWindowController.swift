@@ -8,11 +8,11 @@
 
 import Cocoa
 
+/// Allows disk access and script configuration.
 class PreferencesWindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        print("windowcontroller")
     }
     
     override var windowNibName: NSNib.Name? {
@@ -23,4 +23,12 @@ class PreferencesWindowController: NSWindowController {
         return self
     }
     
+    override func keyDown(with event: NSEvent) {
+        if event.modifierFlags.intersection(.deviceIndependentFlagsMask) == [.command] && event.characters == "w" {
+            self.window?.performClose(self)
+        }
+        else if event.modifierFlags.intersection(.deviceIndependentFlagsMask) == [.command] && event.characters == "m" {
+            self.window?.miniaturize(self)
+        }
+    }
 }
