@@ -14,8 +14,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let preferencesWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 270), styleMask: [.closable, .miniaturizable, .titled], backing: .buffered, defer: false)
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print(SDTaskManager.shared.currentTimeStamp)
         SDTaskManager.shared.fetchTasks()
+        SDTaskManager.shared.performTasks(specifiedDiskName: "Test") { task in
+            print(task.taskLog!)
+        }
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {

@@ -34,7 +34,7 @@ class SDTaskManager {
     /// Retrieve current timestamp by timezone.
     var currentTimeStamp: String {
         let now = Date()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS Z"
         return "[\(dateFormatter.string(from: now))]"
     }
     
@@ -44,14 +44,15 @@ class SDTaskManager {
     ///   - diskName: Name of the disk.
     ///   - taskType: Type of task.
     ///   - script: Script to execute.
-    func addTask(withDiskName diskName: String, withTaskType taskType: TaskType, withTaskScript script: String) {
+    func addTask(withDiskName diskName: String, withTaskType type: TaskType, withTaskScript script: String, withTaskLanguage language: TaskLanguage) {
         let task = SDTask(context: managedContext)
         task.diskName = diskName
         task.taskLog = nil
         task.taskScript = script
-        task.taskType = Int16(taskType.rawValue)
+        task.taskType = type.rawValue
+        task.taskLanguage = language.rawValue
         saveContext {
-            tasks.append(task)
+            self.tasks.append(task)
         }
     }
     
@@ -72,7 +73,17 @@ class SDTaskManager {
         guard let index = tasks.index(of: task) else { return }
         managedContext.delete(tasks[index])
         saveContext {
-            tasks.remove(at: index)
+            self.tasks.remove(at: index)
+        }
+    }
+    
+    /// Remove all queued tasks.
+    func removeAllTasks() {
+        for task in tasks {
+            managedContext.delete(task)
+        }
+        saveContext {
+            self.tasks.removeAll()
         }
     }
     
@@ -83,24 +94,32 @@ class SDTaskManager {
     ///   - taskCompletionHandler: Handle task after completion.
     func performTasks(specifiedDiskName diskName: String, handler: @escaping (SDTask) -> Void) {
         for task in tasks where task.diskName == diskName {
-            swiptManager.asyncExecute(unixScriptText: task.taskScript ?? "echo \"No script provided.\"") { error, result in
-                self.perTaskCompletionHandler(task: task, error: error, result: result, handler: handler)
+            if TaskLanguage(rawValue: task.taskLanguage) == .bash {
+                swiptManager.asyncExecute(unixScriptText: task.taskScript ?? "echo \"No script provided.\"") { error, result in
+                    self.perTaskCompletionHandler(task: task, error: error, result: result, handler: handler)
+                }
+            } else if TaskLanguage(rawValue: task.taskLanguage) == .appleScript {
+                swiptManager.asyncExecute(appleScriptText: task.taskScript ?? "echo \"No script provided.\"") { error, result in
+                    self.perTaskCompletionHandler(task: task, error: error, result: result, handler: handler)
+                }
             }
         }
     }
     
     private func perTaskCompletionHandler(task: SDTask, error: SwiptError?, result: String?, handler: @escaping (SDTask) -> Void) {
-        task.taskLog = "\(task.taskLog ?? "")\n\n\(currentTimeStamp)\nOutputs:\n\(result ?? "No output.")\n\nErrors:\n\(error.debugDescription)"
+        task.taskLog = "\(task.taskLog ?? "")\(currentTimeStamp)\nOutput:\n\(result ?? "None")\n\nErrors:\n\(error == nil ? "None" : String(describing: error!) + "\n\n")"
+        saveContext()
         handler(task)
     }
     
     /// Persist data changes made to container.
     ///
     /// - Parameter task: Perform any additional task if saving succeeds.
-    private func saveContext(andDoTask task: () -> Void) {
+    private func saveContext(andDoTask task: (() -> Void)? = nil) {
         do {
             try managedContext.save()
-            task()
+            guard let handler = task else { return }
+            handler()
         } catch {
             print("Could not save.")
         }

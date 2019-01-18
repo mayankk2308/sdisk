@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum TaskType: Int {
+enum TaskType: Int16 {
     case onMount = 1, periodic = 2, onUnmount = 3
 }

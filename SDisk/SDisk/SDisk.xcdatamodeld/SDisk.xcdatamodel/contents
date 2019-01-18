@@ -2,11 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18D39a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SDTask" representedClassName="SDTask" syncable="YES" codeGenerationType="class">
         <attribute name="diskName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="taskLanguage" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="taskLog" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="taskScript" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="taskType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SDTask" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="SDTask" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>
