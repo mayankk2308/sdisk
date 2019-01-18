@@ -14,6 +14,7 @@ class MenuManager {
     
     private static var instance: MenuManager?
     private let swiptManager = SwiptManager()
+    private let preferencesWindowController = PreferencesWindowController()
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let statusMenuItem = NSMenuItem(title: "Status: Not Configured", action: nil, keyEquivalent: "")
@@ -23,7 +24,7 @@ class MenuManager {
     func prepare() {
         let quitItem = NSMenuItem(title: "Quit", action: #selector(quit(_:)), keyEquivalent: "q")
         quitItem.target = self
-        let prefItem = NSMenuItem(title: "Preferences...", action: #selector(quit(_:)), keyEquivalent: ",")
+        let prefItem = NSMenuItem(title: "Configure", action: #selector(showPreferences(_:)), keyEquivalent: ",")
         let openAtLogin = NSMenuItem(title: "Open At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
         openAtLogin.target = self
         prefItem.target = self
@@ -92,6 +93,14 @@ class MenuManager {
     /// - Parameter sender: The element responsible for the action.
     @objc func quit(_ sender: Any) {
         NSApplication.shared.terminate(sender)
+    }
+    
+    /// Show preference pane.
+    ///
+    /// - Parameter sender: The element responsible for the action.
+    @objc func showPreferences(_ sender: Any) {
+        preferencesWindowController.showWindow(sender)
+        
     }
     
     /// Returns a shared instance of MenuManager.

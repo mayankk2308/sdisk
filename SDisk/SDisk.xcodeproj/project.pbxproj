@@ -13,6 +13,9 @@
 		A80FA5F521F12C91000A3CC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A80FA5F421F12C91000A3CC4 /* Assets.xcassets */; };
 		A80FA5F821F12C91000A3CC4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A80FA5F621F12C91000A3CC4 /* MainMenu.xib */; };
 		A80FA60521F12E37000A3CC4 /* CDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80FA60421F12E37000A3CC4 /* CDS.swift */; };
+		A860310821F1897400EF7AE4 /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860310721F1897400EF7AE4 /* TaskType.swift */; };
+		A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */; };
+		A860311E21F195C800EF7AE4 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */; };
 		A87A568221F142B600B72611 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87A568121F142B600B72611 /* MenuManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +31,9 @@
 		A80FA5F921F12C91000A3CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A80FA5FA21F12C91000A3CC4 /* SDisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SDisk.entitlements; sourceTree = "<group>"; };
 		A80FA60421F12E37000A3CC4 /* CDS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDS.swift; sourceTree = "<group>"; };
+		A860310721F1897400EF7AE4 /* TaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
+		A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		A87A568121F142B600B72611 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +87,7 @@
 		A80FA5EE21F12C90000A3CC4 /* SDisk */ = {
 			isa = PBXGroup;
 			children = (
+				A860310621F1895D00EF7AE4 /* Tasks */,
 				A80FA60321F12E2B000A3CC4 /* Data */,
 				A80FA60221F12DB3000A3CC4 /* User Interface */,
 				A80FA60121F12CF9000A3CC4 /* Configuration */,
@@ -121,14 +128,24 @@
 			isa = PBXGroup;
 			children = (
 				A80FA5F621F12C91000A3CC4 /* MainMenu.xib */,
+				A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */,
 			);
 			name = XIBs;
+			sourceTree = "<group>";
+		};
+		A860310621F1895D00EF7AE4 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				A860310721F1897400EF7AE4 /* TaskType.swift */,
+			);
+			name = Tasks;
 			sourceTree = "<group>";
 		};
 		A87A568321F142BB00B72611 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				A87A568121F142B600B72611 /* MenuManager.swift */,
+				A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -193,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A860311E21F195C800EF7AE4 /* PreferencesWindowController.xib in Resources */,
 				A80FA5F521F12C91000A3CC4 /* Assets.xcassets in Resources */,
 				A80FA5F821F12C91000A3CC4 /* MainMenu.xib in Resources */,
 			);
@@ -252,8 +270,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */,
 				A80FA5F321F12C90000A3CC4 /* SDisk.xcdatamodeld in Sources */,
 				A87A568221F142B600B72611 /* MenuManager.swift in Sources */,
+				A860310821F1897400EF7AE4 /* TaskType.swift in Sources */,
 				A80FA60521F12E37000A3CC4 /* CDS.swift in Sources */,
 				A80FA5F021F12C90000A3CC4 /* AppDelegate.swift in Sources */,
 			);

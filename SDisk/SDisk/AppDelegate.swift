@@ -11,6 +11,8 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    let preferencesWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 270), styleMask: [.closable, .miniaturizable, .titled], backing: .buffered, defer: false)
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
     }
 
