@@ -29,6 +29,15 @@ class SDTaskManager {
         return prevInstance
     }
     
+    private let dateFormatter = DateFormatter()
+    
+    /// Retrieve current timestamp by timezone.
+    var currentTimeStamp: String {
+        let now = Date()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        return "[\(dateFormatter.string(from: now))]"
+    }
+    
     /// Adds a task to the application database.
     ///
     /// - Parameters:
@@ -72,13 +81,17 @@ class SDTaskManager {
     /// - Parameters:
     ///   - diskName: Target disk name.
     ///   - taskCompletionHandler: Handle task after completion.
-    func performTasks(specifiedDiskName diskName: String, taskCompletionHandler: @escaping (SDTask) -> Void) {
+    func performTasks(specifiedDiskName diskName: String, handler: @escaping (SDTask) -> Void) {
         for task in tasks where task.diskName == diskName {
             swiptManager.asyncExecute(unixScriptText: task.taskScript ?? "echo \"No script provided.\"") { error, result in
-                task.taskLog = "\nOutputs:\n\(result ?? "No output.")\n\nErrors:\n\(error.debugDescription)"
-                taskCompletionHandler(task)
+                self.perTaskCompletionHandler(task: task, error: error, result: result, handler: handler)
             }
         }
+    }
+    
+    private func perTaskCompletionHandler(task: SDTask, error: SwiptError?, result: String?, handler: @escaping (SDTask) -> Void) {
+        task.taskLog = "\(task.taskLog ?? "")\n\n\(currentTimeStamp)\nOutputs:\n\(result ?? "No output.")\n\nErrors:\n\(error.debugDescription)"
+        handler(task)
     }
     
     /// Persist data changes made to container.
