@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MenuManager.swift
 //  SDisk
 //
 //  Created by Mayank Kumar on 1/17/19.
