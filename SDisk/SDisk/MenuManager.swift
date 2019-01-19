@@ -15,6 +15,7 @@ class MenuManager {
     private static var instance: MenuManager?
     private let swiptManager = SwiptManager()
     private let preferencesWindowController = PreferencesWindowController()
+    private let helpWindowController = HelpWindowController()
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let statusMenuItem = NSMenuItem(title: "Status: Not Configured", action: nil, keyEquivalent: "")
@@ -25,10 +26,14 @@ class MenuManager {
     func prepare() {
         let quitItem = NSMenuItem(title: "Quit", action: #selector(quit(_:)), keyEquivalent: "q")
         quitItem.target = self
-        let prefItem = NSMenuItem(title: "Configure", action: #selector(showPreferences(_:)), keyEquivalent: ",")
-        let openAtLogin = NSMenuItem(title: "Open At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
+        let prefItem = NSMenuItem(title: "Configure...", action: #selector(showPreferences(_:)), keyEquivalent: ",")
+        let openAtLogin = NSMenuItem(title: "Launch At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
+        let helpItem = NSMenuItem(title: "Help...", action: #selector(showHelp(_:)), keyEquivalent: "")
+        let donateItem = NSMenuItem(title: "Donate...", action: #selector(openDonationPage(_:)), keyEquivalent: "")
         openAtLogin.target = self
         prefItem.target = self
+        helpItem.target = self
+        donateItem.target = self
         swiptManager.execute(appleScriptText: "tell application \"System Events\" to get login item \"SDisk\"") { error, _ in
             DispatchQueue.main.async {
                 openAtLogin.state = error == nil ? .on : .off
@@ -39,6 +44,9 @@ class MenuManager {
         menu.addItem(NSMenuItem.separator())
         menu.addItem(openAtLogin)
         menu.addItem(prefItem)
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(donateItem)
+        menu.addItem(helpItem)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(quitItem)
         statusItem.menu = menu
@@ -103,6 +111,22 @@ class MenuManager {
     @objc func showPreferences(_ sender: Any) {
         preferencesWindowController.window?.center()
         preferencesWindowController.window?.makeKeyAndOrderFront(sender)
+        NSApplication.shared.activate(ignoringOtherApps: true)
+    }
+    
+    /// Open donation website in Safari.
+    ///
+    /// - Parameter sender: The element responsible for the action.
+    @objc func openDonationPage(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mayankk2308@gmail.com&lc=US&item_name=Development%20of%20SDisk&no_note=0&currency_code=USD&bn=PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest")!)
+    }
+    
+    /// Show help view.
+    ///
+    /// - Parameter sender: The element responsible for the action.
+    @objc func showHelp(_ sender: Any) {
+        helpWindowController.window?.center()
+        helpWindowController.window?.makeKeyAndOrderFront(sender)
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
     

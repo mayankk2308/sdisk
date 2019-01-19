@@ -1,5 +1,5 @@
 //
-//  PreferencesWindowController.swift
+//  HelpWindowController.swift
 //  SDisk
 //
 //  Created by Mayank Kumar on 1/18/19.
@@ -8,18 +8,19 @@
 
 import Cocoa
 
-/// Allows disk access and script configuration.
-class PreferencesWindowController: SDWindowController {
+/// Shows help.
+class HelpWindowController: SDWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
     }
-    
+ 
     override var windowNibName: NSNib.Name? {
-        return "PreferencesWindowController"
+        return "HelpWindowController"
     }
     
     override var owner: AnyObject? {
         return self
     }
+    
 }
