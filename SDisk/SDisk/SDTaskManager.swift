@@ -16,18 +16,11 @@ class SDTaskManager {
     /// Stores all disk-mapped tasks.
     var tasks = [SDTask]()
     
-    private static var instance: SDTaskManager?
     private let managedContext = CDS.persistentContainer.viewContext
     private let swiptManager = SwiptManager()
     
     /// Singleton object for `SDTaskManager`.
-    static var shared: SDTaskManager {
-        guard let prevInstance = instance else {
-            instance = SDTaskManager()
-            return instance!
-        }
-        return prevInstance
-    }
+    static var shared = SDTaskManager()
     
     private let dateFormatter = DateFormatter()
     
@@ -44,9 +37,9 @@ class SDTaskManager {
     ///   - diskName: Name of the disk.
     ///   - taskType: Type of task.
     ///   - script: Script to execute.
-    func addTask(withDiskName diskName: String, withTaskType type: TaskType, withTaskScript script: String, withTaskLanguage language: TaskLanguage) {
+    func addTask(withDisk disk: Disk, withTaskType type: TaskType, withTaskScript script: String, withTaskLanguage language: TaskLanguage) {
         let task = SDTask(context: managedContext)
-        task.diskName = diskName
+        task.targetDisk = disk
         task.taskLog = nil
         task.taskScript = script
         task.taskType = type.rawValue
@@ -92,8 +85,8 @@ class SDTaskManager {
     /// - Parameters:
     ///   - diskName: Target disk name.
     ///   - taskCompletionHandler: Handle task after completion.
-    func performTasks(specifiedDiskName diskName: String, withTaskType type: TaskType, handler: @escaping (SDTask) -> Void) {
-        for task in tasks where task.diskName == diskName && task.taskType == type.rawValue {
+    func performTasks(specifiedDiskName disk: Disk, withTaskType type: TaskType, handler: @escaping (SDTask) -> Void) {
+        for task in tasks where task.targetDisk == disk && task.taskType == type.rawValue {
             if TaskLanguage(rawValue: task.taskLanguage) == .bash {
                 swiptManager.asyncExecute(unixScriptText: task.taskScript ?? "echo \"No script provided.\"") { error, result in
                     self.perTaskCompletionHandler(task: task, error: error, result: result, handler: handler)

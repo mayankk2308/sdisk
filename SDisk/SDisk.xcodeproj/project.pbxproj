@@ -16,6 +16,8 @@
 		A860310821F1897400EF7AE4 /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860310721F1897400EF7AE4 /* TaskType.swift */; };
 		A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */; };
 		A860311E21F195C800EF7AE4 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */; };
+		A8624C5A21F3B3F80088BFE1 /* DADiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8624C5921F3B3F80088BFE1 /* DADiskManager.swift */; };
+		A8624C6321F3E56B0088BFE1 /* AbstractDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8624C6221F3E56B0088BFE1 /* AbstractDisk.swift */; };
 		A87A568221F142B600B72611 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87A568121F142B600B72611 /* MenuManager.swift */; };
 		A8918C4621F280A600F434CC /* SDTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4521F280A600F434CC /* SDTaskManager.swift */; };
 		A8918C4821F2947700F434CC /* TaskLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4721F2947700F434CC /* TaskLanguage.swift */; };
@@ -39,6 +41,8 @@
 		A860310721F1897400EF7AE4 /* TaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
 		A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
+		A8624C5921F3B3F80088BFE1 /* DADiskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DADiskManager.swift; sourceTree = "<group>"; };
+		A8624C6221F3E56B0088BFE1 /* AbstractDisk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDisk.swift; sourceTree = "<group>"; };
 		A87A568121F142B600B72611 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		A8918C4521F280A600F434CC /* SDTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDTaskManager.swift; sourceTree = "<group>"; };
 		A8918C4721F2947700F434CC /* TaskLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLanguage.swift; sourceTree = "<group>"; };
@@ -97,8 +101,9 @@
 		A80FA5EE21F12C90000A3CC4 /* SDisk */ = {
 			isa = PBXGroup;
 			children = (
-				A860310621F1895D00EF7AE4 /* Tasks */,
-				A80FA60321F12E2B000A3CC4 /* Data */,
+				A8624C5821F3B3E60088BFE1 /* Disk Management */,
+				A860310621F1895D00EF7AE4 /* Task Management */,
+				A80FA60321F12E2B000A3CC4 /* Data Management */,
 				A80FA60221F12DB3000A3CC4 /* User Interface */,
 				A80FA60121F12CF9000A3CC4 /* Configuration */,
 				A80FA5F421F12C91000A3CC4 /* Assets.xcassets */,
@@ -125,13 +130,13 @@
 			name = "User Interface";
 			sourceTree = "<group>";
 		};
-		A80FA60321F12E2B000A3CC4 /* Data */ = {
+		A80FA60321F12E2B000A3CC4 /* Data Management */ = {
 			isa = PBXGroup;
 			children = (
 				A80FA60421F12E37000A3CC4 /* CDS.swift */,
 				A80FA5F121F12C90000A3CC4 /* SDisk.xcdatamodeld */,
 			);
-			name = Data;
+			name = "Data Management";
 			sourceTree = "<group>";
 		};
 		A80FA60621F12F1B000A3CC4 /* XIBs */ = {
@@ -144,14 +149,23 @@
 			name = XIBs;
 			sourceTree = "<group>";
 		};
-		A860310621F1895D00EF7AE4 /* Tasks */ = {
+		A860310621F1895D00EF7AE4 /* Task Management */ = {
 			isa = PBXGroup;
 			children = (
 				A860310721F1897400EF7AE4 /* TaskType.swift */,
 				A8918C4721F2947700F434CC /* TaskLanguage.swift */,
 				A8918C4521F280A600F434CC /* SDTaskManager.swift */,
 			);
-			name = Tasks;
+			name = "Task Management";
+			sourceTree = "<group>";
+		};
+		A8624C5821F3B3E60088BFE1 /* Disk Management */ = {
+			isa = PBXGroup;
+			children = (
+				A8624C5921F3B3F80088BFE1 /* DADiskManager.swift */,
+				A8624C6221F3E56B0088BFE1 /* AbstractDisk.swift */,
+			);
+			name = "Disk Management";
 			sourceTree = "<group>";
 		};
 		A87A568321F142BB00B72611 /* Controllers */ = {
@@ -199,6 +213,7 @@
 				TargetAttributes = {
 					A80FA5EB21F12C90000A3CC4 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -286,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8624C6321F3E56B0088BFE1 /* AbstractDisk.swift in Sources */,
 				A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */,
 				A8918C4821F2947700F434CC /* TaskLanguage.swift in Sources */,
 				A80FA5F321F12C90000A3CC4 /* SDisk.xcdatamodeld in Sources */,
@@ -293,6 +309,7 @@
 				A87A568221F142B600B72611 /* MenuManager.swift in Sources */,
 				A860310821F1897400EF7AE4 /* TaskType.swift in Sources */,
 				A8918C4E21F2C7E500F434CC /* SDWindowController.swift in Sources */,
+				A8624C5A21F3B3F80088BFE1 /* DADiskManager.swift in Sources */,
 				A8918C4B21F2C6D800F434CC /* HelpWindowController.swift in Sources */,
 				A80FA60521F12E37000A3CC4 /* CDS.swift in Sources */,
 				A80FA5F021F12C90000A3CC4 /* AppDelegate.swift in Sources */,
@@ -433,6 +450,7 @@
 			baseConfigurationReference = 9ED258EA44ED71A4200FCC88 /* Pods-SDisk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SDisk/SDisk.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -446,6 +464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayank.SDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -455,6 +474,7 @@
 			baseConfigurationReference = 56379F7CF5C93592D866A2AF /* Pods-SDisk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SDisk/SDisk.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
