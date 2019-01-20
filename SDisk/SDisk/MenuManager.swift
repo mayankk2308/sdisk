@@ -60,7 +60,7 @@ class MenuManager {
     ///
     /// - Parameter status: Status description.
     func update(withStatus status: String) {
-        statusMenuItem.title = "Status: " + status
+        statusMenuItem.title = status
     }
     
     /// Toggle open at login.

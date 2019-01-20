@@ -70,16 +70,33 @@ class DADiskManager {
         let fetchRequest = NSFetchRequest<Disk>(entityName: "Disk")
         do {
             configuredDisks = try CDS.persistentContainer.viewContext.fetch(fetchRequest)
+            MenuManager.shared.update(withStatus: "Volumes Configured: \(self.configuredDisks.count == 0 ? "None" : "\(self.configuredDisks.count)")")
         } catch {
             print("Disk fetch failed")
         }
     }
     
+    /// Remove specified disk.
+    ///
+    /// - Parameter disk: `Disk` to remove.
+    func removeConfiguredDisk(_ disk: Disk) {
+        guard let index = configuredDisks.index(of: disk) else { return }
+        CDS.persistentContainer.viewContext.delete(configuredDisks[index])
+        CDS.saveContext {
+            self.configuredDisks.remove(at: index)
+            MenuManager.shared.update(withStatus: "Volumes Configured: \(self.configuredDisks.count == 0 ? "None" : "\(self.configuredDisks.count)")")
+        }
+    }
+    
+    /// Removes all configured disks.
     func removeAllConfiguredDisks() {
         for disk in configuredDisks {
             CDS.persistentContainer.viewContext.delete(disk)
         }
-        CDS.saveContext { self.configuredDisks.removeAll() }
+        CDS.saveContext {
+            self.configuredDisks.removeAll()
+            MenuManager.shared.update(withStatus: "Volumes Configured: None")
+        }
     }
     
     /// Retrieves the disk `UUID`.
