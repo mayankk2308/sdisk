@@ -27,6 +27,7 @@ class DADiskManager {
     /// Holds list of configured disks.
     var configuredDisks = [Disk]()
     
+    /// Initializes a disk arbitration session and prepares disk approval callbacks.
     init() {
         session = DASessionCreate(kCFAllocatorDefault)
         guard let registeredSession = session else { return }
@@ -41,17 +42,21 @@ class DADiskManager {
     }
     
     /// Fetches all available external disks.
-    func fetchExternalDisks() {
+    func fetchExternalDisks(completion: ((Bool) -> Void)? = nil) {
+        var success = true
         let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey], options: [.skipHiddenVolumes])
         guard let allVolumes = volumes else { return }
         for volume in allVolumes {
             do {
                 let volumeProperties = try volume.resourceValues(forKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey])
                 guard let volumeIsInternal = volumeProperties.volumeIsInternal, !volumeIsInternal else { continue }
-                guard let volumeName = volumeProperties.volumeName else { continue }
-                guard let volumeID = volumeProperties.volumeUUIDString else { continue }
-                guard let volumeTotalCapacity = volumeProperties.volumeTotalCapacity else { continue }
-                guard let volumeAvailableCapacity = volumeProperties.volumeAvailableCapacity else { continue }
+                guard let volumeName = volumeProperties.volumeName,
+                let volumeID = volumeProperties.volumeUUIDString,
+                let volumeTotalCapacity = volumeProperties.volumeTotalCapacity,
+                let volumeAvailableCapacity = volumeProperties.volumeAvailableCapacity else {
+                    success = false
+                    continue
+                }
                 let disk = AbstractDisk()
                 disk.name = volumeName
                 disk.volumeID = UUID(uuidString: volumeID)
@@ -60,9 +65,12 @@ class DADiskManager {
                 disk.icon = volume.path
                 currentDisks.append(disk)
             } catch {
+                success = false
                 continue
             }
         }
+        guard let handler = completion else { return }
+        handler(success)
     }
     
     /// Retrieves configured disks.
