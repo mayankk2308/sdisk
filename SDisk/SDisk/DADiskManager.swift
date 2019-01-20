@@ -52,13 +52,12 @@ class DADiskManager {
                 guard let volumeID = volumeProperties.volumeUUIDString else { continue }
                 guard let volumeTotalCapacity = volumeProperties.volumeTotalCapacity else { continue }
                 guard let volumeAvailableCapacity = volumeProperties.volumeAvailableCapacity else { continue }
-                let volumeIcon = NSWorkspace.shared.icon(forFile: volume.path)
                 let disk = AbstractDisk()
                 disk.name = volumeName
-                disk.volumeID = volumeID
-                disk.totalCapacity = volumeTotalCapacity
-                disk.availableCapacity = volumeAvailableCapacity
-                disk.icon = volumeIcon
+                disk.volumeID = UUID(uuidString: volumeID)
+                disk.totalCapacity = Double(volumeTotalCapacity) / 10E8
+                disk.availableCapacity = Double(volumeAvailableCapacity) / 10E8
+                disk.icon = volume.path
                 currentDisks.append(disk)
             } catch {
                 continue
@@ -67,7 +66,7 @@ class DADiskManager {
     }
     
     /// Retrieves configured disks.
-    private func fetchConfiguredDisks() {
+    func fetchConfiguredDisks() {
         let fetchRequest = NSFetchRequest<Disk>(entityName: "Disk")
         do {
             configuredDisks = try CDS.persistentContainer.viewContext.fetch(fetchRequest)
@@ -76,25 +75,42 @@ class DADiskManager {
         }
     }
     
-    /// Computes BSD disk name for given `DADisk`.
+    func removeAllConfiguredDisks() {
+        for disk in configuredDisks {
+            CDS.persistentContainer.viewContext.delete(disk)
+        }
+        CDS.saveContext { self.configuredDisks.removeAll() }
+    }
+    
+    /// Retrieves the disk `UUID`.
     ///
-    /// - Parameter disk: Target disk.
-    /// - Returns: BSD disk name.
-    private func getBSDDiskName(disk: DADisk) -> String {
-        guard let diskBSDNameData = DADiskGetBSDName(disk) else { return "unknown" }
-        return String(cString: diskBSDNameData)
+    /// - Parameter disk: The `DADisk` object.
+    /// - Returns: Disk UUID.
+    private func getUUID(forDisk disk: DADisk) -> UUID? {
+        guard let diskInfo = DADiskCopyDescription(disk) else { return nil }
+        let data = diskInfo as NSDictionary
+        let volumeID = CFUUIDCreateString(kCFAllocatorDefault, (data["DAVolumeUUID"] as! CFUUID)) as String
+        return UUID(uuidString: volumeID)
     }
     
     /// Handle disk unmounts.
     var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, context in
-        print("unmount")
+        DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
         return nil
     }
     
     /// Handle disk mounting.
     var diskDidMount: DADiskMountApprovalCallback = { disk, context in
-        print("mount")
+        DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onMount)
         return nil
+    }
+    
+    /// Generic disk task wrapper.
+    ///
+    /// - Parameter type: The type of task to perform.
+    private func performTask(withDisk disk: DADisk, withTaskType type: TaskType) {
+        guard let diskUUID = DADiskManager.shared.getUUID(forDisk: disk) else { return }
+        SDTaskManager.shared.performTasks(forDiskUUID: diskUUID, withTaskType: type, handler: SDTaskManager.shared.executeUIHandler)
     }
     
 }

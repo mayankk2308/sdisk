@@ -19,6 +19,9 @@ class SDTaskManager {
     private let managedContext = CDS.persistentContainer.viewContext
     private let swiptManager = SwiptManager()
     
+    /// Perform necessary actions for updating the user interface.
+    var userInterfaceHandler: ((SDTask) -> Void)?
+    
     /// Singleton object for `SDTaskManager`.
     static var shared = SDTaskManager()
     
@@ -40,11 +43,12 @@ class SDTaskManager {
     func addTask(withDisk disk: Disk, withTaskType type: TaskType, withTaskScript script: String, withTaskLanguage language: TaskLanguage) {
         let task = SDTask(context: managedContext)
         task.targetDisk = disk
+        disk.associatedTask = task
         task.taskLog = nil
         task.taskScript = script
         task.taskType = type.rawValue
         task.taskLanguage = language.rawValue
-        saveContext {
+        CDS.saveContext {
             self.tasks.append(task)
         }
     }
@@ -65,7 +69,7 @@ class SDTaskManager {
     func removeTask(_ task: SDTask) {
         guard let index = tasks.index(of: task) else { return }
         managedContext.delete(tasks[index])
-        saveContext {
+        CDS.saveContext {
             self.tasks.remove(at: index)
         }
     }
@@ -75,7 +79,7 @@ class SDTaskManager {
         for task in tasks {
             managedContext.delete(task)
         }
-        saveContext {
+        CDS.saveContext {
             self.tasks.removeAll()
         }
     }
@@ -83,10 +87,10 @@ class SDTaskManager {
     /// Perform specified task based on disk name.
     ///
     /// - Parameters:
-    ///   - diskName: Target disk name.
+    ///   - diskUUID: Target disk name.
     ///   - taskCompletionHandler: Handle task after completion.
-    func performTasks(specifiedDiskName disk: Disk, withTaskType type: TaskType, handler: @escaping (SDTask) -> Void) {
-        for task in tasks where task.targetDisk == disk && task.taskType == type.rawValue {
+    func performTasks(forDiskUUID diskUUID: UUID, withTaskType type: TaskType, handler: @escaping (SDTask) -> Void) {
+        for task in tasks where task.targetDisk?.uniqueID == diskUUID && task.taskType == type.rawValue {
             if TaskLanguage(rawValue: task.taskLanguage) == .bash {
                 swiptManager.asyncExecute(unixScriptText: task.taskScript ?? "echo \"No script provided.\"") { error, result in
                     self.perTaskCompletionHandler(task: task, error: error, result: result, handler: handler)
@@ -99,22 +103,24 @@ class SDTaskManager {
         }
     }
     
+    /// A generic completion handler to generate essential logs.
+    ///
+    /// - Parameters:
+    ///   - task: The `SDTask`
+    ///   - error: Error, if any.
+    ///   - result: Result of script execution.
+    ///   - handler: Escaping handler with a reference to the task.
     private func perTaskCompletionHandler(task: SDTask, error: SwiptError?, result: String?, handler: @escaping (SDTask) -> Void) {
-        task.taskLog = "\(task.taskLog ?? "")\(currentTimeStamp)\nOutput:\n\(result ?? "None")\n\nErrors:\n\(error == nil ? "None" : String(describing: error!) + "\n\n")"
-        saveContext()
+        task.taskLog = "\(currentTimeStamp)\nOutput:\n\(result ?? "None")\n\nErrors:\n\((error == nil ? "None" : String(describing: error!)) + "\n\n\(task.taskLog ?? "")")"
+        CDS.saveContext()
         handler(task)
     }
     
-    /// Persist data changes made to container.
+    /// Executes the user interface handler, if provided.
     ///
-    /// - Parameter task: Perform any additional task if saving succeeds.
-    private func saveContext(andDoTask task: (() -> Void)? = nil) {
-        do {
-            try managedContext.save()
-            guard let handler = task else { return }
-            handler()
-        } catch {
-            print("Could not save.")
-        }
+    /// - Parameter task: Passthrough `Task`.
+    func executeUIHandler(withTask task: SDTask) {
+        guard let handler = userInterfaceHandler else { return }
+        handler(task)
     }
 }

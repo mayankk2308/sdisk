@@ -16,6 +16,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         SDTaskManager.shared.fetchTasks()
         DADiskManager.shared.fetchExternalDisks()
+        DADiskManager.shared.fetchConfiguredDisks()
+        DADiskManager.shared.removeAllConfiguredDisks()
+        SDTaskManager.shared.removeAllTasks()
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {

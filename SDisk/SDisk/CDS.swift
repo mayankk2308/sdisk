@@ -22,4 +22,17 @@ class CDS {
         return container
     }()
     
+    /// Persist data changes made to container.
+    ///
+    /// - Parameter task: Perform any additional task if saving succeeds.
+    static func saveContext(andDoTask task: (() -> Void)? = nil) {
+        do {
+            try persistentContainer.viewContext.save()
+            guard let handler = task else { return }
+            handler()
+        } catch {
+            print("Could not save.")
+        }
+    }
+    
 }

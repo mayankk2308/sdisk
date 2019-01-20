@@ -10,21 +10,37 @@ import Foundation
 import Cocoa
 
 /// Defines an external disk.
-class AbstractDisk {
+class AbstractDisk: CustomStringConvertible {
     
     /// Disk name.
     var name: String! = nil
     
     /// Disk UUID.
-    var volumeID: String! = nil
+    var volumeID: UUID! = nil
     
     /// Available space on disk in `GB`.
-    var availableCapacity: Int! = nil
+    var availableCapacity: Double! = nil
     
     /// Total capacity of disk in `GB`.
-    var totalCapacity: Int! = nil
+    var totalCapacity: Double! = nil
     
     /// Disk icon.
-    var icon: NSImage! = nil
+    var icon: String! = nil
+    
+    var configuredDisk: Disk! = nil
+    
+    var description: String {
+        return "(Disk Name: \(String(describing: name!)), Disk ID: \(String(describing: volumeID!)), Space Available: \(String(describing: availableCapacity!)), Total Capacity: \(String(describing: totalCapacity!)))"
+    }
+    
+    func addAsConfigurableDisk() {
+        configuredDisk = Disk(context: CDS.persistentContainer.viewContext)
+        configuredDisk.availableCapacity = availableCapacity
+        configuredDisk.uniqueID = volumeID
+        configuredDisk.totalCapacity = totalCapacity
+        configuredDisk.name = name
+        configuredDisk.icon = icon
+        CDS.saveContext()
+    }
     
 }
