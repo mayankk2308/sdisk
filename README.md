@@ -31,4 +31,12 @@ A brief table of contents for all you need to know:
 
   A list and short description of any incorporated open source components.
 
-To be completed.
+
+## Requirements
+**SDisk** requirements are summarized in the following table:
+
+| Item | Requirement | Description |
+| :--: | :---------: | :---------: |
+| macOS | **10.14+** | It is difficult to test on previous version of macOS at this time, hence a minimum target for Mojave was set. |
+| Automation Permissions | **Allow** | It is typically a very roundabout to be able to add an application as a **Login Item**. The approach applied here is simpler but requires user permissions for automation. |
+| Some External Drives | **Required** | Scripting is not possible on internal drives since the boot drive cannot be mounted or disconnected, and there isn't much purpose served automating over internal volumes. |
