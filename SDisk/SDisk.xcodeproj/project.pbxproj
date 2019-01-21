@@ -26,6 +26,7 @@
 		A8918C4E21F2C7E500F434CC /* SDWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4D21F2C7E500F434CC /* SDWindowController.swift */; };
 		A8A4F24221F66F14006FDEE6 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */; };
 		A8A4F24321F66F14006FDEE6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A4F24121F66F14006FDEE6 /* PreferencesViewController.xib */; };
+		A8A4F24521F67D1D006FDEE6 /* SDiskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A4F24421F67D1D006FDEE6 /* SDiskCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		A8918C4D21F2C7E500F434CC /* SDWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWindowController.swift; sourceTree = "<group>"; };
 		A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		A8A4F24121F66F14006FDEE6 /* PreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
+		A8A4F24421F67D1D006FDEE6 /* SDiskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDiskCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 			children = (
 				A87A568121F142B600B72611 /* MenuManager.swift */,
 				A8918C4D21F2C7E500F434CC /* SDWindowController.swift */,
+				A8A4F24421F67D1D006FDEE6 /* SDiskCellView.swift */,
 				A8918C4921F2C6D800F434CC /* HelpWindowController.swift */,
 				A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */,
 				A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */,
@@ -313,6 +316,7 @@
 				A8918C4821F2947700F434CC /* TaskLanguage.swift in Sources */,
 				A80FA5F321F12C90000A3CC4 /* SDisk.xcdatamodeld in Sources */,
 				A8918C4621F280A600F434CC /* SDTaskManager.swift in Sources */,
+				A8A4F24521F67D1D006FDEE6 /* SDiskCellView.swift in Sources */,
 				A87A568221F142B600B72611 /* MenuManager.swift in Sources */,
 				A860310821F1897400EF7AE4 /* TaskType.swift in Sources */,
 				A8918C4E21F2C7E500F434CC /* SDWindowController.swift in Sources */,
