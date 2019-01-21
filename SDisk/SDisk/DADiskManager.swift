@@ -33,7 +33,7 @@ class DADiskManager {
         guard let registeredSession = session else { return }
         DARegisterDiskUnmountApprovalCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidUnmount, nil)
         DARegisterDiskMountApprovalCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidMount, nil)
-        DARegisterDiskDescriptionChangedCallback(registeredSession, nil, nil, diskDidChange, nil)
+        DARegisterDiskDescriptionChangedCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), nil, diskDidChange, nil)
         DASessionScheduleWithRunLoop(registeredSession, RunLoop.main.getCFRunLoop(), RunLoop.Mode.default as CFString)
     }
     
@@ -41,10 +41,11 @@ class DADiskManager {
         guard let registeredSession = session else { return }
         DASessionUnscheduleFromRunLoop(registeredSession, RunLoop.main.getCFRunLoop(), RunLoop.Mode.default as CFString)
     }
-    
+        
     /// Fetches all available external disks.
     func fetchExternalDisks(completion: ((Bool) -> Void)? = nil) {
         var success = true
+        currentDisks.removeAll()
         let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey], options: [.skipHiddenVolumes])
         guard let allVolumes = volumes else { return }
         for volume in allVolumes {
@@ -133,7 +134,7 @@ class DADiskManager {
     
     /// Handles changes to disk information.
     var diskDidChange: DADiskDescriptionChangedCallback = { disk, _, _ in
-        for aDisk in DADiskManager.shared.currentDisks { aDisk.updateFrom(arbDisk: disk) }
+        for aDisk in DADiskManager.shared.configuredDisks { aDisk.updateFrom(arbDisk: disk) }
     }
     
     /// Generic disk task wrapper.
