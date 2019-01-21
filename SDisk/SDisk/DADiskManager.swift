@@ -33,6 +33,7 @@ class DADiskManager {
         guard let registeredSession = session else { return }
         DARegisterDiskUnmountApprovalCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidUnmount, nil)
         DARegisterDiskMountApprovalCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidMount, nil)
+        DARegisterDiskDescriptionChangedCallback(registeredSession, nil, nil, diskDidChange, nil)
         DASessionScheduleWithRunLoop(registeredSession, RunLoop.main.getCFRunLoop(), RunLoop.Mode.default as CFString)
     }
     
@@ -119,15 +120,20 @@ class DADiskManager {
     }
     
     /// Handle disk unmounts.
-    var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, context in
+    var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
         return nil
     }
     
     /// Handle disk mounting.
-    var diskDidMount: DADiskMountApprovalCallback = { disk, context in
+    var diskDidMount: DADiskMountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onMount)
         return nil
+    }
+    
+    /// Handles changes to disk information.
+    var diskDidChange: DADiskDescriptionChangedCallback = { disk, _, _ in
+        for aDisk in DADiskManager.shared.currentDisks { aDisk.updateFrom(arbDisk: disk) }
     }
     
     /// Generic disk task wrapper.

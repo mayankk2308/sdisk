@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import DiskArbitration
 import Cocoa
 
 /// Defines an external disk.
@@ -33,6 +34,7 @@ class AbstractDisk: CustomStringConvertible {
         return "(Disk Name: \(String(describing: name!)), Disk ID: \(String(describing: volumeID!)), Space Available: \(String(describing: availableCapacity!)), Total Capacity: \(String(describing: totalCapacity!)))"
     }
     
+    /// Converts an abstract disk to a saved, configurable disk.
     func addAsConfigurableDisk() {
         configuredDisk = Disk(context: CDS.persistentContainer.viewContext)
         configuredDisk.availableCapacity = availableCapacity
@@ -43,4 +45,21 @@ class AbstractDisk: CustomStringConvertible {
         CDS.saveContext()
     }
     
+    /// Updates abstract disk values from provided `DADisk`, as long as current object is initialized and has same UUID.
+    ///
+    /// - Parameter disk: A `DADisk`.
+    func updateFrom(arbDisk disk: DADisk) {
+        guard let diskInfo = DADiskCopyDescription(disk) else { return }
+        let data = diskInfo as NSDictionary
+        let arbDiskUUID = UUID(uuidString: CFUUIDCreateString(kCFAllocatorDefault, (data["DAVolumeUUID"] as! CFUUID)) as String)
+        guard let abstractDiskUUID = volumeID else { return }
+        if arbDiskUUID != abstractDiskUUID { return }
+        name = data["name"] as? String
+        totalCapacity = (data["DAMediaSize"] as! Double) / 10E8
+        icon = (data["DAVolumePath"] as! URL).path
+        guard let savedDisk = configuredDisk else { return }
+        savedDisk.name = name
+        savedDisk.totalCapacity = totalCapacity
+        savedDisk.icon = icon
+    }
 }
