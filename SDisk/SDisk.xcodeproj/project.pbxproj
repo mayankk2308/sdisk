@@ -24,6 +24,8 @@
 		A8918C4B21F2C6D800F434CC /* HelpWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4921F2C6D800F434CC /* HelpWindowController.swift */; };
 		A8918C4C21F2C6D800F434CC /* HelpWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8918C4A21F2C6D800F434CC /* HelpWindowController.xib */; };
 		A8918C4E21F2C7E500F434CC /* SDWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4D21F2C7E500F434CC /* SDWindowController.swift */; };
+		A8A4F24221F66F14006FDEE6 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */; };
+		A8A4F24321F66F14006FDEE6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A4F24121F66F14006FDEE6 /* PreferencesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		A8918C4921F2C6D800F434CC /* HelpWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpWindowController.swift; sourceTree = "<group>"; };
 		A8918C4A21F2C6D800F434CC /* HelpWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpWindowController.xib; sourceTree = "<group>"; };
 		A8918C4D21F2C7E500F434CC /* SDWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWindowController.swift; sourceTree = "<group>"; };
+		A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		A8A4F24121F66F14006FDEE6 /* PreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,7 @@
 				A80FA5F621F12C91000A3CC4 /* MainMenu.xib */,
 				A8918C4A21F2C6D800F434CC /* HelpWindowController.xib */,
 				A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */,
+				A8A4F24121F66F14006FDEE6 /* PreferencesViewController.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 				A87A568121F142B600B72611 /* MenuManager.swift */,
 				A8918C4D21F2C7E500F434CC /* SDWindowController.swift */,
 				A8918C4921F2C6D800F434CC /* HelpWindowController.swift */,
+				A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */,
 				A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */,
 			);
 			name = Controllers;
@@ -241,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A860311E21F195C800EF7AE4 /* PreferencesWindowController.xib in Resources */,
+				A8A4F24321F66F14006FDEE6 /* PreferencesViewController.xib in Resources */,
 				A80FA5F521F12C91000A3CC4 /* Assets.xcassets in Resources */,
 				A8918C4C21F2C6D800F434CC /* HelpWindowController.xib in Resources */,
 				A80FA5F821F12C91000A3CC4 /* MainMenu.xib in Resources */,
@@ -309,6 +316,7 @@
 				A87A568221F142B600B72611 /* MenuManager.swift in Sources */,
 				A860310821F1897400EF7AE4 /* TaskType.swift in Sources */,
 				A8918C4E21F2C7E500F434CC /* SDWindowController.swift in Sources */,
+				A8A4F24221F66F14006FDEE6 /* PreferencesViewController.swift in Sources */,
 				A8624C5A21F3B3F80088BFE1 /* DADiskManager.swift in Sources */,
 				A8918C4B21F2C6D800F434CC /* HelpWindowController.swift in Sources */,
 				A80FA60521F12E37000A3CC4 /* CDS.swift in Sources */,

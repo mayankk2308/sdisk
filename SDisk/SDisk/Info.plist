@@ -27,7 +27,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>SDisk would like access to System Events to allow launching the application on login.</string>
+	<string>SDisk would like access to System Events to allow or disallow launching the application on login.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2019 Mayank Kumar. All rights reserved.</string>
 	<key>NSMainNibFile</key>

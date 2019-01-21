@@ -116,7 +116,8 @@ class DADiskManager {
     private func getUUID(forDisk disk: DADisk) -> UUID? {
         guard let diskInfo = DADiskCopyDescription(disk) else { return nil }
         let data = diskInfo as NSDictionary
-        let volumeID = CFUUIDCreateString(kCFAllocatorDefault, (data["DAVolumeUUID"] as! CFUUID)) as String
+        let volumeUUID = data[kDADiskDescriptionVolumeUUIDKey] as! CFUUID
+        guard let volumeID = CFUUIDCreateString(kCFAllocatorDefault, volumeUUID) as String? else { return nil }
         return UUID(uuidString: volumeID)
     }
     

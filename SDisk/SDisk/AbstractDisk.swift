@@ -53,12 +53,13 @@ extension Disk {
     func updateFrom(arbDisk disk: DADisk) {
         guard let diskInfo = DADiskCopyDescription(disk) else { return }
         let data = diskInfo as NSDictionary
-        let arbDiskUUID = UUID(uuidString: CFUUIDCreateString(kCFAllocatorDefault, (data["DAVolumeUUID"] as! CFUUID)) as String)
+        guard let volumeUUID = CFUUIDCreateString(kCFAllocatorDefault, (data[kDADiskDescriptionVolumeUUIDKey] as! CFUUID)) as String? else { return }
+        let arbDiskUUID = UUID(uuidString: volumeUUID)
         guard let volumeID = uniqueID else { return }
         if arbDiskUUID != volumeID { return }
-        name = data["name"] as? String
-        totalCapacity = (data["DAMediaSize"] as! Double) / 10E8
-        icon = (data["DAVolumePath"] as! URL).path
+        name = data[kDADiskDescriptionVolumeNameKey] as? String
+        totalCapacity = (data[kDADiskDescriptionMediaSizeKey] as! Double) / 10E8
+        icon = (data[kDADiskDescriptionVolumePathKey] as! URL).path
     }
     
 }

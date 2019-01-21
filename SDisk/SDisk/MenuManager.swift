@@ -12,9 +12,10 @@ import Swipt
 /// Manages the macOS menubar item for the application.
 class MenuManager {
     
-    private static var instance: MenuManager?
+    static let shared = MenuManager()
     private let swiptManager = SwiptManager()
     private let preferencesWindowController = PreferencesWindowController()
+    private let preferencesViewController = PreferencesViewController()
     private let helpWindowController = HelpWindowController()
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -110,6 +111,8 @@ class MenuManager {
     /// - Parameter sender: The element responsible for the action.
     @objc func showPreferences(_ sender: Any) {
         preferencesWindowController.window?.center()
+        preferencesViewController.window = preferencesWindowController.window
+        preferencesWindowController.contentViewController = preferencesViewController
         preferencesWindowController.window?.makeKeyAndOrderFront(sender)
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
@@ -129,14 +132,4 @@ class MenuManager {
         helpWindowController.window?.makeKeyAndOrderFront(sender)
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
-    
-    /// Returns a shared instance of MenuManager.
-    static var shared: MenuManager {
-        guard let prevInstance = instance else {
-            instance = MenuManager()
-            return instance!
-        }
-        return prevInstance
-    }
-    
 }

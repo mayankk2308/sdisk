@@ -10,7 +10,7 @@ import Cocoa
 
 /// Allows disk access and script configuration.
 class PreferencesWindowController: SDWindowController {
-
+    
     override func windowDidLoad() {
         super.windowDidLoad()
     }
