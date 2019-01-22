@@ -150,8 +150,8 @@
 			children = (
 				A80FA5F621F12C91000A3CC4 /* MainMenu.xib */,
 				A8918C4A21F2C6D800F434CC /* HelpWindowController.xib */,
-				A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */,
 				A8A4F24121F66F14006FDEE6 /* PreferencesViewController.xib */,
+				A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";

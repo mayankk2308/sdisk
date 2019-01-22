@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// Defines the configured disk cell view.
 class SDiskCellView: NSTableCellView {
 
 }

@@ -14,11 +14,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let preferencesWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 270), styleMask: [.closable, .miniaturizable, .titled], backing: .buffered, defer: false)
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        SDTaskManager.shared.fetchTasks()
-        DADiskManager.shared.fetchExternalDisks()
-        DADiskManager.shared.fetchConfiguredDisks()
-        DADiskManager.shared.removeAllConfiguredDisks()
-        SDTaskManager.shared.removeAllTasks()
+//        let disk = Disk(context: CDS.persistentContainer.viewContext)
+//        disk.name = "macOS High Sierra"
+//        disk.availableCapacity = 100
+//        disk.totalCapacity = 2000
+//        disk.icon = nil
+//        disk.uniqueID = nil
+//        CDS.saveContext()
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {

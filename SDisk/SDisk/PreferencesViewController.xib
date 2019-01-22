@@ -8,7 +8,10 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesViewController" customModule="SDisk" customModuleProvider="target">
             <connections>
                 <outlet property="addDiskButton" destination="82m-Xg-Xzi" id="aXB-kh-apQ"/>
+                <outlet property="diskTableView" destination="uDD-cD-jFv" id="GuK-Xf-110"/>
                 <outlet property="indicator" destination="Nla-vy-2tF" id="zhm-16-5LQ"/>
+                <outlet property="instructionView" destination="cV4-Hl-6oD" id="xFz-8g-w1e"/>
+                <outlet property="removeDiskButton" destination="5KR-dh-SmY" id="33p-Mn-5ep"/>
                 <outlet property="statusLabel" destination="RxT-dB-fxz" id="w8H-Ay-wKU"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -33,14 +36,14 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RxT-dB-fxz">
                     <rect key="frame" x="5" y="6" width="128" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Disks Configured: None" id="e0J-nc-c88">
-                        <font key="font" metaFont="system" size="11"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Updating..." id="e0J-nc-c88">
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Nla-vy-2tF">
-                    <rect key="frame" x="351" y="5" width="16" height="16"/>
+                    <rect key="frame" x="326" y="5" width="16" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                 </progressIndicator>
                 <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="76" horizontalPageScroll="10" verticalLineScroll="76" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pf-8z-xua">
@@ -70,7 +73,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView id="akr-2L-JXP" customClass="SDiskCellView" customModule="SDisk" customModuleProvider="target">
+                                            <tableCellView identifier="SDTableCellView" id="akr-2L-JXP" customClass="SDiskCellView" customModule="SDisk" customModuleProvider="target">
                                                 <rect key="frame" x="1" y="1" width="397" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -96,7 +99,7 @@
                                                         <rect key="frame" x="66" y="13" width="97" height="11"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="178 of 5000 GB used" id="Ug2-4F-u7C">
-                                                            <font key="font" metaFont="system" size="9"/>
+                                                            <font key="font" metaFont="miniSystem"/>
                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
@@ -176,19 +179,32 @@
                             <rect key="frame" x="64" y="13" width="326" height="28"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <textFieldCell key="cell" selectable="YES" title="You will see volume information once you select one or more volumes for configuration." id="ILv-cO-b4J">
-                                <font key="font" metaFont="system" size="11"/>
+                                <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                     </subviews>
                 </customView>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5KR-dh-SmY">
+                    <rect key="frame" x="355" y="0.0" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="r7C-4Q-MQg">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removeDisk:" target="-2" id="AWk-dR-151"/>
+                    </connections>
+                </button>
             </subviews>
+            <point key="canvasLocation" x="118" y="148"/>
         </customView>
     </objects>
     <resources>
         <image name="MenuIcon" width="7.679999828338623" height="7.679999828338623"/>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="SDisk" width="245.75999450683594" height="245.75999450683594"/>
     </resources>
 </document>
