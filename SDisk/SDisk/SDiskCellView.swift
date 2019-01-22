@@ -11,4 +11,6 @@ import Cocoa
 /// Defines the configured disk cell view.
 class SDiskCellView: NSTableCellView {
 
+    @IBOutlet weak var diskImageView: NSImageView!
+    @IBOutlet weak var diskNameLabel: NSTextField!
 }

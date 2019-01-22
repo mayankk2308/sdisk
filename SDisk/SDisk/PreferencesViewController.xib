@@ -85,7 +85,7 @@
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fL7-sI-kJv">
                                                         <rect key="frame" x="66" y="40" width="205" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Seagate Expansion" id="Cbe-8c-NeG">
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" title="Disk Name" usesSingleLineMode="YES" id="Cbe-8c-NeG">
                                                             <font key="font" metaFont="systemSemibold" size="15"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -141,6 +141,10 @@
                                                         <color key="contentTintColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                     </button>
                                                 </subviews>
+                                                <connections>
+                                                    <outlet property="diskImageView" destination="iej-Cg-0uI" id="Gh7-Vz-Rqp"/>
+                                                    <outlet property="diskNameLabel" destination="fL7-sI-kJv" id="EWW-z1-bP6"/>
+                                                </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>

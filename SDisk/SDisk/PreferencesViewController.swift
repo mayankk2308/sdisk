@@ -42,7 +42,6 @@ class PreferencesViewController: NSViewController {
         guard let window = window else { return }
         var frame = window.frame
         let oldHeight = frame.height
-        print(oldHeight, height)
         frame.size = CGSize(width: frame.width, height: height)
         frame.origin.y -= (height - oldHeight)
         var viewFrame = view.frame
@@ -95,7 +94,9 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let disk = DADiskManager.shared.configuredDisks[row]
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskCellView"), owner: self) as! SDiskCellView
+        cell.diskNameLabel.stringValue = disk.name!
         return cell
     }
 }
