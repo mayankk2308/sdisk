@@ -19,6 +19,7 @@ class PreferencesViewController: NSViewController {
     @IBOutlet weak var statusLabel: NSTextField!
     
     private let maxCellsInView = 5
+    private let viewDelta: CGFloat = 48
     
     var window: NSWindow! = nil
     
@@ -37,13 +38,15 @@ class PreferencesViewController: NSViewController {
     /// Changes current window size.
     ///
     /// - Parameter offset: Offset by which to change window size.
-    private func changeWindowSize(byOffset offset: CGFloat) {
+    private func changeWindowHeight(toHeight height: CGFloat) {
         guard let window = window else { return }
         var frame = window.frame
-        frame.size = CGSize(width: window.frame.width, height: window.frame.height + offset)
-        frame.origin.y -= offset
+        let oldHeight = frame.height
+        print(oldHeight, height)
+        frame.size = CGSize(width: frame.width, height: height)
+        frame.origin.y -= (height - oldHeight)
         var viewFrame = view.frame
-        viewFrame.origin.y -= offset
+        viewFrame.origin.y -= (height - oldHeight)
         view.frame = viewFrame
         window.setFrame(frame, display: true, animate: true)
     }
@@ -62,11 +65,13 @@ class PreferencesViewController: NSViewController {
                 self.instructionView.isHidden = !DADiskManager.shared.configuredDisks.isEmpty
                 self.statusLabel.stringValue = "Disks Configured: \(DADiskManager.shared.configuredDisks.isEmpty ? "None" : "\(DADiskManager.shared.configuredDisks.count)")"
                 self.diskTableView.reloadData()
-                if DADiskManager.shared.configuredDisks.count > self.maxCellsInView {
-                    self.changeWindowSize(byOffset: CGFloat(self.maxCellsInView) * self.diskTableView.rowHeight)
-                } else if DADiskManager.shared.configuredDisks.count > 1 {
-                    self.changeWindowSize(byOffset: CGFloat(DADiskManager.shared.configuredDisks.count - 1) * self.diskTableView.rowHeight)
+                var count = DADiskManager.shared.configuredDisks.count
+                if count == 0 {
+                    count += 1
+                } else if count > self.maxCellsInView {
+                    count = self.maxCellsInView
                 }
+                self.changeWindowHeight(toHeight: CGFloat(count) * self.diskTableView.rowHeight + self.viewDelta)
             }
         }
     }
@@ -89,9 +94,8 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
         return DADiskManager.shared.configuredDisks.count
     }
     
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-//        let disk = DADiskManager.shared.configuredDisks[row]
-        let cell = tableView.makeView(withIdentifier: .init("SDTableCellView"), owner: self)
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskCellView"), owner: self) as! SDiskCellView
         return cell
     }
 }

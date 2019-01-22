@@ -15,8 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 //        let disk = Disk(context: CDS.persistentContainer.viewContext)
-//        disk.name = "macOS High Sierra"
-//        disk.availableCapacity = 100
+//        disk.name = "macOS Sierra"
+//        disk.availableCapacity = 80
 //        disk.totalCapacity = 2000
 //        disk.icon = nil
 //        disk.uniqueID = nil
