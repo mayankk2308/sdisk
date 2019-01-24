@@ -27,6 +27,8 @@ class DADiskManager {
     /// Holds list of configured disks.
     var configuredDisks = [Disk]()
     
+    var needsUpdate = false
+    
     /// Initializes a disk arbitration session and prepares disk approval callbacks.
     init() {
         session = DASessionCreate(kCFAllocatorDefault)
@@ -45,9 +47,9 @@ class DADiskManager {
     /// Fetches all available external disks.
     func fetchExternalDisks(completion: ((Bool) -> Void)? = nil) {
         var success = true
-        currentDisks.removeAll()
         let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey], options: [.skipHiddenVolumes])
         guard let allVolumes = volumes else { return }
+        currentDisks.removeAll()
         for volume in allVolumes {
             do {
                 let volumeProperties = try volume.resourceValues(forKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey])
@@ -73,6 +75,7 @@ class DADiskManager {
         }
         guard let handler = completion else { return }
         handler(success)
+        needsUpdate = false
     }
     
     /// Retrieves configured disks.
@@ -125,12 +128,20 @@ class DADiskManager {
     /// Handle disk unmounts.
     var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
+        DADiskManager.shared.needsUpdate = true
+        if !MenuManager.shared.preferencesViewController.updateQueued {
+            MenuManager.shared.preferencesViewController.updateDisks()
+        }
         return nil
     }
     
     /// Handle disk mounting.
     var diskDidMount: DADiskMountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onMount)
+        DADiskManager.shared.needsUpdate = true
+        if !MenuManager.shared.preferencesViewController.updateQueued {
+            MenuManager.shared.preferencesViewController.updateDisks()
+        }
         return nil
     }
     

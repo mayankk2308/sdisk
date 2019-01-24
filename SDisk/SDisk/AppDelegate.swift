@@ -14,19 +14,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let preferencesWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 270), styleMask: [.closable, .miniaturizable, .titled], backing: .buffered, defer: false)
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-//        let disk = Disk(context: CDS.persistentContainer.viewContext)
-//        disk.name = "Sabrent"
-//        disk.availableCapacity = 699_849_993
-//        disk.totalCapacity = 950_600_000
-//        disk.icon = NSWorkspace.shared.icon(forFile: "/Volumes/Sabrent").tiffRepresentation
-//        disk.uniqueID = nil
-//        CDS.saveContext()
-        DADiskManager.shared.fetchConfiguredDisks()
-//        DADiskManager.shared.removeAllConfiguredDisks()
+        MenuManager.shared.prepare()
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {
-        MenuManager.shared.prepare()
+        DADiskManager.shared.fetchExternalDisks()
+        DADiskManager.shared.fetchConfiguredDisks()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

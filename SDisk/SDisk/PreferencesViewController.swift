@@ -22,6 +22,7 @@ class PreferencesViewController: NSViewController {
     
     private let maxCellsInView = 5
     private let viewDelta: CGFloat = 48
+    var updateQueued = false
     
     var window: NSWindow! = nil
     
@@ -30,7 +31,8 @@ class PreferencesViewController: NSViewController {
     /// - Parameter sender: The element responsible for the action.
     @IBAction func refreshAllDisks(_ sender: Any) {
         toggleUpdateMode()
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInteractive).async {
+            DADiskManager.shared.fetchExternalDisks()
             DADiskManager.shared.fetchConfiguredDisks()
             DispatchQueue.main.async {
                 self.toggleUpdateMode()
@@ -73,13 +75,24 @@ class PreferencesViewController: NSViewController {
         window.setFrame(frame, display: true, animate: true)
     }
     
-    private func toggleUpdateMode() {
+    /// Updates disk after certain delay.
+    func updateDisks() {
+        updateQueued = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.refreshAllDisks(self)
+            self.updateQueued = false
+        }
+    }
+    
+    /// Toggles view into update mode.
+    func toggleUpdateMode() {
         statusLabel.stringValue = "Updating..."
         refreshAllDisksButton.isEnabled = !refreshAllDisksButton.isEnabled
         removeAllDisksButton.isEnabled = !removeAllDisksButton.isEnabled
         removeDiskButton.isEnabled = !removeDiskButton.isEnabled
         addDiskButton.isEnabled = !addDiskButton.isEnabled
         indicator.isHidden = !indicator.isHidden
+        diskTableView.isEnabled = !diskTableView.isEnabled
         if indicator.isHidden {
             indicator.stopAnimation(self)
         } else  {
@@ -107,7 +120,7 @@ class PreferencesViewController: NSViewController {
         super.viewDidLoad()
         diskTableView.dataSource = self
         diskTableView.delegate = self
-        indicator.isHidden = true
+        removeDiskButton.isEnabled = false
     }
     
     override func viewDidAppear() {
@@ -122,9 +135,13 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
         return DADiskManager.shared.configuredDisks.count
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    /// Populates the table view cells.
+    ///
+    /// - Parameters:
+    ///   - cell: Cell to populate.
+    ///   - row: Row index.
+    private func populateCell(_ cell: SDiskCellView, _ row: Int) {
         let disk = DADiskManager.shared.configuredDisks[row]
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskCellView"), owner: self) as! SDiskCellView
         if let diskName = disk.name,
             let diskIcon = disk.icon {
             cell.diskNameLabel.stringValue = diskName
@@ -133,6 +150,17 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
         cell.diskCapacityLabel.stringValue = DADiskManager.shared.computeDiskSizeString(fromDiskCapacity: disk.totalCapacity, withAvailableDiskCapacity: disk.availableCapacity, withPrecision: 10)
         cell.diskCapacityBar.doubleValue = ((disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity) * 100
         cell.associatedDisk = disk
+        DispatchQueue.global(qos: .background).async {
+            let mounted = disk.mounted()
+            DispatchQueue.main.async {
+                cell.diskAvailableImageView.image = NSImage(named: mounted ? NSImage.Name("NSStatusAvailable") : NSImage.Name("NSStatusUnavailable"))
+            }
+        }
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskCellView"), owner: self) as! SDiskCellView
+        populateCell(cell, row)
         return cell
     }
 }

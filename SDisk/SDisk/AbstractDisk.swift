@@ -32,6 +32,10 @@ class AbstractDisk: CustomStringConvertible {
         return "(Disk Name: \(String(describing: name!)), Disk ID: \(String(describing: volumeID!)), Space Available: \(String(describing: availableCapacity!)), Total Capacity: \(String(describing: totalCapacity!)))"
     }
     
+    static func == (lhs: AbstractDisk, rhs: AbstractDisk) -> Bool {
+        return lhs.volumeID == rhs.volumeID
+    }
+    
     /// Converts an abstract disk to a saved, configurable disk.
     func addAsConfigurableDisk() -> Disk {
         let configuredDisk = Disk(context: CDS.persistentContainer.viewContext)
@@ -53,14 +57,22 @@ extension Disk {
     func updateFrom(arbDisk disk: DADisk) {
         guard let diskInfo = DADiskCopyDescription(disk) else { return }
         let data = diskInfo as NSDictionary
-        guard let volumeUUID = CFUUIDCreateString(kCFAllocatorDefault, (data[kDADiskDescriptionVolumeUUIDKey] as! CFUUID)) as String? else { return }
+        guard let volumeUUIDData = data[kDADiskDescriptionVolumeUUIDKey] else  { return }
+        guard let volumeUUID = CFUUIDCreateString(kCFAllocatorDefault, (volumeUUIDData as! CFUUID)) as String? else { return }
         let arbDiskUUID = UUID(uuidString: volumeUUID)
         guard let volumeID = uniqueID else { return }
         if arbDiskUUID != volumeID { return }
-        name = data[kDADiskDescriptionVolumeNameKey] as? String
-        totalCapacity = (data[kDADiskDescriptionMediaSizeKey] as! Double) / 10E8
-        let path = data[kDADiskDescriptionVolumePathKey] as! String
-        icon = NSWorkspace.shared.icon(forFile: path).tiffRepresentation
+        if let fetchedName = data[kDADiskDescriptionVolumeNameKey] as? String { name = fetchedName }
+        if let fetchedTotalCapacity = data[kDADiskDescriptionMediaSizeKey] as? Double { totalCapacity = fetchedTotalCapacity }
+        if let path = data[kDADiskDescriptionVolumePathKey] as? String { icon = NSWorkspace.shared.icon(forFile: path).tiffRepresentation }
+    }
+    
+    func mounted() -> Bool {
+        guard let diskUUID = uniqueID else { return false }
+        for disk in DADiskManager.shared.currentDisks {
+            if disk.volumeID == diskUUID { return true }
+        }
+        return false
     }
     
 }

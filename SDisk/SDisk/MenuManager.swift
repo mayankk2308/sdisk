@@ -15,7 +15,7 @@ class MenuManager {
     static let shared = MenuManager()
     private let swiptManager = SwiptManager()
     private let preferencesWindowController = PreferencesWindowController()
-    private let preferencesViewController = PreferencesViewController()
+    let preferencesViewController = PreferencesViewController()
     private let helpWindowController = HelpWindowController()
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
