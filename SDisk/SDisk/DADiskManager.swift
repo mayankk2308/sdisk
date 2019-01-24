@@ -62,9 +62,9 @@ class DADiskManager {
                 let disk = AbstractDisk()
                 disk.name = volumeName
                 disk.volumeID = UUID(uuidString: volumeID)
-                disk.totalCapacity = Double(volumeTotalCapacity) / 10E8
-                disk.availableCapacity = Double(volumeAvailableCapacity) / 10E8
-                disk.icon = volume.path
+                disk.totalCapacity = Double(volumeTotalCapacity)
+                disk.availableCapacity = Double(volumeAvailableCapacity)
+                disk.icon = NSWorkspace.shared.icon(forFile: volume.path).tiffRepresentation
                 currentDisks.append(disk)
             } catch {
                 success = false
@@ -116,7 +116,8 @@ class DADiskManager {
     private func getUUID(forDisk disk: DADisk) -> UUID? {
         guard let diskInfo = DADiskCopyDescription(disk) else { return nil }
         let data = diskInfo as NSDictionary
-        let volumeUUID = data[kDADiskDescriptionVolumeUUIDKey] as! CFUUID
+        guard let volumeUUIDData = data[kDADiskDescriptionVolumeUUIDKey] else { return nil }
+        let volumeUUID = volumeUUIDData as! CFUUID
         guard let volumeID = CFUUIDCreateString(kCFAllocatorDefault, volumeUUID) as String? else { return nil }
         return UUID(uuidString: volumeID)
     }
@@ -136,6 +137,31 @@ class DADiskManager {
     /// Handles changes to disk information.
     var diskDidChange: DADiskDescriptionChangedCallback = { disk, _, _ in
         for aDisk in DADiskManager.shared.configuredDisks { aDisk.updateFrom(arbDisk: disk) }
+    }
+    
+    /// Computes appropriate displayable disk size and unit.
+    ///
+    /// - Parameter capacity: Disk capacity in bytes.
+    /// - Returns: Tuple of calculated displayable size and unit.
+    private func diskSizeComputeHelper(_ capacity: Double) -> (Double, String) {
+        var capacity = capacity, tierCount = 0
+        let tiers = ["bytes", "KB", "MB", "GB", "TB", "PB"]
+        while capacity > 999 {
+            capacity /= 1000
+            tierCount += 1
+            if tierCount > tiers.count - 1 { break }
+        }
+        return (capacity, tiers[tierCount])
+    }
+    
+    /// Creates disk size string from given size in bytes.
+    ///
+    /// - Parameter diskSize: Size of disk or volume in bytes.
+    /// - Returns: String representing the size with appropriate units.
+    func computeDiskSizeString(fromDiskCapacity diskCapacity: Double, withAvailableDiskCapacity availableDiskCapacity: Double, withPrecision precision: Double) -> String {
+        let availableDiskCapacityStringData = diskSizeComputeHelper(availableDiskCapacity)
+        let totalDiskCapacityStringData = diskSizeComputeHelper(diskCapacity)
+        return "\(round(availableDiskCapacityStringData.0 * precision) / precision)\(availableDiskCapacityStringData.1 == totalDiskCapacityStringData.1 ? " of " : " \(availableDiskCapacityStringData.1) of ")\(round(totalDiskCapacityStringData.0 * precision) / precision) \(totalDiskCapacityStringData.1) available"
     }
     
     /// Generic disk task wrapper.

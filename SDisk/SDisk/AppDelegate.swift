@@ -15,12 +15,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 //        let disk = Disk(context: CDS.persistentContainer.viewContext)
-//        disk.name = "macOS Sierra"
-//        disk.availableCapacity = 80
-//        disk.totalCapacity = 2000
-//        disk.icon = nil
+//        disk.name = "Sabrent"
+//        disk.availableCapacity = 699_849_993
+//        disk.totalCapacity = 950_600_000
+//        disk.icon = NSWorkspace.shared.icon(forFile: "/Volumes/Sabrent").tiffRepresentation
 //        disk.uniqueID = nil
 //        CDS.saveContext()
+        DADiskManager.shared.fetchConfiguredDisks()
+//        DADiskManager.shared.removeAllConfiguredDisks()
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {

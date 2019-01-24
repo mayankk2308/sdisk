@@ -26,7 +26,7 @@ class AbstractDisk: CustomStringConvertible {
     var totalCapacity: Double! = nil
     
     /// Disk icon.
-    var icon: String! = nil
+    var icon: Data! = nil
     
     var description: String {
         return "(Disk Name: \(String(describing: name!)), Disk ID: \(String(describing: volumeID!)), Space Available: \(String(describing: availableCapacity!)), Total Capacity: \(String(describing: totalCapacity!)))"
@@ -59,7 +59,8 @@ extension Disk {
         if arbDiskUUID != volumeID { return }
         name = data[kDADiskDescriptionVolumeNameKey] as? String
         totalCapacity = (data[kDADiskDescriptionMediaSizeKey] as! Double) / 10E8
-        icon = (data[kDADiskDescriptionVolumePathKey] as! URL).path
+        let path = data[kDADiskDescriptionVolumePathKey] as! String
+        icon = NSWorkspace.shared.icon(forFile: path).tiffRepresentation
     }
     
 }

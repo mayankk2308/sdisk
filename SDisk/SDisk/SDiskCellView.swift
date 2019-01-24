@@ -13,4 +13,26 @@ class SDiskCellView: NSTableCellView {
 
     @IBOutlet weak var diskImageView: NSImageView!
     @IBOutlet weak var diskNameLabel: NSTextField!
+    @IBOutlet weak var diskCapacityBar: NSProgressIndicator!
+    @IBOutlet weak var diskCapacityLabel: NSTextField!
+    @IBOutlet weak var diskAvailableImageView: NSImageView!
+    
+    weak var associatedDisk: Disk! = nil
+    
+    @IBAction func actionsOnMount(_ sender: Any) {
+        
+    }
+    
+    @IBAction func actionsPeriodically(_ sender: Any) {
+        
+    }
+    
+    @IBAction func actionsOnUnmount(_ sender: Any) {
+        
+    }
+    
+    @IBAction func ejectDisk(_ sender: Any) {
+        
+    }
+    
 }
