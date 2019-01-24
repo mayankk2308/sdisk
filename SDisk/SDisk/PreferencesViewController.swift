@@ -38,6 +38,7 @@ class PreferencesViewController: NSViewController {
                 self.toggleUpdateMode()
                 self.diskTableView.reloadData()
                 self.manageWindow()
+                self.updateQueued = false
             }
         }
     }
@@ -80,7 +81,6 @@ class PreferencesViewController: NSViewController {
         updateQueued = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             self.refreshAllDisks(self)
-            self.updateQueued = false
         }
     }
     
@@ -89,7 +89,6 @@ class PreferencesViewController: NSViewController {
         statusLabel.stringValue = "Updating..."
         refreshAllDisksButton.isEnabled = !refreshAllDisksButton.isEnabled
         removeAllDisksButton.isEnabled = !removeAllDisksButton.isEnabled
-        removeDiskButton.isEnabled = !removeDiskButton.isEnabled
         addDiskButton.isEnabled = !addDiskButton.isEnabled
         indicator.isHidden = !indicator.isHidden
         diskTableView.isEnabled = !diskTableView.isEnabled
@@ -148,7 +147,8 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
             cell.diskImageView.image = NSImage(data: diskIcon)
         }
         cell.diskCapacityLabel.stringValue = DADiskManager.shared.computeDiskSizeString(fromDiskCapacity: disk.totalCapacity, withAvailableDiskCapacity: disk.availableCapacity, withPrecision: 10)
-        cell.diskCapacityBar.doubleValue = ((disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity) * 100
+        cell.diskCapacityBarView.index = row
+        cell.diskCapacityBarView.normal = (disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity
         cell.associatedDisk = disk
         DispatchQueue.global(qos: .background).async {
             let mounted = disk.mounted()

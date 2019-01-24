@@ -13,14 +13,13 @@ class SDiskCellView: NSTableCellView {
 
     @IBOutlet weak var diskImageView: NSImageView!
     @IBOutlet weak var diskNameLabel: NSTextField!
-    @IBOutlet weak var diskCapacityBar: NSProgressIndicator!
     @IBOutlet weak var diskCapacityLabel: NSTextField!
     @IBOutlet weak var diskAvailableImageView: NSImageView!
+    @IBOutlet weak var diskCapacityBarView: DiskCapacityBarView!
     
     weak var associatedDisk: Disk! = nil
     
     @IBAction func actionsOnMount(_ sender: Any) {
-        
     }
     
     @IBAction func actionsPeriodically(_ sender: Any) {
