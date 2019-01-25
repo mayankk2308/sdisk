@@ -39,6 +39,9 @@ class DADiskManager {
     /// Holds all delegates.
     private var delegates = [DADiskManagerDelegate]()
     
+    /// Maintains state of disk arbitration.
+    private var ejectMode = false
+    
     var delegate: DADiskManagerDelegate? {
         willSet {
             if let value = newValue { delegates.append(value) }
@@ -66,8 +69,7 @@ class DADiskManager {
     var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
         DADiskManager.shared.diskMap[disk] = nil
-        if !DADiskManager.shared.updateQueued && DADiskManager.shared.totalDisksToUnmount == 0 {
-            DADiskManager.shared.updateQueued = true
+        if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount() }
             }
@@ -84,7 +86,7 @@ class DADiskManager {
                 break
             }
         }
-        if !DADiskManager.shared.updateQueued {
+        if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 for delegate in DADiskManager.shared.delegates { delegate.postDiskMount() }
@@ -97,7 +99,7 @@ class DADiskManager {
     var diskDidChange: DADiskDescriptionChangedCallback = { disk, _, _ in
         guard let cDisk = DADiskManager.shared.diskMap[disk] else { return }
         cDisk.updateFrom(arbDisk: disk)
-        if !DADiskManager.shared.updateQueued {
+        if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 for delegate in DADiskManager.shared.delegates { delegate.postDiskDescriptionChanged() }
@@ -108,6 +110,12 @@ class DADiskManager {
     /// Called after a disk successfully unmounts.
     var diskUnmountDone: DADiskUnmountCallback = { disk, _, _ in
         DADiskManager.shared.totalDisksToUnmount -= 1
+        if DADiskManager.shared.ejectMode && DADiskManager.shared.totalDisksToUnmount == 0 {
+            DADiskManager.shared.ejectMode = false
+            DispatchQueue.main.async {
+                for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount() }
+            }
+        }
     }
 }
 
@@ -207,16 +215,23 @@ extension DADiskManager {
     ///
     /// - Parameter task: Runs designated task after all disks have been unmounted.
     func unmountAllDisks() {
+        ejectMode = true
         for del in delegates { del.preDiskUnmount() }
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.fetchExternalDisks()
+        fetchExternalDisks { success in
+            if !success {
+                // error handling
+                self.ejectMode = false
+                return
+            }
             self.totalDisksToUnmount = self.currentDisks.count
             if self.totalDisksToUnmount == 0 {
                 DispatchQueue.main.async {
                     for delegate in self.delegates { delegate.postDiskUnmount() }
                 }
+                self.ejectMode = false
                 return
             }
+            print("starting unmount")
             for disk in self.currentDisks {
                 DADiskUnmount(disk, DADiskUnmountOptions(kDADiskUnmountOptionDefault), self.diskUnmountDone, nil)
             }

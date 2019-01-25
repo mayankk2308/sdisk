@@ -89,7 +89,6 @@ extension DADisk {
 extension Disk {
     
     static func == (lhs: DADisk, rhs: Disk) -> Bool {
-        print("occurred")
         guard let data = lhs.diskData() else { return false }
         return rhs.uniqueID == lhs.uniqueID(withDiskData: data)
     }

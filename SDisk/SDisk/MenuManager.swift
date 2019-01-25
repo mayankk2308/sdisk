@@ -23,7 +23,7 @@ class MenuManager {
     private let aboutMenuItem = NSMenuItem(title: "SDisk Version: \(String(describing: Bundle.main.infoDictionary!["CFBundleShortVersionString"]!))", action: nil, keyEquivalent: "")
     private let menu = NSMenu()
     
-    private let ejectAllDisksItem = NSMenuItem(title: "Eject All Disks", action: nil, keyEquivalent: "E")
+    private let ejectAllDisksItem = NSMenuItem(title: "Eject All Disks", action: #selector(initiateEject(_:)), keyEquivalent: "E")
     
     /// Toggle open at login.
     ///
@@ -106,7 +106,7 @@ extension MenuManager {
         let openAtLogin = NSMenuItem(title: "Launch At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
         let helpItem = NSMenuItem(title: "Help...", action: #selector(showHelp(_:)), keyEquivalent: "")
         let donateItem = NSMenuItem(title: "Donate...", action: #selector(openDonationPage(_:)), keyEquivalent: "")
-        ejectAllDisksItem.target = DADiskManager.shared
+        ejectAllDisksItem.target = self
         openAtLogin.target = self
         prefItem.target = self
         helpItem.target = self
@@ -132,6 +132,7 @@ extension MenuManager {
             button.image = NSImage(named: "MenuIcon")
             button.target = self
         }
+        DADiskManager.shared.delegate = self
     }
     
     /// Updates menu item status.
@@ -139,6 +140,28 @@ extension MenuManager {
     /// - Parameter status: Status description.
     func update(withStatus status: String) {
         statusMenuItem.title = status
+    }
+    
+}
+
+// MARK: - Handle disk mounting/unmounting.
+extension MenuManager: DADiskManagerDelegate {
+    
+    /// Initiates disk ejection.
+    ///
+    /// - Parameter sender: The element responsible for the action.
+    @objc func initiateEject(_ sender: Any) {
+        DADiskManager.shared.unmountAllDisks()
+    }
+    
+    func preDiskUnmount() {
+        ejectAllDisksItem.title = "Ejecting..."
+        ejectAllDisksItem.target = nil
+    }
+    
+    func postDiskUnmount() {
+        ejectAllDisksItem.title = "Eject All Disks"
+        ejectAllDisksItem.target = self
     }
     
 }
