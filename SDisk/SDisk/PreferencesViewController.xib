@@ -128,9 +128,9 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8zh-pL-rb0">
-                                                        <rect key="frame" x="66" y="10" width="299" height="11"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="178 of 5000 GB used" id="Ug2-4F-u7C">
+                                                        <rect key="frame" x="66" y="10" width="181" height="11"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Capacity information" id="Ug2-4F-u7C">
                                                             <font key="font" metaFont="miniSystem"/>
                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -176,12 +176,22 @@
                                                             <action selector="actionsOnUnmount:" target="akr-2L-JXP" id="9MK-Dh-egJ"/>
                                                         </connections>
                                                     </button>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zO-Qs-leW">
+                                                        <rect key="frame" x="256" y="10" width="119" height="11"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Not Mounted" id="dvW-4e-F4B">
+                                                            <font key="font" metaFont="miniSystem"/>
+                                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
                                                 </subviews>
                                                 <connections>
                                                     <outlet property="diskAvailableImageView" destination="zFd-NO-9TD" id="tgg-aj-Ckm"/>
                                                     <outlet property="diskCapacityBarView" destination="8oE-cT-iye" id="7zO-c2-Kld"/>
                                                     <outlet property="diskCapacityLabel" destination="8zh-pL-rb0" id="j4e-3u-Qlf"/>
                                                     <outlet property="diskImageView" destination="iej-Cg-0uI" id="Gh7-Vz-Rqp"/>
+                                                    <outlet property="diskMountStatusLabel" destination="6zO-Qs-leW" id="Jdk-pV-rHV"/>
                                                     <outlet property="diskNameLabel" destination="fL7-sI-kJv" id="EWW-z1-bP6"/>
                                                 </connections>
                                             </tableCellView>

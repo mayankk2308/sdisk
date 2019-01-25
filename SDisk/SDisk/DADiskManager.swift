@@ -40,7 +40,7 @@ class DADiskManager {
     private var delegates = [DADiskManagerDelegate]()
     
     /// Maintains state of disk arbitration.
-    private var ejectMode = false
+    var ejectMode = false
     
     var delegate: DADiskManagerDelegate? {
         willSet {
@@ -71,7 +71,7 @@ class DADiskManager {
         DADiskManager.shared.diskMap[disk] = nil
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            DispatchQueue.main.async {
                 for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount() }
                 DADiskManager.shared.updateQueued = false
             }
@@ -82,6 +82,7 @@ class DADiskManager {
     /// Handle disk mounting.
     var diskDidMount: DADiskMountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onMount)
+        DADiskManager.shared.currentDisks.append(disk)
         for cDisk in DADiskManager.shared.configuredDisks {
             if disk == cDisk {
                 DADiskManager.shared.diskMap[disk] = cDisk
@@ -90,7 +91,7 @@ class DADiskManager {
         }
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            DispatchQueue.main.async {
                 for delegate in DADiskManager.shared.delegates { delegate.postDiskMount() }
                 DADiskManager.shared.updateQueued = false
             }
@@ -104,8 +105,9 @@ class DADiskManager {
         cDisk.updateFrom(arbDisk: disk)
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            DispatchQueue.main.async {
                 for delegate in DADiskManager.shared.delegates { delegate.postDiskDescriptionChanged() }
+                DADiskManager.shared.updateQueued = false
             }
         }
     }

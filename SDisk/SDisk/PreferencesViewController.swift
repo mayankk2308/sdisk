@@ -24,8 +24,7 @@ class PreferencesViewController: NSViewController {
     
     private let maxCellsInView = 5
     private let viewDelta: CGFloat = 48
-    var updateQueued = false
-    var viewWasLoaded = false
+    private var viewWasLoaded = false
     
     var window: NSWindow! = nil
     
@@ -34,8 +33,7 @@ class PreferencesViewController: NSViewController {
     /// - Parameter sender: The element responsible for the action.
     @IBAction func refreshAllDisks(_ sender: Any) {
         toggleUpdateMode()
-        updateQueued = false
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.global(qos: .default).async {
             DADiskManager.shared.fetchExternalDisks()
             DADiskManager.shared.fetchConfiguredDisks()
             DispatchQueue.main.async {
@@ -50,6 +48,7 @@ class PreferencesViewController: NSViewController {
     ///
     /// - Parameter sender: The element responsible for the action.
     @IBAction func ejectAllDisks(_ sender: Any) {
+        DADiskManager.shared.unmountAllDisks()
     }
     
     /// Removes all configured disks.
@@ -64,6 +63,44 @@ class PreferencesViewController: NSViewController {
     @IBAction func addDisk(_ sender: Any) {
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        diskTableView.dataSource = self
+        diskTableView.delegate = self
+        viewWasLoaded = true
+        DADiskManager.shared.delegate = self
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        manageWindow()
+        if DADiskManager.shared.ejectMode || DADiskManager.shared.updateQueued {
+            toggleUpdateMode()
+        }
+    }
+}
+
+// MARK: - Handle disk events.
+extension PreferencesViewController: DADiskManagerDelegate {
+    
+    func preDiskUnmount() {
+        toggleUpdateMode()
+    }
+    
+    func postDiskUnmount() {
+        toggleUpdateMode(enableItems: true)
+        diskTableView.reloadData()
+    }
+    
+    func postDiskDescriptionChanged() {
+        diskTableView.reloadData()
+    }
+    
+}
+
+// MARK: - Handle user interface updates.
+extension PreferencesViewController {
+    
     /// Changes current window size.
     ///
     /// - Parameter offset: Offset by which to change window size.
@@ -77,15 +114,6 @@ class PreferencesViewController: NSViewController {
         viewFrame.origin.y -= (height - oldHeight)
         view.frame = viewFrame
         window.setFrame(frame, display: true, animate: true)
-    }
-    
-    /// Updates disk after certain delay.
-    func updateDisks() {
-        if !viewWasLoaded || DADiskManager.shared.totalDisksToUnmount != 0 { return }
-        updateQueued = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.refreshAllDisks(self)
-        }
     }
     
     /// Toggles view into update mode.
@@ -123,19 +151,9 @@ class PreferencesViewController: NSViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        diskTableView.dataSource = self
-        diskTableView.delegate = self
-        viewWasLoaded = true
-    }
-    
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        manageWindow()
-    }
 }
 
+// MARK: - Handle table view configuration.
 extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -160,7 +178,9 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
         cell.associatedDisk = disk
         DispatchQueue.global(qos: .background).async {
             DispatchQueue.main.async {
-                cell.diskAvailableImageView.image = NSImage(named: disk.mounted ? NSImage.Name("NSStatusAvailable") : NSImage.Name("NSStatusUnavailable"))
+                let mountStatus = disk.mounted
+                cell.diskAvailableImageView.image = NSImage(named: mountStatus ? NSImage.Name("NSStatusAvailable") : NSImage.Name("NSStatusUnavailable"))
+                cell.diskMountStatusLabel.stringValue = mountStatus ? "Mounted" : "Not Mounted"
             }
         }
     }

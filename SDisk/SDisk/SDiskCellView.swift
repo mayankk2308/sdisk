@@ -16,6 +16,7 @@ class SDiskCellView: NSTableCellView {
     @IBOutlet weak var diskCapacityLabel: NSTextField!
     @IBOutlet weak var diskAvailableImageView: NSImageView!
     @IBOutlet weak var diskCapacityBarView: DiskCapacityBarView!
+    @IBOutlet weak var diskMountStatusLabel: NSTextField!
     
     weak var associatedDisk: Disk! = nil
     

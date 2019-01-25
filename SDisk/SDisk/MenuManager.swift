@@ -160,7 +160,6 @@ extension MenuManager: DADiskManagerDelegate {
     }
     
     func postDiskUnmount() {
-        print("occurred")
         ejectAllDisksItem.title = "Eject All Disks"
         ejectAllDisksItem.target = self
     }
