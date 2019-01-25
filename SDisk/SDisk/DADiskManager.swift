@@ -27,8 +27,23 @@ class DADiskManager {
     /// Holds list of configured disks.
     var configuredDisks = [Disk]()
     
+    /// Convenience map between `DADisk`s and `Disk` object(s).
+    var diskMap = SuperMap<DADisk, Disk>()
+    
     /// Maintains track of the number of disks to unmount.
     var totalDisksToUnmount = 0
+    
+    /// Maintains update queue state.
+    var updateQueued = true
+    
+    /// Holds all delegates.
+    private var delegates = [DADiskManagerDelegate]()
+    
+    var delegate: DADiskManagerDelegate? {
+        willSet {
+            if let value = newValue { delegates.append(value) }
+        }
+    }
     
     /// Initializes a disk arbitration session and prepares disk approval callbacks.
     init() {
@@ -38,62 +53,66 @@ class DADiskManager {
         DARegisterDiskMountApprovalCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidMount, nil)
         DARegisterDiskDescriptionChangedCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), nil, diskDidChange, nil)
         DASessionScheduleWithRunLoop(registeredSession, RunLoop.main.getCFRunLoop(), RunLoop.Mode.default as CFString)
+        fetchExternalDisks()
+        fetchConfiguredDisks()
     }
     
     deinit {
         guard let registeredSession = session else { return }
         DASessionUnscheduleFromRunLoop(registeredSession, RunLoop.main.getCFRunLoop(), RunLoop.Mode.default as CFString)
     }
-        
-    /// Fetches all available external disks.
-    func fetchExternalDisks(completion: ((Bool) -> Void)? = nil) {
-        var success = true
-        guard let registeredSession = session else { return }
-        let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey], options: [.skipHiddenVolumes])
-        guard let allVolumes = volumes else { return }
-        currentDisks.removeAll()
-        for volume in allVolumes {
-//                let volumeProperties = try volume.resourceValues(forKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey])
-//                guard let volumeIsInternal = volumeProperties.volumeIsInternal, !volumeIsInternal else { continue }
-//                guard let volumeName = volumeProperties.volumeName,
-//                let volumeID = volumeProperties.volumeUUIDString,
-//                let volumeTotalCapacity = volumeProperties.volumeTotalCapacity,
-//                let volumeAvailableCapacity = volumeProperties.volumeAvailableCapacity else {
-//                    success = false
-//                    continue
-//                }
-            guard let disk = DADiskCreateFromVolumePath(kCFAllocatorDefault, registeredSession, volume as CFURL) else {
-                success = false
-                continue
+    
+    /// Handle disk unmounts.
+    var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, _ in
+        DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
+        DADiskManager.shared.diskMap[disk] = nil
+        if !DADiskManager.shared.updateQueued && DADiskManager.shared.totalDisksToUnmount == 0 {
+            DADiskManager.shared.updateQueued = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount() }
             }
-            currentDisks.append(disk)
         }
-        guard let handler = completion else { return }
-        handler(success)
+        return nil
     }
     
-    /// Retrieves configured disks.
-    func fetchConfiguredDisks() {
-        let fetchRequest = NSFetchRequest<Disk>(entityName: "Disk")
-        do {
-            configuredDisks = try CDS.persistentContainer.viewContext.fetch(fetchRequest)
-            MenuManager.shared.update(withStatus: "Volumes Configured: \(self.configuredDisks.count == 0 ? "None" : "\(self.configuredDisks.count)")")
-        } catch {
-            print("Disk fetch failed")
+    /// Handle disk mounting.
+    var diskDidMount: DADiskMountApprovalCallback = { disk, _ in
+        DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onMount)
+        for cDisk in DADiskManager.shared.configuredDisks {
+            if disk == cDisk {
+                DADiskManager.shared.diskMap[disk] = cDisk
+                break
+            }
+        }
+        if !DADiskManager.shared.updateQueued {
+            DADiskManager.shared.updateQueued = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                for delegate in DADiskManager.shared.delegates { delegate.postDiskMount() }
+            }
+        }
+        return nil
+    }
+    
+    /// Handles changes to disk information.
+    var diskDidChange: DADiskDescriptionChangedCallback = { disk, _, _ in
+        guard let cDisk = DADiskManager.shared.diskMap[disk] else { return }
+        cDisk.updateFrom(arbDisk: disk)
+        if !DADiskManager.shared.updateQueued {
+            DADiskManager.shared.updateQueued = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                for delegate in DADiskManager.shared.delegates { delegate.postDiskDescriptionChanged() }
+            }
         }
     }
     
-    /// Remove specified disk.
-    ///
-    /// - Parameter disk: `Disk` to remove.
-    func removeConfiguredDisk(_ disk: Disk) {
-        guard let index = configuredDisks.index(of: disk) else { return }
-        CDS.persistentContainer.viewContext.delete(configuredDisks[index])
-        CDS.saveContext {
-            self.configuredDisks.remove(at: index)
-            MenuManager.shared.update(withStatus: "Volumes Configured: \(self.configuredDisks.count == 0 ? "None" : "\(self.configuredDisks.count)")")
-        }
+    /// Called after a disk successfully unmounts.
+    var diskUnmountDone: DADiskUnmountCallback = { disk, _, _ in
+        DADiskManager.shared.totalDisksToUnmount -= 1
     }
+}
+
+// MARK: - Manages disk fetching, configuration, and more.
+extension DADiskManager {
     
     /// Removes all configured disks.
     func removeAllConfiguredDisks() {
@@ -102,67 +121,9 @@ class DADiskManager {
         }
         CDS.saveContext {
             self.configuredDisks.removeAll()
-            MenuManager.shared.update(withStatus: "Volumes Configured: None")
-        }
-    }
-    
-    /// Handle disk unmounts.
-    var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, _ in
-        DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
-        if !MenuManager.shared.preferencesViewController.updateQueued {
-            MenuManager.shared.preferencesViewController.updateDisks()
-        }
-        return nil
-    }
-    
-    /// Handle disk mounting.
-    var diskDidMount: DADiskMountApprovalCallback = { disk, _ in
-        DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onMount)
-        if !MenuManager.shared.preferencesViewController.updateQueued {
-            MenuManager.shared.preferencesViewController.updateDisks()
-        }
-        return nil
-    }
-    
-    /// Handles changes to disk information.
-    var diskDidChange: DADiskDescriptionChangedCallback = { disk, _, _ in
-        for aDisk in DADiskManager.shared.configuredDisks { aDisk.updateFrom(arbDisk: disk) }
-    }
-    
-    /// Called after a disk successfully unmounts.
-    var diskUnmountDone: DADiskUnmountCallback = { disk, _, _ in
-        DADiskManager.shared.totalDisksToUnmount -= 1
-        DispatchQueue.main.async {
-            if DADiskManager.shared.totalDisksToUnmount == 0 {
-                if !MenuManager.shared.preferencesViewController.updateQueued {
-                    MenuManager.shared.preferencesViewController.refreshAllDisks(DADiskManager.shared)
-                }
-                MenuManager.shared.ejectAllDisksItem.title = "Eject All Disks"
-                MenuManager.shared.ejectAllDisksItem.action = #selector(DADiskManager.shared.unmountAllDisks(_:))
-            }
-        }
-    }
-    
-    /// Unmount all disks.
-    ///
-    /// - Parameter task: Runs designated task after all disks have been unmounted.
-    @objc func unmountAllDisks(_ sender: Any) {
-        MenuManager.shared.ejectAllDisksItem.title = "Ejecting..."
-        MenuManager.shared.ejectAllDisksItem.action = nil
-        MenuManager.shared.preferencesViewController.toggleUpdateMode()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.fetchExternalDisks()
-            self.totalDisksToUnmount = self.currentDisks.count
-            if self.totalDisksToUnmount == 0 {
-                DispatchQueue.main.async {
-                    MenuManager.shared.ejectAllDisksItem.title = "Eject All Disks"
-                    MenuManager.shared.ejectAllDisksItem.action = #selector(DADiskManager.shared.unmountAllDisks(_:))
-                    MenuManager.shared.preferencesViewController.toggleUpdateMode(enableItems: true)
-                }
-                return
-            }
-            for disk in self.currentDisks {
-                DADiskUnmount(disk, DADiskUnmountOptions(kDADiskUnmountOptionDefault), self.diskUnmountDone, nil)
+            self.diskMap = SuperMap<DADisk, Disk>()
+            DispatchQueue.main.async {
+                MenuManager.shared.update(withStatus: "Volumes Configured: None")
             }
         }
     }
@@ -176,4 +137,89 @@ class DADiskManager {
         SDTaskManager.shared.performTasks(forDiskUUID: diskUUID, withTaskType: type, handler: SDTaskManager.shared.executeUIHandler)
     }
     
+    /// Retrieves configured disks.
+    func fetchConfiguredDisks(onCompletion handler: ((Bool) -> Void)? = nil) {
+        var success = true
+        DispatchQueue.global(qos: .default).async {
+            let fetchRequest = NSFetchRequest<Disk>(entityName: "Disk")
+            do {
+                self.configuredDisks = try CDS.persistentContainer.viewContext.fetch(fetchRequest)
+                MenuManager.shared.update(withStatus: "Volumes Configured: \(self.configuredDisks.count == 0 ? "None" : "\(self.configuredDisks.count)")")
+                for savedDisk in self.configuredDisks {
+                    for disk in self.currentDisks {
+                        guard let data = disk.diskData(),
+                            let uniqueID = disk.uniqueID(withDiskData: data),
+                            let savedUniqueID = savedDisk.uniqueID, uniqueID == savedUniqueID else { continue }
+                        self.diskMap[disk] = savedDisk
+                    }
+                }
+            } catch {
+                success = false
+            }
+            guard let call = handler else { return }
+            call(success)
+        }
+    }
+    
+    /// Remove specified disk.
+    ///
+    /// - Parameter disk: `Disk` to remove.
+    func removeConfiguredDisk(_ disk: Disk) {
+        guard let index = configuredDisks.index(of: disk) else { return }
+        CDS.persistentContainer.viewContext.delete(configuredDisks[index])
+        CDS.saveContext {
+            self.configuredDisks.remove(at: index)
+            self.diskMap[disk] = nil
+            DispatchQueue.main.async {
+                MenuManager.shared.update(withStatus: "Volumes Configured: \(self.configuredDisks.count == 0 ? "None" : "\(self.configuredDisks.count)")")
+            }
+        }
+    }
+    
+    /// Fetches all available external disks.
+    func fetchExternalDisks(completion: ((Bool) -> Void)? = nil) {
+        var success = true
+        guard let registeredSession = session else { return }
+        DispatchQueue.global(qos: .default).async {
+            let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: [.volumeIsInternalKey], options: [.skipHiddenVolumes])
+            guard let allVolumes = volumes else { return }
+            self.currentDisks.removeAll()
+            for volume in allVolumes {
+                do {
+                    let properties = try volume.resourceValues(forKeys: [.volumeIsInternalKey])
+                    guard let volumeIsInternal = properties.volumeIsInternal, !volumeIsInternal else { continue }
+                    guard let disk = DADiskCreateFromVolumePath(kCFAllocatorDefault, registeredSession, volume as CFURL) else {
+                        success = false
+                        continue
+                    }
+                    self.currentDisks.append(disk)
+                } catch {
+                    success = false
+                    continue
+                }
+            }
+            guard let handler = completion else { return }
+            handler(success)
+        }
+    }
+    
+    /// Unmount all disks.
+    ///
+    /// - Parameter task: Runs designated task after all disks have been unmounted.
+    func unmountAllDisks() {
+        for del in delegates { del.preDiskUnmount() }
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.fetchExternalDisks()
+            self.totalDisksToUnmount = self.currentDisks.count
+            if self.totalDisksToUnmount == 0 {
+                DispatchQueue.main.async {
+                    for delegate in self.delegates { delegate.postDiskUnmount() }
+                }
+                return
+            }
+            for disk in self.currentDisks {
+                DADiskUnmount(disk, DADiskUnmountOptions(kDADiskUnmountOptionDefault), self.diskUnmountDone, nil)
+            }
+        }
+    }
 }

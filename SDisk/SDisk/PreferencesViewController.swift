@@ -50,7 +50,6 @@ class PreferencesViewController: NSViewController {
     ///
     /// - Parameter sender: The element responsible for the action.
     @IBAction func ejectAllDisks(_ sender: Any) {
-        DADiskManager.shared.unmountAllDisks(sender)
     }
     
     /// Removes all configured disks.
@@ -134,9 +133,6 @@ class PreferencesViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         manageWindow()
-        if MenuManager.shared.ejectAllDisksItem.action == nil {
-            toggleUpdateMode()
-        }
     }
 }
 
@@ -163,10 +159,8 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
         cell.diskCapacityBarView.normal = (disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity
         cell.associatedDisk = disk
         DispatchQueue.global(qos: .background).async {
-//            let mounted = disk.mounted()
-            let mounted = false
             DispatchQueue.main.async {
-                cell.diskAvailableImageView.image = NSImage(named: mounted ? NSImage.Name("NSStatusAvailable") : NSImage.Name("NSStatusUnavailable"))
+                cell.diskAvailableImageView.image = NSImage(named: disk.mounted ? NSImage.Name("NSStatusAvailable") : NSImage.Name("NSStatusUnavailable"))
             }
         }
     }

@@ -18,8 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {
-        DADiskManager.shared.fetchExternalDisks()
-        DADiskManager.shared.fetchConfiguredDisks()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

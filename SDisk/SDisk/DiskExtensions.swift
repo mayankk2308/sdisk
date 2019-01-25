@@ -12,6 +12,9 @@ import Cocoa
 
 extension DADisk {
     
+    /// Retrieves disk information dictionary for the disk.
+    ///
+    /// - Returns: Information dictionary.
     func diskData() -> NSDictionary? {
         guard let data = DADiskCopyDescription(self) else { return nil }
         return data as NSDictionary
@@ -77,12 +80,19 @@ extension DADisk {
         configuredDisk.name = diskName
         configuredDisk.icon = image
         CDS.saveContext()
+        DADiskManager.shared.diskMap[self] = configuredDisk
         return configuredDisk
     }
     
 }
 
 extension Disk {
+    
+    static func == (lhs: DADisk, rhs: Disk) -> Bool {
+        print("occurred")
+        guard let data = lhs.diskData() else { return false }
+        return rhs.uniqueID == lhs.uniqueID(withDiskData: data)
+    }
     
     /// Updates configured disk values from provided `DADisk`, as long as current object is initialized and has same UUID.
     ///
@@ -99,6 +109,7 @@ extension Disk {
         icon = image
         availableCapacity = capacityData.available
         totalCapacity = capacityData.total
+        DADiskManager.shared.diskMap[disk] = self
     }
     
     /// Computes appropriate displayable disk size and unit.
@@ -127,12 +138,34 @@ extension Disk {
         return "\(round(availableDiskCapacityStringData.0 * p) / p)\(availableDiskCapacityStringData.1 == totalDiskCapacityStringData.1 ? " of " : " \(availableDiskCapacityStringData.1) of ")\(round(totalDiskCapacityStringData.0 * p) / p) \(totalDiskCapacityStringData.1) available"
     }
     
-//    func mounted() -> Bool {
-//        guard let diskUUID = uniqueID else { return false }
-//        for disk in DADiskManager.shared.currentDisks {
-//            if disk.volumeID == diskUUID { return true }
-//        }
-//        return false
-//    }
+    var mounted: Bool {
+        return DADiskManager.shared.diskMap[self] != nil
+    }
     
+}
+
+/// Avails access to events such as disk mounting/unmounting for user interfaces.
+protocol DADiskManagerDelegate {
+    
+    /// Notification for delegate after an unmount callback.
+    func preDiskUnmount()
+    
+    /// Notification for delegate after an unmount callback.
+    func postDiskUnmount()
+    
+    /// Notification for delegate after a disk mount.
+    func postDiskMount()
+    
+    /// Notification for delegate after a disk description changes.
+    func postDiskDescriptionChanged()
+    
+}
+
+// MARK: - Defaults for the delegate.
+extension DADiskManagerDelegate {
+    
+    func postDiskMount() {}
+    
+    func postDiskDescriptionChanged() {}
+
 }

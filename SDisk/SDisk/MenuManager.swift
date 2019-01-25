@@ -23,50 +23,7 @@ class MenuManager {
     private let aboutMenuItem = NSMenuItem(title: "SDisk Version: \(String(describing: Bundle.main.infoDictionary!["CFBundleShortVersionString"]!))", action: nil, keyEquivalent: "")
     private let menu = NSMenu()
     
-    let ejectAllDisksItem = NSMenuItem(title: "Eject All Disks", action: #selector(DADiskManager.shared.unmountAllDisks(_:)), keyEquivalent: "E")
-    
-    /// Prepares the menu item.
-    func prepare() {
-        let quitItem = NSMenuItem(title: "Quit", action: #selector(quit(_:)), keyEquivalent: "q")
-        quitItem.target = self
-        let prefItem = NSMenuItem(title: "Configure...", action: #selector(showPreferences(_:)), keyEquivalent: ",")
-        let openAtLogin = NSMenuItem(title: "Launch At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
-        let helpItem = NSMenuItem(title: "Help...", action: #selector(showHelp(_:)), keyEquivalent: "")
-        let donateItem = NSMenuItem(title: "Donate...", action: #selector(openDonationPage(_:)), keyEquivalent: "")
-        ejectAllDisksItem.target = DADiskManager.shared
-        openAtLogin.target = self
-        prefItem.target = self
-        helpItem.target = self
-        donateItem.target = self
-        swiptManager.execute(appleScriptText: "tell application \"System Events\" to get login item \"SDisk\"") { error, _ in
-            DispatchQueue.main.async {
-                openAtLogin.state = error == nil ? .on : .off
-            }
-        }
-        menu.addItem(aboutMenuItem)
-        menu.addItem(statusMenuItem)
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(openAtLogin)
-        menu.addItem(ejectAllDisksItem)
-        menu.addItem(prefItem)
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(donateItem)
-        menu.addItem(helpItem)
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(quitItem)
-        statusItem.menu = menu
-        if let button = statusItem.button {
-            button.image = NSImage(named: "MenuIcon")
-            button.target = self
-        }
-    }
-    
-    /// Updates menu item status.
-    ///
-    /// - Parameter status: Status description.
-    func update(withStatus status: String) {
-        statusMenuItem.title = status
-    }
+    private let ejectAllDisksItem = NSMenuItem(title: "Eject All Disks", action: nil, keyEquivalent: "E")
     
     /// Toggle open at login.
     ///
@@ -136,4 +93,52 @@ class MenuManager {
         helpWindowController.window?.makeKeyAndOrderFront(sender)
         NSApplication.shared.activate(ignoringOtherApps: true)
     }
+}
+
+// MARK: - Preparation and management.
+extension MenuManager {
+    
+    /// Prepares the menu item.
+    func prepare() {
+        let quitItem = NSMenuItem(title: "Quit", action: #selector(quit(_:)), keyEquivalent: "q")
+        quitItem.target = self
+        let prefItem = NSMenuItem(title: "Configure...", action: #selector(showPreferences(_:)), keyEquivalent: ",")
+        let openAtLogin = NSMenuItem(title: "Launch At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
+        let helpItem = NSMenuItem(title: "Help...", action: #selector(showHelp(_:)), keyEquivalent: "")
+        let donateItem = NSMenuItem(title: "Donate...", action: #selector(openDonationPage(_:)), keyEquivalent: "")
+        ejectAllDisksItem.target = DADiskManager.shared
+        openAtLogin.target = self
+        prefItem.target = self
+        helpItem.target = self
+        donateItem.target = self
+        swiptManager.execute(appleScriptText: "tell application \"System Events\" to get login item \"SDisk\"") { error, _ in
+            DispatchQueue.main.async {
+                openAtLogin.state = error == nil ? .on : .off
+            }
+        }
+        menu.addItem(aboutMenuItem)
+        menu.addItem(statusMenuItem)
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(openAtLogin)
+        menu.addItem(ejectAllDisksItem)
+        menu.addItem(prefItem)
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(donateItem)
+        menu.addItem(helpItem)
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(quitItem)
+        statusItem.menu = menu
+        if let button = statusItem.button {
+            button.image = NSImage(named: "MenuIcon")
+            button.target = self
+        }
+    }
+    
+    /// Updates menu item status.
+    ///
+    /// - Parameter status: Status description.
+    func update(withStatus status: String) {
+        statusMenuItem.title = status
+    }
+    
 }
