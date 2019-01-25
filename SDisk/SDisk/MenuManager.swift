@@ -23,6 +23,8 @@ class MenuManager {
     private let aboutMenuItem = NSMenuItem(title: "SDisk Version: \(String(describing: Bundle.main.infoDictionary!["CFBundleShortVersionString"]!))", action: nil, keyEquivalent: "")
     private let menu = NSMenu()
     
+    let ejectAllDisksItem = NSMenuItem(title: "Eject All Disks", action: #selector(DADiskManager.shared.unmountAllDisks(_:)), keyEquivalent: "E")
+    
     /// Prepares the menu item.
     func prepare() {
         let quitItem = NSMenuItem(title: "Quit", action: #selector(quit(_:)), keyEquivalent: "q")
@@ -31,6 +33,7 @@ class MenuManager {
         let openAtLogin = NSMenuItem(title: "Launch At Login", action: #selector(toggleOpenAtLogin(_:)), keyEquivalent: "")
         let helpItem = NSMenuItem(title: "Help...", action: #selector(showHelp(_:)), keyEquivalent: "")
         let donateItem = NSMenuItem(title: "Donate...", action: #selector(openDonationPage(_:)), keyEquivalent: "")
+        ejectAllDisksItem.target = DADiskManager.shared
         openAtLogin.target = self
         prefItem.target = self
         helpItem.target = self
@@ -44,6 +47,7 @@ class MenuManager {
         menu.addItem(statusMenuItem)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(openAtLogin)
+        menu.addItem(ejectAllDisksItem)
         menu.addItem(prefItem)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(donateItem)

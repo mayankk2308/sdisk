@@ -9,11 +9,11 @@
             <connections>
                 <outlet property="addDiskButton" destination="82m-Xg-Xzi" id="aXB-kh-apQ"/>
                 <outlet property="diskTableView" destination="uDD-cD-jFv" id="GuK-Xf-110"/>
+                <outlet property="ejectAllDisksButton" destination="b6W-4q-X1T" id="5cu-T4-gUJ"/>
                 <outlet property="indicator" destination="Nla-vy-2tF" id="zhm-16-5LQ"/>
                 <outlet property="instructionView" destination="cV4-Hl-6oD" id="xFz-8g-w1e"/>
                 <outlet property="refreshAllDisksButton" destination="h7D-CD-QNG" id="Jj9-Zq-rIu"/>
                 <outlet property="removeAllDisksButton" destination="GD9-U1-QIh" id="cF8-dE-JP2"/>
-                <outlet property="removeDiskButton" destination="5KR-dh-SmY" id="33p-Mn-5ep"/>
                 <outlet property="statusLabel" destination="RxT-dB-fxz" id="w8H-Ay-wKU"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82m-Xg-Xzi">
-                    <rect key="frame" x="375" y="0.0" width="25" height="25"/>
+                    <rect key="frame" x="340" y="0.0" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="Nkf-Ru-RjN">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -45,7 +45,7 @@
                     </textFieldCell>
                 </textField>
                 <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Nla-vy-2tF">
-                    <rect key="frame" x="252" y="5" width="16" height="16"/>
+                    <rect key="frame" x="250" y="5" width="16" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                 </progressIndicator>
                 <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cV4-Hl-6oD">
@@ -109,7 +109,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zFd-NO-9TD">
-                                                        <rect key="frame" x="375" y="5" width="14" height="14"/>
+                                                        <rect key="frame" x="376" y="8" width="14" height="14"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusUnavailable" id="KHa-6k-Ywm"/>
                                                     </imageView>
@@ -136,32 +136,8 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7V0-sj-sPq">
-                                                        <rect key="frame" x="367" y="46" width="16" height="16"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MenuIcon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="nJv-cf-1eq">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <color key="contentTintColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                        <connections>
-                                                            <action selector="ejectDisk:" target="akr-2L-JXP" id="Foq-wj-ZXp"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9p2-zN-PsL">
-                                                        <rect key="frame" x="337" y="46" width="16" height="16"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MenuIcon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="fhx-cy-33A">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <color key="contentTintColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                        <connections>
-                                                            <action selector="actionsOnUnmount:" target="akr-2L-JXP" id="9MK-Dh-egJ"/>
-                                                        </connections>
-                                                    </button>
                                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OO2-3d-YFH">
-                                                        <rect key="frame" x="307" y="46" width="16" height="16"/>
+                                                        <rect key="frame" x="345" y="46" width="16" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MenuIcon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="sps-rx-Rdl">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -173,7 +149,7 @@
                                                         </connections>
                                                     </button>
                                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ktM-Ad-oo8">
-                                                        <rect key="frame" x="277" y="46" width="16" height="16"/>
+                                                        <rect key="frame" x="319" y="46" width="16" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MenuIcon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="vTl-nL-Sep">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -188,6 +164,18 @@
                                                         <rect key="frame" x="68" y="27" width="319" height="12"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     </customView>
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9p2-zN-PsL">
+                                                        <rect key="frame" x="371" y="46" width="16" height="16"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MenuIcon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="fhx-cy-33A">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <color key="contentTintColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                        <connections>
+                                                            <action selector="actionsOnUnmount:" target="akr-2L-JXP" id="9MK-Dh-egJ"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <connections>
                                                     <outlet property="diskAvailableImageView" destination="zFd-NO-9TD" id="tgg-aj-Ckm"/>
@@ -216,19 +204,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5KR-dh-SmY">
-                    <rect key="frame" x="342" y="0.0" width="25" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="r7C-4Q-MQg">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="removeDisk:" target="-2" id="AWk-dR-151"/>
-                    </connections>
-                </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GD9-U1-QIh">
-                    <rect key="frame" x="309" y="0.0" width="25" height="25"/>
+                    <rect key="frame" x="307" y="0.0" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="neR-hv-u7w">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -239,7 +216,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7D-CD-QNG">
-                    <rect key="frame" x="276" y="0.0" width="25" height="25"/>
+                    <rect key="frame" x="274" y="0.0" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="DZE-kT-fvy">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -249,15 +226,26 @@
                         <action selector="refreshAllDisks:" target="-2" id="Pon-ej-LRe"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6W-4q-X1T">
+                    <rect key="frame" x="375" y="5" width="15" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="Eject" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="D6i-74-QMQ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="ejectAllDisks:" target="-2" id="pL4-rA-OXr"/>
+                    </connections>
+                </button>
             </subviews>
-            <point key="canvasLocation" x="112" y="143"/>
+            <point key="canvasLocation" x="87" y="142"/>
         </customView>
     </objects>
     <resources>
+        <image name="Eject" width="120" height="120"/>
         <image name="MenuIcon" width="7.679999828338623" height="7.679999828338623"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
-        <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSStatusUnavailable" width="16" height="16"/>
         <image name="NSStopProgressTemplate" width="11" height="11"/>
         <image name="SDisk" width="245.75999450683594" height="245.75999450683594"/>

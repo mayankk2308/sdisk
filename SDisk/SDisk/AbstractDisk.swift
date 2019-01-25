@@ -28,12 +28,14 @@ class AbstractDisk: CustomStringConvertible {
     /// Disk icon.
     var icon: Data! = nil
     
+    var arbDisk: DADisk! = nil
+    
     var description: String {
         return "(Disk Name: \(String(describing: name!)), Disk ID: \(String(describing: volumeID!)), Space Available: \(String(describing: availableCapacity!)), Total Capacity: \(String(describing: totalCapacity!)))"
     }
     
     static func == (lhs: AbstractDisk, rhs: AbstractDisk) -> Bool {
-        return lhs.volumeID == rhs.volumeID
+        return lhs.volumeID == rhs.volumeID && lhs.arbDisk == rhs.arbDisk
     }
     
     /// Converts an abstract disk to a saved, configurable disk.

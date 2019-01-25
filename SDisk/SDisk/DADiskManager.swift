@@ -27,7 +27,8 @@ class DADiskManager {
     /// Holds list of configured disks.
     var configuredDisks = [Disk]()
     
-    var needsUpdate = false
+    /// Maintains track of the number of disks to unmount.
+    var totalDisksToUnmount = 0
     
     /// Initializes a disk arbitration session and prepares disk approval callbacks.
     init() {
@@ -47,6 +48,7 @@ class DADiskManager {
     /// Fetches all available external disks.
     func fetchExternalDisks(completion: ((Bool) -> Void)? = nil) {
         var success = true
+        guard let registeredSession = session else { return }
         let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey], options: [.skipHiddenVolumes])
         guard let allVolumes = volumes else { return }
         currentDisks.removeAll()
@@ -67,6 +69,7 @@ class DADiskManager {
                 disk.totalCapacity = Double(volumeTotalCapacity)
                 disk.availableCapacity = Double(volumeAvailableCapacity)
                 disk.icon = NSWorkspace.shared.icon(forFile: volume.path).tiffRepresentation
+                disk.arbDisk = DADiskCreateFromVolumePath(kCFAllocatorDefault, registeredSession, volume as CFURL)
                 currentDisks.append(disk)
             } catch {
                 success = false
@@ -75,7 +78,6 @@ class DADiskManager {
         }
         guard let handler = completion else { return }
         handler(success)
-        needsUpdate = false
     }
     
     /// Retrieves configured disks.
@@ -128,7 +130,6 @@ class DADiskManager {
     /// Handle disk unmounts.
     var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
-        DADiskManager.shared.needsUpdate = true
         if !MenuManager.shared.preferencesViewController.updateQueued {
             MenuManager.shared.preferencesViewController.updateDisks()
         }
@@ -138,7 +139,6 @@ class DADiskManager {
     /// Handle disk mounting.
     var diskDidMount: DADiskMountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onMount)
-        DADiskManager.shared.needsUpdate = true
         if !MenuManager.shared.preferencesViewController.updateQueued {
             MenuManager.shared.preferencesViewController.updateDisks()
         }
@@ -148,6 +148,44 @@ class DADiskManager {
     /// Handles changes to disk information.
     var diskDidChange: DADiskDescriptionChangedCallback = { disk, _, _ in
         for aDisk in DADiskManager.shared.configuredDisks { aDisk.updateFrom(arbDisk: disk) }
+    }
+    
+    /// Called after a disk successfully unmounts.
+    var diskUnmountDone: DADiskUnmountCallback = { disk, _, _ in
+        DADiskManager.shared.totalDisksToUnmount -= 1
+        DispatchQueue.main.async {
+            if DADiskManager.shared.totalDisksToUnmount == 0 {
+                if !MenuManager.shared.preferencesViewController.updateQueued {
+                    MenuManager.shared.preferencesViewController.refreshAllDisks(DADiskManager.shared)
+                }
+                MenuManager.shared.ejectAllDisksItem.title = "Eject All Disks"
+                MenuManager.shared.ejectAllDisksItem.action = #selector(DADiskManager.shared.unmountAllDisks(_:))
+            }
+        }
+    }
+    
+    /// Unmount all disks.
+    ///
+    /// - Parameter task: Runs designated task after all disks have been unmounted.
+    @objc func unmountAllDisks(_ sender: Any) {
+        MenuManager.shared.ejectAllDisksItem.title = "Ejecting..."
+        MenuManager.shared.ejectAllDisksItem.action = nil
+        MenuManager.shared.preferencesViewController.toggleUpdateMode()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.fetchExternalDisks()
+            self.totalDisksToUnmount = self.currentDisks.count
+            if self.totalDisksToUnmount == 0 {
+                DispatchQueue.main.async {
+                    MenuManager.shared.ejectAllDisksItem.title = "Eject All Disks"
+                    MenuManager.shared.ejectAllDisksItem.action = #selector(DADiskManager.shared.unmountAllDisks(_:))
+                    MenuManager.shared.preferencesViewController.toggleUpdateMode(enableItems: true)
+                }
+                return
+            }
+            for disk in self.currentDisks {
+                DADiskUnmount(disk.arbDisk, DADiskUnmountOptions(kDADiskUnmountOptionDefault), self.diskUnmountDone, nil)
+            }
+        }
     }
     
     /// Computes appropriate displayable disk size and unit.

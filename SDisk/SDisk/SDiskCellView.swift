@@ -30,8 +30,4 @@ class SDiskCellView: NSTableCellView {
         
     }
     
-    @IBAction func ejectDisk(_ sender: Any) {
-        
-    }
-    
 }

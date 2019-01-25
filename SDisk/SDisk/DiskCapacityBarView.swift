@@ -18,13 +18,14 @@ class DiskCapacityBarView: NSView {
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        layer?.cornerRadius = 4.0
+        layer?.cornerRadius = 3.5
         layer?.borderColor = NSColor.separatorColor.cgColor
         layer?.borderWidth = 1.0
         NSColor.quaternaryLabelColor.setFill()
+        dirtyRect.fill()
         progressRect.frame = dirtyRect
         progressRect.frame.size.width = CGFloat(normal) * progressRect.frame.size.width
-        progressRect.layer?.backgroundColor = availableColors[index].cgColor
+        progressRect.layer?.backgroundColor = availableColors[index].withAlphaComponent(0.75).cgColor
         if !subViewSet { addSubview(progressRect) }
         subViewSet = true
     }
