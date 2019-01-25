@@ -17,7 +17,7 @@
 		A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */; };
 		A860311E21F195C800EF7AE4 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */; };
 		A8624C5A21F3B3F80088BFE1 /* DADiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8624C5921F3B3F80088BFE1 /* DADiskManager.swift */; };
-		A8624C6321F3E56B0088BFE1 /* AbstractDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8624C6221F3E56B0088BFE1 /* AbstractDisk.swift */; };
+		A8624C6321F3E56B0088BFE1 /* DiskExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8624C6221F3E56B0088BFE1 /* DiskExtensions.swift */; };
 		A87A568221F142B600B72611 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87A568121F142B600B72611 /* MenuManager.swift */; };
 		A8918C4621F280A600F434CC /* SDTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4521F280A600F434CC /* SDTaskManager.swift */; };
 		A8918C4821F2947700F434CC /* TaskLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4721F2947700F434CC /* TaskLanguage.swift */; };
@@ -46,7 +46,7 @@
 		A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		A8624C5921F3B3F80088BFE1 /* DADiskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DADiskManager.swift; sourceTree = "<group>"; };
-		A8624C6221F3E56B0088BFE1 /* AbstractDisk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDisk.swift; sourceTree = "<group>"; };
+		A8624C6221F3E56B0088BFE1 /* DiskExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskExtensions.swift; sourceTree = "<group>"; };
 		A87A568121F142B600B72611 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		A8918C4521F280A600F434CC /* SDTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDTaskManager.swift; sourceTree = "<group>"; };
 		A8918C4721F2947700F434CC /* TaskLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLanguage.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				A8624C5921F3B3F80088BFE1 /* DADiskManager.swift */,
-				A8624C6221F3E56B0088BFE1 /* AbstractDisk.swift */,
+				A8624C6221F3E56B0088BFE1 /* DiskExtensions.swift */,
 			);
 			name = "Disk Management";
 			sourceTree = "<group>";
@@ -314,7 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8624C6321F3E56B0088BFE1 /* AbstractDisk.swift in Sources */,
+				A8624C6321F3E56B0088BFE1 /* DiskExtensions.swift in Sources */,
 				A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */,
 				A8918C4821F2947700F434CC /* TaskLanguage.swift in Sources */,
 				A80FA5F321F12C90000A3CC4 /* SDisk.xcdatamodeld in Sources */,

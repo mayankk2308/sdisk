@@ -22,7 +22,7 @@ class DADiskManager {
     static let shared = DADiskManager()
     
     /// Holds list of available disks.
-    var currentDisks = [AbstractDisk]()
+    var currentDisks = [DADisk]()
     
     /// Holds list of configured disks.
     var configuredDisks = [Disk]()
@@ -53,28 +53,20 @@ class DADiskManager {
         guard let allVolumes = volumes else { return }
         currentDisks.removeAll()
         for volume in allVolumes {
-            do {
-                let volumeProperties = try volume.resourceValues(forKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey])
-                guard let volumeIsInternal = volumeProperties.volumeIsInternal, !volumeIsInternal else { continue }
-                guard let volumeName = volumeProperties.volumeName,
-                let volumeID = volumeProperties.volumeUUIDString,
-                let volumeTotalCapacity = volumeProperties.volumeTotalCapacity,
-                let volumeAvailableCapacity = volumeProperties.volumeAvailableCapacity else {
-                    success = false
-                    continue
-                }
-                let disk = AbstractDisk()
-                disk.name = volumeName
-                disk.volumeID = UUID(uuidString: volumeID)
-                disk.totalCapacity = Double(volumeTotalCapacity)
-                disk.availableCapacity = Double(volumeAvailableCapacity)
-                disk.icon = NSWorkspace.shared.icon(forFile: volume.path).tiffRepresentation
-                disk.arbDisk = DADiskCreateFromVolumePath(kCFAllocatorDefault, registeredSession, volume as CFURL)
-                currentDisks.append(disk)
-            } catch {
+//                let volumeProperties = try volume.resourceValues(forKeys: [.volumeNameKey, .volumeAvailableCapacityKey, .volumeTotalCapacityKey, .volumeUUIDStringKey, .volumeIsInternalKey])
+//                guard let volumeIsInternal = volumeProperties.volumeIsInternal, !volumeIsInternal else { continue }
+//                guard let volumeName = volumeProperties.volumeName,
+//                let volumeID = volumeProperties.volumeUUIDString,
+//                let volumeTotalCapacity = volumeProperties.volumeTotalCapacity,
+//                let volumeAvailableCapacity = volumeProperties.volumeAvailableCapacity else {
+//                    success = false
+//                    continue
+//                }
+            guard let disk = DADiskCreateFromVolumePath(kCFAllocatorDefault, registeredSession, volume as CFURL) else {
                 success = false
                 continue
             }
+            currentDisks.append(disk)
         }
         guard let handler = completion else { return }
         handler(success)
@@ -112,19 +104,6 @@ class DADiskManager {
             self.configuredDisks.removeAll()
             MenuManager.shared.update(withStatus: "Volumes Configured: None")
         }
-    }
-    
-    /// Retrieves the disk `UUID`.
-    ///
-    /// - Parameter disk: The `DADisk` object.
-    /// - Returns: Disk UUID.
-    private func getUUID(forDisk disk: DADisk) -> UUID? {
-        guard let diskInfo = DADiskCopyDescription(disk) else { return nil }
-        let data = diskInfo as NSDictionary
-        guard let volumeUUIDData = data[kDADiskDescriptionVolumeUUIDKey] else { return nil }
-        let volumeUUID = volumeUUIDData as! CFUUID
-        guard let volumeID = CFUUIDCreateString(kCFAllocatorDefault, volumeUUID) as String? else { return nil }
-        return UUID(uuidString: volumeID)
     }
     
     /// Handle disk unmounts.
@@ -183,41 +162,17 @@ class DADiskManager {
                 return
             }
             for disk in self.currentDisks {
-                DADiskUnmount(disk.arbDisk, DADiskUnmountOptions(kDADiskUnmountOptionDefault), self.diskUnmountDone, nil)
+                DADiskUnmount(disk, DADiskUnmountOptions(kDADiskUnmountOptionDefault), self.diskUnmountDone, nil)
             }
         }
-    }
-    
-    /// Computes appropriate displayable disk size and unit.
-    ///
-    /// - Parameter capacity: Disk capacity in bytes.
-    /// - Returns: Tuple of calculated displayable size and unit.
-    private func diskSizeComputeHelper(_ capacity: Double) -> (Double, String) {
-        var capacity = capacity, tierCount = 0
-        let tiers = ["bytes", "KB", "MB", "GB", "TB", "PB"]
-        while capacity > 999 {
-            capacity /= 1000
-            tierCount += 1
-            if tierCount > tiers.count - 1 { break }
-        }
-        return (capacity, tiers[tierCount])
-    }
-    
-    /// Creates disk size string from given size in bytes.
-    ///
-    /// - Parameter diskSize: Size of disk or volume in bytes.
-    /// - Returns: String representing the size with appropriate units.
-    func computeDiskSizeString(fromDiskCapacity diskCapacity: Double, withAvailableDiskCapacity availableDiskCapacity: Double, withPrecision precision: Double) -> String {
-        let availableDiskCapacityStringData = diskSizeComputeHelper(availableDiskCapacity)
-        let totalDiskCapacityStringData = diskSizeComputeHelper(diskCapacity)
-        return "\(round(availableDiskCapacityStringData.0 * precision) / precision)\(availableDiskCapacityStringData.1 == totalDiskCapacityStringData.1 ? " of " : " \(availableDiskCapacityStringData.1) of ")\(round(totalDiskCapacityStringData.0 * precision) / precision) \(totalDiskCapacityStringData.1) available"
     }
     
     /// Generic disk task wrapper.
     ///
     /// - Parameter type: The type of task to perform.
     private func performTask(withDisk disk: DADisk, withTaskType type: TaskType) {
-        guard let diskUUID = DADiskManager.shared.getUUID(forDisk: disk) else { return }
+        guard let diskData = disk.diskData(),
+            let diskUUID = disk.uniqueID(withDiskData: diskData) else { return }
         SDTaskManager.shared.performTasks(forDiskUUID: diskUUID, withTaskType: type, handler: SDTaskManager.shared.executeUIHandler)
     }
     

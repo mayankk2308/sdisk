@@ -11,6 +11,8 @@ import Cocoa
 /// Defines the base preferences view.
 class PreferencesViewController: NSViewController {
     
+    static let preferencesViewController = PreferencesViewController()
+    
     @IBOutlet weak var diskTableView: NSTableView!
     @IBOutlet weak var instructionView: NSView!
     @IBOutlet weak var addDiskButton: NSButton!
@@ -151,17 +153,18 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
     ///   - row: Row index.
     private func populateCell(_ cell: SDiskCellView, _ row: Int) {
         let disk = DADiskManager.shared.configuredDisks[row]
-        if let diskName = disk.name,
-            let diskIcon = disk.icon {
-            cell.diskNameLabel.stringValue = diskName
-            cell.diskImageView.image = NSImage(data: diskIcon)
-        }
-        cell.diskCapacityLabel.stringValue = DADiskManager.shared.computeDiskSizeString(fromDiskCapacity: disk.totalCapacity, withAvailableDiskCapacity: disk.availableCapacity, withPrecision: 10)
+        guard let diskName = disk.name,
+            let diskIcon = disk.icon,
+            let diskCapacityString = disk.capacityString() else { return }
+        cell.diskNameLabel.stringValue = diskName
+        cell.diskImageView.image = NSImage(data: diskIcon)
+        cell.diskCapacityLabel.stringValue = diskCapacityString
         cell.diskCapacityBarView.index = row
         cell.diskCapacityBarView.normal = (disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity
         cell.associatedDisk = disk
         DispatchQueue.global(qos: .background).async {
-            let mounted = disk.mounted()
+//            let mounted = disk.mounted()
+            let mounted = false
             DispatchQueue.main.async {
                 cell.diskAvailableImageView.image = NSImage(named: mounted ? NSImage.Name("NSStatusAvailable") : NSImage.Name("NSStatusUnavailable"))
             }
