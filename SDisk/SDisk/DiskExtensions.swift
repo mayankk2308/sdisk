@@ -111,32 +111,6 @@ extension Disk {
         DADiskManager.shared.diskMap[disk] = self
     }
     
-    /// Computes appropriate displayable disk size and unit.
-    ///
-    /// - Parameter capacity: Disk capacity in bytes.
-    /// - Returns: Tuple of calculated displayable size and unit.
-    private func diskSizeComputeHelper(_ capacity: Double) -> (Double, String) {
-        var capacity = capacity, tierCount = 0
-        let tiers = ["bytes", "KB", "MB", "GB", "TB", "PB"]
-        while capacity > 999 {
-            capacity /= 1000
-            tierCount += 1
-            if tierCount > tiers.count - 1 { break }
-        }
-        return (capacity, tiers[tierCount])
-    }
-    
-    /// Generates a user-presentable string representation of disk capacity.
-    ///
-    /// - Parameter data: Retrieved `DADisk` data.
-    /// - Returns: String representation of `capacity`.
-    func capacityString(withPrecision precision: Int! = 10) -> String? {
-        let p = Double(precision)
-        let availableDiskCapacityStringData = diskSizeComputeHelper(availableCapacity)
-        let totalDiskCapacityStringData = diskSizeComputeHelper(totalCapacity)
-        return "\(round(availableDiskCapacityStringData.0 * p) / p)\(availableDiskCapacityStringData.1 == totalDiskCapacityStringData.1 ? " of " : " \(availableDiskCapacityStringData.1) of ")\(round(totalDiskCapacityStringData.0 * p) / p) \(totalDiskCapacityStringData.1) available"
-    }
-    
     var mounted: Bool {
         return DADiskManager.shared.diskMap[self] != nil
     }
@@ -166,5 +140,7 @@ extension DADiskManagerDelegate {
     func postDiskMount() {}
     
     func postDiskDescriptionChanged() {}
+    
+    func preDiskUnmount() {}
 
 }

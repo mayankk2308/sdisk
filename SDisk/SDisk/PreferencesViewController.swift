@@ -11,8 +11,6 @@ import Cocoa
 /// Defines the base preferences view.
 class PreferencesViewController: NSViewController {
     
-    static let preferencesViewController = PreferencesViewController()
-    
     @IBOutlet weak var diskTableView: NSTableView!
     @IBOutlet weak var instructionView: NSView!
     @IBOutlet weak var addDiskButton: NSButton!
@@ -27,6 +25,8 @@ class PreferencesViewController: NSViewController {
     private var viewWasLoaded = false
     
     var window: NSWindow! = nil
+    
+    let selectionViewController = DiskSelectionViewController()
     
     /// Refreshes list of configured disks.
     ///
@@ -61,6 +61,7 @@ class PreferencesViewController: NSViewController {
     ///
     /// - Parameter sender: The element responsible for the action.
     @IBAction func addDisk(_ sender: Any) {
+        presentAsSheet(selectionViewController)
     }
     
     override func viewDidLoad() {
@@ -169,7 +170,7 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
         let disk = DADiskManager.shared.configuredDisks[row]
         guard let diskName = disk.name,
             let diskIcon = disk.icon,
-            let diskCapacityString = disk.capacityString() else { return }
+            let diskCapacityString = DADiskManager.shared.capacityString(availableCapacity: disk.availableCapacity, totalCapacity: disk.totalCapacity) else { return }
         cell.diskNameLabel.stringValue = diskName
         cell.diskImageView.image = NSImage(data: diskIcon)
         cell.diskCapacityLabel.stringValue = diskCapacityString

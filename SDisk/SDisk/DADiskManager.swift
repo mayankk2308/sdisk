@@ -30,6 +30,14 @@ class DADiskManager {
     /// Convenience map between `DADisk`s and `Disk` object(s).
     var diskMap = SuperMap<DADisk, Disk>()
     
+    var filteredDisks: [DADisk] {
+        var tempDisks = [DADisk]()
+        for disk in currentDisks {
+            if diskMap[disk] == nil { tempDisks.append(disk) }
+        }
+        return tempDisks
+    }
+    
     /// Maintains track of the number of disks to unmount.
     var totalDisksToUnmount = 0
     
@@ -237,8 +245,33 @@ extension DADiskManager {
                 return
             }
             for disk in self.currentDisks {
-                DADiskUnmount(disk, DADiskUnmountOptions(kDADiskUnmountOptionDefault), self.diskUnmountDone, nil)
+                DADiskUnmount(disk, DADiskUnmountOptions(kDADiskUnmountOptionForce), self.diskUnmountDone, nil)
             }
         }
+    }
+}
+
+// MARK: - Handles basic disk data.
+extension DADiskManager {
+    
+    /// Computes appropriate displayable disk size and unit.
+    ///
+    /// - Parameter capacity: Disk capacity in bytes.
+    /// - Returns: Tuple of calculated displayable size and unit.
+    private func diskSizeComputeHelper(_ capacity: Double) -> (Double, String) {
+        var capacity = capacity, tierCount = 0
+        let tiers = ["bytes", "KB", "MB", "GB", "TB", "PB"]
+        while capacity > 999 {
+            capacity /= 1000
+            tierCount += 1
+            if tierCount > tiers.count - 1 { break }
+        }
+        return (capacity, tiers[tierCount])
+    }
+    
+    func capacityString(availableCapacity available: Double, totalCapacity total: Double, withPrecision p: Double! = 10) -> String? {
+        let availableDiskCapacityStringData = diskSizeComputeHelper(available)
+        let totalDiskCapacityStringData = diskSizeComputeHelper(total)
+        return "\(round(availableDiskCapacityStringData.0 * p) / p)\(availableDiskCapacityStringData.1 == totalDiskCapacityStringData.1 ? " of " : " \(availableDiskCapacityStringData.1) of ")\(round(totalDiskCapacityStringData.0 * p) / p) \(totalDiskCapacityStringData.1) available"
     }
 }
