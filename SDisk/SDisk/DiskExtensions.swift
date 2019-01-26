@@ -142,5 +142,7 @@ extension DADiskManagerDelegate {
     func postDiskDescriptionChanged() {}
     
     func preDiskUnmount() {}
+    
+    func postDiskUnmount() {}
 
 }

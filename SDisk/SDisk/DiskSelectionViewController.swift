@@ -31,6 +31,7 @@ class DiskSelectionViewController: NSViewController {
         driveFetchLabel.stringValue = "Retrieving drives..."
         selectionTableView.dataSource = self
         selectionTableView.delegate = self
+        DADiskManager.shared.delegate = self
     }
     
     override func viewWillAppear() {
@@ -68,15 +69,26 @@ class DiskSelectionViewController: NSViewController {
 // MARK: - Handle disk events.
 extension DiskSelectionViewController: DADiskManagerDelegate {
     
-    func postDiskMount() {
-        selectionTableView.reloadData()
-    }
+//    func postDiskMount() {
+//        print("mount")
+//        disks = DADiskManager.shared.filteredDisks
+//        selectionTableView.reloadData()
+//    }
+//    
+//    func postDiskUnmount() {
+//        print("unmount")
+//        disks = DADiskManager.shared.filteredDisks
+//        selectionTableView.reloadData()
+//    }
     
-    func postDiskUnmount() {
+    func postDiskDescriptionChanged() {
+        print("description")
+        disks = DADiskManager.shared.filteredDisks
         selectionTableView.reloadData()
     }
 }
 
+// MARK: - Handle tableview configuration.
 extension DiskSelectionViewController: NSTableViewDelegate, NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -106,5 +118,6 @@ extension DiskSelectionViewController: NSTableViewDelegate, NSTableViewDataSourc
         cell.diskCapacityLabel.stringValue = capacityString
         cell.diskCapacityBar.normal = (capacityData.total - capacityData.available) / capacityData.total
         cell.diskCapacityBar.index = row
+        cell.diskCapacityBar.drawLayer()
     }
 }

@@ -68,12 +68,12 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kV2-7h-R2E" customClass="DiskCapacityBarView" customModule="SDisk" customModuleProvider="target">
+                                                    <customView canDrawConcurrently="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kV2-7h-R2E" customClass="DiskCapacityBarView" customModule="SDisk" customModuleProvider="target">
                                                         <rect key="frame" x="56" y="18" width="192" height="8"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     </customView>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nca-8I-6Jl">
-                                                        <rect key="frame" x="54" y="5" width="196" height="8"/>
+                                                        <rect key="frame" x="54" y="3" width="196" height="10"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Capacity information" id="Ue3-3G-Bpp">
                                                             <font key="font" metaFont="system" size="7"/>

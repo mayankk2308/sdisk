@@ -177,6 +177,7 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
         cell.diskCapacityBarView.index = row
         cell.diskCapacityBarView.normal = (disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity
         cell.associatedDisk = disk
+        cell.diskCapacityBarView.drawLayer()
         DispatchQueue.global(qos: .background).async {
             DispatchQueue.main.async {
                 let mountStatus = disk.mounted

@@ -22,7 +22,7 @@ class DADiskManager {
     static let shared = DADiskManager()
     
     /// Holds list of available disks.
-    var currentDisks = [DADisk]()
+    var currentDisks = Set<DADisk>()
     
     /// Holds list of configured disks.
     var configuredDisks = [Disk]()
@@ -77,6 +77,9 @@ class DADiskManager {
     var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
         DADiskManager.shared.diskMap[disk] = nil
+        if let index = DADiskManager.shared.currentDisks.index(of: disk) {
+            DADiskManager.shared.currentDisks.remove(at: index)
+        }
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
             DispatchQueue.main.async {
@@ -90,7 +93,7 @@ class DADiskManager {
     /// Handle disk mounting.
     var diskDidMount: DADiskMountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onMount)
-        DADiskManager.shared.currentDisks.append(disk)
+        DADiskManager.shared.currentDisks.insert(disk)
         for cDisk in DADiskManager.shared.configuredDisks {
             if disk == cDisk {
                 DADiskManager.shared.diskMap[disk] = cDisk
@@ -109,8 +112,13 @@ class DADiskManager {
     
     /// Handles changes to disk information.
     var diskDidChange: DADiskDescriptionChangedCallback = { disk, _, _ in
-        guard let cDisk = DADiskManager.shared.diskMap[disk] else { return }
-        cDisk.updateFrom(arbDisk: disk)
+        if DADiskManager.shared.currentDisks.contains(disk) {
+            DADiskManager.shared.currentDisks.remove(disk)
+            DADiskManager.shared.currentDisks.insert(disk)
+        }
+        if let cDisk = DADiskManager.shared.diskMap[disk] {
+            cDisk.updateFrom(arbDisk: disk)
+        }
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
             DispatchQueue.main.async {
@@ -213,7 +221,7 @@ extension DADiskManager {
                         success = false
                         continue
                     }
-                    self.currentDisks.append(disk)
+                    self.currentDisks.insert(disk)
                 } catch {
                     success = false
                     continue

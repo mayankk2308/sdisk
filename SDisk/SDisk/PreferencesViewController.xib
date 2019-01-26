@@ -160,7 +160,7 @@
                                                             <action selector="actionsOnMount:" target="akr-2L-JXP" id="TTm-Cy-f03"/>
                                                         </connections>
                                                     </button>
-                                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8oE-cT-iye" customClass="DiskCapacityBarView" customModule="SDisk" customModuleProvider="target">
+                                                    <customView identifier="barView" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8oE-cT-iye" customClass="DiskCapacityBarView" customModule="SDisk" customModuleProvider="target">
                                                         <rect key="frame" x="68" y="27" width="319" height="12"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     </customView>
