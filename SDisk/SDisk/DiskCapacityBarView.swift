@@ -16,19 +16,32 @@ class DiskCapacityBarView: NSView {
     
     var normal: Double = 0
     var index: Int = 0
-    var subViewSet = false
-    private var progressRect = NSView()
     private let availableColors: [NSColor] = [.systemBlue, .systemGreen, .systemPink, .systemOrange, .systemRed]
     
     func drawLayer() {
-        let gradient = CAGradientLayer()
-        gradient.cornerRadius = 3.5
-        gradient.borderColor = NSColor.separatorColor.cgColor
-        gradient.borderWidth = 1.0
-        gradient.colors = [availableColors[index].cgColor, availableColors[index].withAlphaComponent(0.6).cgColor, NSColor.quaternaryLabelColor.cgColor, NSColor.quaternaryLabelColor.cgColor]
-        gradient.startPoint = CGPoint(x: 0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 0.5)
-        gradient.locations = [0, normal, normal, 1] as [NSNumber]
-        layer = gradient
+        if let oldGradient = layer as? CAGradientLayer {
+            let colorAnimation = CABasicAnimation(keyPath: "colors")
+            colorAnimation.duration = 1
+            colorAnimation.toValue = [availableColors[index % availableColors.count].cgColor, availableColors[index % availableColors.count].withAlphaComponent(0.6).cgColor, NSColor.quaternaryLabelColor.cgColor, NSColor.quaternaryLabelColor.cgColor]
+            colorAnimation.isRemovedOnCompletion = false
+            colorAnimation.fillMode = .forwards
+            let progressAnimation = CABasicAnimation(keyPath: "locations")
+            progressAnimation.duration = 1
+            progressAnimation.toValue = [0, normal, normal, 1] as [NSNumber]
+            progressAnimation.isRemovedOnCompletion = false
+            progressAnimation.fillMode = .forwards
+            oldGradient.add(colorAnimation, forKey: "colors")
+            oldGradient.add(progressAnimation, forKey: "locations")
+        } else {
+            let gradient = CAGradientLayer()
+            gradient.cornerRadius = 3.5
+            gradient.borderColor = NSColor.separatorColor.cgColor
+            gradient.borderWidth = 1.0
+            gradient.colors = [availableColors[index % availableColors.count].cgColor, availableColors[index % availableColors.count].withAlphaComponent(0.6).cgColor, NSColor.quaternaryLabelColor.cgColor, NSColor.quaternaryLabelColor.cgColor]
+            gradient.startPoint = CGPoint(x: 0, y: 0.5)
+            gradient.endPoint = CGPoint(x: 1, y: 0.5)
+            gradient.locations = [0, normal, normal, 1] as [NSNumber]
+            layer = gradient
+        }
     }
 }

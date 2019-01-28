@@ -31,11 +31,11 @@ class DADiskManager {
     var diskMap = SuperMap<DADisk, Disk>()
     
     var filteredDisks: [DADisk] {
-        var tempDisks = [DADisk]()
+        var tempDisks = Set<DADisk>()
         for disk in currentDisks {
-            if diskMap[disk] == nil { tempDisks.append(disk) }
+            if diskMap[disk] == nil { tempDisks.insert(disk) }
         }
-        return tempDisks
+        return Array(tempDisks)
     }
     
     /// Maintains track of the number of disks to unmount.
@@ -82,10 +82,8 @@ class DADiskManager {
         }
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
-            DispatchQueue.main.async {
-                for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount() }
-                DADiskManager.shared.updateQueued = false
-            }
+            for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount(unmountedDisk: disk) }
+            DADiskManager.shared.updateQueued = false
         }
         return nil
     }
@@ -102,10 +100,8 @@ class DADiskManager {
         }
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
-            DispatchQueue.main.async {
-                for delegate in DADiskManager.shared.delegates { delegate.postDiskMount() }
-                DADiskManager.shared.updateQueued = false
-            }
+            for delegate in DADiskManager.shared.delegates { delegate.postDiskMount(mountedDisk: disk) }
+            DADiskManager.shared.updateQueued = false
         }
         return nil
     }
@@ -121,10 +117,8 @@ class DADiskManager {
         }
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
-            DispatchQueue.main.async {
-                for delegate in DADiskManager.shared.delegates { delegate.postDiskDescriptionChanged() }
-                DADiskManager.shared.updateQueued = false
-            }
+            for delegate in DADiskManager.shared.delegates { delegate.postDiskDescriptionChanged() }
+            DADiskManager.shared.updateQueued = false
         }
     }
     
@@ -133,9 +127,7 @@ class DADiskManager {
         DADiskManager.shared.totalDisksToUnmount -= 1
         if DADiskManager.shared.ejectMode && DADiskManager.shared.totalDisksToUnmount == 0 {
             DADiskManager.shared.ejectMode = false
-            DispatchQueue.main.async {
-                for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount() }
-            }
+            for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount(unmountedDisk: disk) }
         }
     }
 }
@@ -247,7 +239,7 @@ extension DADiskManager {
             self.totalDisksToUnmount = self.currentDisks.count
             if self.totalDisksToUnmount == 0 {
                 DispatchQueue.main.async {
-                    for delegate in self.delegates { delegate.postDiskUnmount() }
+                    for delegate in self.delegates { delegate.postDiskUnmount(unmountedDisk: nil) }
                 }
                 self.ejectMode = false
                 return
@@ -280,6 +272,6 @@ extension DADiskManager {
     func capacityString(availableCapacity available: Double, totalCapacity total: Double, withPrecision p: Double! = 10) -> String? {
         let availableDiskCapacityStringData = diskSizeComputeHelper(available)
         let totalDiskCapacityStringData = diskSizeComputeHelper(total)
-        return "\(round(availableDiskCapacityStringData.0 * p) / p)\(availableDiskCapacityStringData.1 == totalDiskCapacityStringData.1 ? " of " : " \(availableDiskCapacityStringData.1) of ")\(round(totalDiskCapacityStringData.0 * p) / p) \(totalDiskCapacityStringData.1) available"
+        return "\(round(availableDiskCapacityStringData.0 * p) / p)\(availableDiskCapacityStringData.1 == totalDiskCapacityStringData.1 ? " of " : " \(availableDiskCapacityStringData.1) of ")\(round(totalDiskCapacityStringData.0 * p) / p) \(totalDiskCapacityStringData.1) free"
     }
 }

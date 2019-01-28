@@ -13,6 +13,7 @@
 		A80FA5F521F12C91000A3CC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A80FA5F421F12C91000A3CC4 /* Assets.xcassets */; };
 		A80FA5F821F12C91000A3CC4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A80FA5F621F12C91000A3CC4 /* MainMenu.xib */; };
 		A80FA60521F12E37000A3CC4 /* CDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80FA60421F12E37000A3CC4 /* CDS.swift */; };
+		A8308C6A21FD051D001C7FD3 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8308C6921FD051D001C7FD3 /* ViewExtensions.swift */; };
 		A860310821F1897400EF7AE4 /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860310721F1897400EF7AE4 /* TaskType.swift */; };
 		A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */; };
 		A860311E21F195C800EF7AE4 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */; };
@@ -46,6 +47,7 @@
 		A80FA5F921F12C91000A3CC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A80FA5FA21F12C91000A3CC4 /* SDisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SDisk.entitlements; sourceTree = "<group>"; };
 		A80FA60421F12E37000A3CC4 /* CDS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDS.swift; sourceTree = "<group>"; };
+		A8308C6921FD051D001C7FD3 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		A860310721F1897400EF7AE4 /* TaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskType.swift; sourceTree = "<group>"; };
 		A860311B21F195C800EF7AE4 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		A80FA60221F12DB3000A3CC4 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A8308C6821FD0508001C7FD3 /* Extensions */,
 				A80FA60621F12F1B000A3CC4 /* XIBs */,
 				A87A568321F142BB00B72611 /* Controllers */,
 			);
@@ -165,6 +168,14 @@
 				A860311C21F195C800EF7AE4 /* PreferencesWindowController.xib */,
 			);
 			name = XIBs;
+			sourceTree = "<group>";
+		};
+		A8308C6821FD0508001C7FD3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A8308C6921FD051D001C7FD3 /* ViewExtensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		A860310621F1895D00EF7AE4 /* Task Management */ = {
@@ -338,6 +349,7 @@
 				A8F0FE9721FC0CDF007D5D19 /* DiskSelectionViewController.swift in Sources */,
 				A8C6315221FA19B600E150A9 /* DiskCapacityBarView.swift in Sources */,
 				A87A568221F142B600B72611 /* MenuManager.swift in Sources */,
+				A8308C6A21FD051D001C7FD3 /* ViewExtensions.swift in Sources */,
 				A860310821F1897400EF7AE4 /* TaskType.swift in Sources */,
 				A8918C4E21F2C7E500F434CC /* SDWindowController.swift in Sources */,
 				A8A4F24221F66F14006FDEE6 /* PreferencesViewController.swift in Sources */,

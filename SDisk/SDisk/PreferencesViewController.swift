@@ -75,9 +75,6 @@ class PreferencesViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         manageWindow()
-        if DADiskManager.shared.ejectMode || DADiskManager.shared.updateQueued {
-            toggleUpdateMode()
-        }
     }
 }
 

@@ -19,10 +19,13 @@ class DiskSelectionViewController: NSViewController {
     @IBOutlet weak var dismissButton: NSButton!
     @IBOutlet weak var addButton: NSButton!
     
+    var reloadRequest = false
+    
     var disks = [DADisk]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectionTableView.canDrawConcurrently = true
         mainScrollView.isHidden = true
         availableVolumesLabel.isHidden = true
         dismissButton.isHidden = true
@@ -69,22 +72,19 @@ class DiskSelectionViewController: NSViewController {
 // MARK: - Handle disk events.
 extension DiskSelectionViewController: DADiskManagerDelegate {
     
-//    func postDiskMount() {
-//        print("mount")
-//        disks = DADiskManager.shared.filteredDisks
-//        selectionTableView.reloadData()
-//    }
-//    
-//    func postDiskUnmount() {
-//        print("unmount")
-//        disks = DADiskManager.shared.filteredDisks
-//        selectionTableView.reloadData()
-//    }
-    
-    func postDiskDescriptionChanged() {
-        print("description")
-        disks = DADiskManager.shared.filteredDisks
+    func postDiskMount(mountedDisk disk: DADisk) {
+        if self.disks.contains(disk) { return }
+        guard let data = disk.diskData(), let name = disk.name(withDiskData: data), name != "EFI", DADiskManager.shared.diskMap[disk] == nil else { return }
+        disks.append(disk)
+        selectionTableView.insertRows(at: IndexSet(integer: 0), withAnimation: .slideDown)
         selectionTableView.reloadData()
+    }
+    
+    func postDiskUnmount(unmountedDisk disk: DADisk?) {
+        guard let unmountedDisk = disk, let index = self.disks.index(of: unmountedDisk) else { return }
+        disks.remove(at: index)
+        selectionTableView.removeRows(at: IndexSet(arrayLiteral: index), withAnimation: .slideUp)
+        selectionTableView.reloadData(forRowIndexes: IndexSet(integersIn: index...disks.count), columnIndexes: IndexSet(integer: 0))
     }
 }
 
@@ -96,7 +96,7 @@ extension DiskSelectionViewController: NSTableViewDelegate, NSTableViewDataSourc
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskSelectCellView"), owner: self) as! SDiskSelectCellView
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskSelectCellView"), owner: nil) as! SDiskSelectCellView
         populateCell(cell, row)
         return cell
     }
@@ -107,13 +107,13 @@ extension DiskSelectionViewController: NSTableViewDelegate, NSTableViewDataSourc
     ///   - cell: Cell to populate.
     ///   - row: Row index.
     private func populateCell(_ cell: SDiskSelectCellView, _ row: Int) {
-        let disk = disks[row]
+        let disk = self.disks[row]
         guard let data = disk.diskData(),
             let name = disk.name(withDiskData: data),
             let capacityData = disk.capacity(withDiskData: data),
             let capacityString = DADiskManager.shared.capacityString(availableCapacity: capacityData.available, totalCapacity: capacityData.total),
             let icon = disk.icon(withDiskData: data) else { return }
-        cell.diskImageView.image = NSImage(data: icon)
+        cell.diskImageView.transition(withImage: NSImage(data: icon)!)
         cell.diskNameLabel.stringValue = name
         cell.diskCapacityLabel.stringValue = capacityString
         cell.diskCapacityBar.normal = (capacityData.total - capacityData.available) / capacityData.total
