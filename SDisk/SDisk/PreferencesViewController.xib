@@ -22,7 +22,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView autoresizesSubviews="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="400" height="100"/>
-            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82m-Xg-Xzi">
                     <rect key="frame" x="341" y="0.0" width="25" height="25"/>

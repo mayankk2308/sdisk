@@ -99,9 +99,6 @@ extension PreferencesViewController {
         let oldHeight = frame.height
         frame.size = CGSize(width: frame.width, height: height)
         frame.origin.y -= (height - oldHeight)
-        var viewFrame = view.frame
-        viewFrame.origin.y -= (height - oldHeight)
-        view.frame = viewFrame
         window.setFrame(frame, display: true, animate: true)
     }
     
@@ -178,7 +175,10 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
     func tableView(_ tableView: NSTableView, rowActionsForRow row: Int, edge: NSTableView.RowActionEdge) -> [NSTableViewRowAction] {
         if edge == .trailing {
             let deleteAction = NSTableViewRowAction(style: .destructive, title: "") { action, index in
-                tableView.removeRows(at: IndexSet(integer: index), withAnimation: .slideUp)
+                NSAnimationContext.runAnimationGroup { context in
+                    context.duration = 0.3
+                    tableView.removeRows(at: IndexSet(integer: index), withAnimation: NSTableView.AnimationOptions.slideUp)
+                }
                 DADiskManager.shared.removeConfiguredDisk(DADiskManager.shared.configuredDisks[index])
                 self.manageWindow()
             }

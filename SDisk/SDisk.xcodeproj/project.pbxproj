@@ -29,6 +29,7 @@
 		A8918C4C21F2C6D800F434CC /* HelpWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8918C4A21F2C6D800F434CC /* HelpWindowController.xib */; };
 		A8918C4E21F2C7E500F434CC /* SDWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4D21F2C7E500F434CC /* SDWindowController.swift */; };
 		A8989BA12200EB5800F6D0B0 /* DiskCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8989BA02200EB5800F6D0B0 /* DiskCellView.swift */; };
+		A8989BA32201196B00F6D0B0 /* PrimaryWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8989BA22201196B00F6D0B0 /* PrimaryWindow.swift */; };
 		A8A4F24221F66F14006FDEE6 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */; };
 		A8A4F24321F66F14006FDEE6 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A4F24121F66F14006FDEE6 /* PreferencesViewController.xib */; };
 		A8C6315221FA19B600E150A9 /* DiskCapacityBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C6315121FA19B600E150A9 /* DiskCapacityBarView.swift */; };
@@ -64,6 +65,7 @@
 		A8918C4A21F2C6D800F434CC /* HelpWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpWindowController.xib; sourceTree = "<group>"; };
 		A8918C4D21F2C7E500F434CC /* SDWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWindowController.swift; sourceTree = "<group>"; };
 		A8989BA02200EB5800F6D0B0 /* DiskCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCellView.swift; sourceTree = "<group>"; };
+		A8989BA22201196B00F6D0B0 /* PrimaryWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryWindow.swift; sourceTree = "<group>"; };
 		A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		A8A4F24121F66F14006FDEE6 /* PreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
 		A8C6315121FA19B600E150A9 /* DiskCapacityBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCapacityBarView.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				A8989BA02200EB5800F6D0B0 /* DiskCellView.swift */,
+				A8989BA22201196B00F6D0B0 /* PrimaryWindow.swift */,
 				A8C6315121FA19B600E150A9 /* DiskCapacityBarView.swift */,
 				A87389AA21FFEB6900966D76 /* ActionPaneView.swift */,
 				A87389AC21FFEE1E00966D76 /* CellWaitView.swift */,
@@ -368,6 +371,7 @@
 				A8918C4B21F2C6D800F434CC /* HelpWindowController.swift in Sources */,
 				A80FA60521F12E37000A3CC4 /* CDS.swift in Sources */,
 				A80FA5F021F12C90000A3CC4 /* AppDelegate.swift in Sources */,
+				A8989BA32201196B00F6D0B0 /* PrimaryWindow.swift in Sources */,
 				A87389AD21FFEE1E00966D76 /* CellWaitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
