@@ -27,19 +27,8 @@
                     <rect key="frame" x="20" y="42" width="260" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z5T-kd-fNI">
-                            <rect key="frame" x="27" y="3" width="25" height="23"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="nOl-g8-UhC">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="reloadDisks:" target="-2" id="xJD-Ix-qPe"/>
-                            </connections>
-                        </button>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ERC-ls-Pco">
-                            <rect key="frame" x="1" y="3" width="25" height="23"/>
+                            <rect key="frame" x="0.0" y="3" width="25" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" imageScaling="proportionallyDown" inset="2" id="KFD-2t-Q4N">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -47,7 +36,7 @@
                             </buttonCell>
                         </button>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWv-54-dl9">
-                            <rect key="frame" x="235" y="3" width="25" height="23"/>
+                            <rect key="frame" x="235" y="2" width="25" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="abG-TW-M8n">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -55,6 +44,17 @@
                             </buttonCell>
                             <connections>
                                 <action selector="dismissView:" target="-2" id="rMe-uy-ymy"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z5T-kd-fNI">
+                            <rect key="frame" x="211" y="2" width="25" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="nOl-g8-UhC">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="reloadDisks:" target="-2" id="xJD-Ix-qPe"/>
                             </connections>
                         </button>
                     </subviews>
@@ -86,7 +86,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="SDiskSelectCellView" id="WBm-6r-bFi" customClass="SDiskSelectCellView" customModule="SDisk" customModuleProvider="target">
+                                            <tableCellView identifier="diskFetchCell" id="WBm-6r-bFi" customClass="DiskCellView" customModule="SDisk" customModuleProvider="target">
                                                 <rect key="frame" x="1" y="1" width="255" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -141,11 +141,11 @@
                                                     </customView>
                                                 </subviews>
                                                 <connections>
-                                                    <outlet property="diskCapacityBar" destination="kV2-7h-R2E" id="yWH-7k-B2p"/>
-                                                    <outlet property="diskCapacityLabel" destination="nca-8I-6Jl" id="EG1-bv-Tlp"/>
-                                                    <outlet property="diskImageView" destination="w2W-nc-d9B" id="vCc-Rr-81x"/>
-                                                    <outlet property="diskNameLabel" destination="wbb-em-wJv" id="ocF-tq-aZg"/>
-                                                    <outlet property="loadingView" destination="NxK-ey-Wq3" id="rJV-X9-9FV"/>
+                                                    <outlet property="diskCapacityBar" destination="kV2-7h-R2E" id="Imw-7G-f7S"/>
+                                                    <outlet property="diskCapacityLabel" destination="nca-8I-6Jl" id="vmV-Tf-lO0"/>
+                                                    <outlet property="diskImageView" destination="w2W-nc-d9B" id="CzZ-1N-ROD"/>
+                                                    <outlet property="diskNameLabel" destination="wbb-em-wJv" id="tS2-DH-8G1"/>
+                                                    <outlet property="diskPreloadView" destination="NxK-ey-Wq3" id="PTM-YO-e7H"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>

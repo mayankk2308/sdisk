@@ -158,37 +158,9 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
         return DADiskManager.shared.configuredDisks.count
     }
     
-    /// Populates the table view cells.
-    ///
-    /// - Parameters:
-    ///   - cell: Cell to populate.
-    ///   - row: Row index.
-    private func populateCell(_ cell: SDiskCellView, _ row: Int) {
-        cell.toggleView(hide: true)
-        DispatchQueue.global(qos: .userInitiated).async {
-            let disk = DADiskManager.shared.configuredDisks[row]
-            guard let diskName = disk.name,
-                let diskIcon = disk.icon,
-                let diskCapacityString = DADiskManager.shared.capacityString(availableCapacity: disk.availableCapacity, totalCapacity: disk.totalCapacity) else { return }
-            let mountStatus = disk.mounted
-            DispatchQueue.main.async {
-                cell.toggleView()
-                cell.diskNameLabel.stringValue = diskName
-                cell.diskImageView.image = NSImage(data: diskIcon)
-                cell.diskCapacityLabel.stringValue = diskCapacityString
-                cell.diskCapacityBarView.index = row
-                cell.diskCapacityBarView.normal = (disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity
-                cell.associatedDisk = disk
-                cell.diskCapacityBarView.drawLayer()
-                cell.diskAvailableImageView.image = NSImage(named: mountStatus ? NSImage.Name("NSStatusAvailable") : NSImage.Name("NSStatusUnavailable"))
-                cell.diskMountStatusLabel.stringValue = mountStatus ? "Mounted" : "Not Mounted"
-            }
-        }
-    }
-    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskCellView"), owner: self) as! SDiskCellView
-        populateCell(cell, row)
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskCellView"), owner: self) as! DiskCellView
+        cell.update(fromDisk: DADiskManager.shared.configuredDisks[row], withRow: row)
         return cell
     }
     

@@ -77,35 +77,12 @@ extension DiskSelectionViewController: NSTableViewDelegate, NSTableViewDataSourc
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SDiskSelectCellView"), owner: self) as! SDiskSelectCellView
-        populateCell(cell, row)
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "diskFetchCell"), owner: self) as! DiskCellView
+        cell.update(fromDisk: disks[row], withRow: row)
         return cell
     }
     
-    /// Populates the table view cells.
-    ///
-    /// - Parameters:
-    ///   - cell: Cell to populate.
-    ///   - row: Row index.
-    private func populateCell(_ cell: SDiskSelectCellView, _ row: Int) {
-        cell.toggleView(hide: true)
-        DispatchQueue.global(qos: .userInitiated).async {
-            let disk = self.disks[row]
-            guard let data = disk.diskData(),
-                let name = disk.name(withDiskData: data),
-                let capacityData = disk.capacity(withDiskData: data),
-                let capacityString = DADiskManager.shared.capacityString(availableCapacity: capacityData.available, totalCapacity: capacityData.total),
-                let icon = disk.icon(withDiskData: data) else { return }
-            DispatchQueue.main.async {
-                cell.toggleView()
-                cell.diskImageView.transition(withImage: NSImage(data: icon)!)
-                cell.diskNameLabel.stringValue = name
-                cell.diskCapacityLabel.stringValue = capacityString
-                cell.diskCapacityBar.normal = (capacityData.total - capacityData.available) / capacityData.total
-                cell.diskCapacityBar.index = row
-                cell.diskCapacityBar.drawLayer()
-            }
-        }
-        
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        addButton.isEnabled = selectionTableView.selectedRowIndexes.count > 0
     }
 }

@@ -146,3 +146,11 @@ extension DADiskManagerDelegate {
     func postDiskUnmount(unmountedDisk disk: DADisk?) {}
 
 }
+
+extension CGFloat {
+    
+    init(_ bool: Bool) {
+        self = bool ? 1.0 : 0.0
+    }
+    
+}

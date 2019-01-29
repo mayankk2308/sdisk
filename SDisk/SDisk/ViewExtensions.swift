@@ -10,7 +10,8 @@ import Cocoa
 
 extension NSImageView {
     
-    func transition(withImage image: NSImage) {
+    func transition(withImage img: NSImage?) {
+        guard let image = img else { return }
         let transition = CATransition()
         transition.duration = 1.0
         transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)

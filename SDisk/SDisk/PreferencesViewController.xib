@@ -104,7 +104,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="SDiskCellView" id="akr-2L-JXP" customClass="SDiskCellView" customModule="SDisk" customModuleProvider="target">
+                                            <tableCellView identifier="SDiskCellView" id="akr-2L-JXP" customClass="DiskCellView" customModule="SDisk" customModuleProvider="target">
                                                 <rect key="frame" x="1" y="1" width="397" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -112,34 +112,26 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="74"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wMl-ma-CPb" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
-                                                                <rect key="frame" x="319" y="50" width="68" height="10"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                                            </customView>
-                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inB-bS-jLc" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
-                                                                <rect key="frame" x="287" y="14" width="100" height="10"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                                            </customView>
-                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrI-O9-8Rx" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                            <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrI-O9-8Rx" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
                                                                 <rect key="frame" x="66" y="49" width="181" height="10"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             </customView>
-                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5kR-vH-2aH" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                            <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5kR-vH-2aH" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
                                                                 <rect key="frame" x="10" y="13" width="48" height="48"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             </customView>
-                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oNR-oD-90b" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                            <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oNR-oD-90b" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
                                                                 <rect key="frame" x="66" y="14" width="181" height="10"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             </customView>
-                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X4w-eD-xd9" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                            <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X4w-eD-xd9" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
                                                                 <rect key="frame" x="66" y="32" width="321" height="10"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             </customView>
                                                         </subviews>
                                                     </customView>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zFd-NO-9TD">
-                                                        <rect key="frame" x="376" y="8" width="14" height="14"/>
+                                                        <rect key="frame" x="376" y="8" width="14" height="12"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusUnavailable" id="KHa-6k-Ywm"/>
                                                     </imageView>
@@ -158,7 +150,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="8zh-pL-rb0">
-                                                        <rect key="frame" x="66" y="10" width="181" height="11"/>
+                                                        <rect key="frame" x="66" y="8" width="181" height="13"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" id="Ug2-4F-u7C">
                                                             <font key="font" metaFont="miniSystem"/>
@@ -207,7 +199,7 @@
                                                         </connections>
                                                     </button>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="6zO-Qs-leW">
-                                                        <rect key="frame" x="256" y="10" width="119" height="11"/>
+                                                        <rect key="frame" x="256" y="8" width="119" height="12"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" id="dvW-4e-F4B">
                                                             <font key="font" metaFont="miniSystem"/>
@@ -217,16 +209,16 @@
                                                     </textField>
                                                 </subviews>
                                                 <connections>
-                                                    <outlet property="actionMountButton" destination="ktM-Ad-oo8" id="sqe-pf-Ghh"/>
-                                                    <outlet property="actionPeriodicButton" destination="OO2-3d-YFH" id="piu-Qb-PMr"/>
-                                                    <outlet property="actionUnmountButton" destination="9p2-zN-PsL" id="txE-Qo-oJa"/>
-                                                    <outlet property="diskAvailableImageView" destination="zFd-NO-9TD" id="tgg-aj-Ckm"/>
-                                                    <outlet property="diskCapacityBarView" destination="8oE-cT-iye" id="7zO-c2-Kld"/>
-                                                    <outlet property="diskCapacityLabel" destination="8zh-pL-rb0" id="j4e-3u-Qlf"/>
-                                                    <outlet property="diskImageView" destination="iej-Cg-0uI" id="Gh7-Vz-Rqp"/>
-                                                    <outlet property="diskMountStatusLabel" destination="6zO-Qs-leW" id="Jdk-pV-rHV"/>
-                                                    <outlet property="diskNameLabel" destination="fL7-sI-kJv" id="EWW-z1-bP6"/>
-                                                    <outlet property="loadingView" destination="GhC-XY-WsE" id="Zem-Zx-uWe"/>
+                                                    <outlet property="actionOnMountButton" destination="ktM-Ad-oo8" id="Ebc-gp-V7A"/>
+                                                    <outlet property="actionOnUnmountButton" destination="9p2-zN-PsL" id="ZvN-Cx-MkP"/>
+                                                    <outlet property="actionPeriodicButton" destination="OO2-3d-YFH" id="4dB-Fu-Mxw"/>
+                                                    <outlet property="diskCapacityBar" destination="8oE-cT-iye" id="mqP-ES-CNC"/>
+                                                    <outlet property="diskCapacityLabel" destination="8zh-pL-rb0" id="z7b-B5-nQG"/>
+                                                    <outlet property="diskImageView" destination="iej-Cg-0uI" id="oz1-hj-bjs"/>
+                                                    <outlet property="diskMountLabel" destination="6zO-Qs-leW" id="Lr3-A5-fse"/>
+                                                    <outlet property="diskMountStatusView" destination="zFd-NO-9TD" id="dCk-nT-La6"/>
+                                                    <outlet property="diskNameLabel" destination="fL7-sI-kJv" id="VPy-FT-3Y7"/>
+                                                    <outlet property="diskPreloadView" destination="GhC-XY-WsE" id="5jl-Z1-G4M"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
