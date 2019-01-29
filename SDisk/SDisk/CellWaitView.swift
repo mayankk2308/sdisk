@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// Describes a pulsating intermediate state view.
 class CellWaitView: NSView {
     
     override var wantsUpdateLayer: Bool {
@@ -20,7 +21,7 @@ class CellWaitView: NSView {
     
     func drawLayer() {
         let gradient = CAGradientLayer()
-        gradient.cornerRadius = 2
+        gradient.cornerRadius = 5
         gradient.colors = [NSColor.quaternaryLabelColor.withAlphaComponent(0.2).cgColor, NSColor.windowBackgroundColor.withAlphaComponent(0.2).cgColor]
         gradient.locations = [0, 1]
         gradient.startPoint = CGPoint(x: 0, y: 0.5)

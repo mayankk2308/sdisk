@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// Describes a cell view for available disks.
 class SDiskSelectCellView: NSTableCellView {
     
     @IBOutlet weak var diskImageView: NSImageView!

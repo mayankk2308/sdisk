@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// Custom view to show disk capacity.
 class DiskCapacityBarView: NSView {
     
     override var wantsUpdateLayer: Bool {

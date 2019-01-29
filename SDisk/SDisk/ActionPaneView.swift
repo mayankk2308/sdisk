@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// Represents a simple action bar.
 class ActionPaneView: NSView {
     
     override var wantsUpdateLayer: Bool {

@@ -130,7 +130,7 @@ protocol DADiskManagerDelegate {
     func postDiskMount(mountedDisk disk: DADisk)
     
     /// Notification for delegate after a disk description changes.
-    func postDiskDescriptionChanged()
+    func postDiskDescriptionChanged(changedDisk disk: DADisk?)
     
 }
 
@@ -139,7 +139,7 @@ extension DADiskManagerDelegate {
     
     func postDiskMount(mountedDisk disk: DADisk) {}
     
-    func postDiskDescriptionChanged() {}
+    func postDiskDescriptionChanged(changedDisk disk: DADisk?) {}
     
     func preDiskUnmount() {}
     

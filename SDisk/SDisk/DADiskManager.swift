@@ -117,7 +117,7 @@ class DADiskManager {
         }
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
             DADiskManager.shared.updateQueued = true
-            for delegate in DADiskManager.shared.delegates { delegate.postDiskDescriptionChanged() }
+            for delegate in DADiskManager.shared.delegates { delegate.postDiskDescriptionChanged(changedDisk: disk) }
             DADiskManager.shared.updateQueued = false
         }
     }

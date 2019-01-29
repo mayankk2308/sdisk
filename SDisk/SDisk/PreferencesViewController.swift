@@ -85,12 +85,12 @@ extension PreferencesViewController: DADiskManagerDelegate {
         toggleUpdateMode()
     }
     
-    func postDiskUnmount() {
+    func postDiskUnmount(unmountedDisk disk: DADisk?) {
         toggleUpdateMode(enableItems: true)
         diskTableView.reloadData()
     }
     
-    func postDiskDescriptionChanged() {
+    func postDiskDescriptionChanged(changedDisk disk: DADisk?) {
         diskTableView.reloadData()
     }
     
@@ -164,20 +164,22 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
     ///   - cell: Cell to populate.
     ///   - row: Row index.
     private func populateCell(_ cell: SDiskCellView, _ row: Int) {
-        let disk = DADiskManager.shared.configuredDisks[row]
-        guard let diskName = disk.name,
-            let diskIcon = disk.icon,
-            let diskCapacityString = DADiskManager.shared.capacityString(availableCapacity: disk.availableCapacity, totalCapacity: disk.totalCapacity) else { return }
-        cell.diskNameLabel.stringValue = diskName
-        cell.diskImageView.image = NSImage(data: diskIcon)
-        cell.diskCapacityLabel.stringValue = diskCapacityString
-        cell.diskCapacityBarView.index = row
-        cell.diskCapacityBarView.normal = (disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity
-        cell.associatedDisk = disk
-        cell.diskCapacityBarView.drawLayer()
-        DispatchQueue.global(qos: .background).async {
+        cell.toggleView(hide: true)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let disk = DADiskManager.shared.configuredDisks[row]
+            guard let diskName = disk.name,
+                let diskIcon = disk.icon,
+                let diskCapacityString = DADiskManager.shared.capacityString(availableCapacity: disk.availableCapacity, totalCapacity: disk.totalCapacity) else { return }
+            let mountStatus = disk.mounted
             DispatchQueue.main.async {
-                let mountStatus = disk.mounted
+                cell.toggleView()
+                cell.diskNameLabel.stringValue = diskName
+                cell.diskImageView.image = NSImage(data: diskIcon)
+                cell.diskCapacityLabel.stringValue = diskCapacityString
+                cell.diskCapacityBarView.index = row
+                cell.diskCapacityBarView.normal = (disk.totalCapacity - disk.availableCapacity) / disk.totalCapacity
+                cell.associatedDisk = disk
+                cell.diskCapacityBarView.drawLayer()
                 cell.diskAvailableImageView.image = NSImage(named: mountStatus ? NSImage.Name("NSStatusAvailable") : NSImage.Name("NSStatusUnavailable"))
                 cell.diskMountStatusLabel.stringValue = mountStatus ? "Mounted" : "Not Mounted"
             }

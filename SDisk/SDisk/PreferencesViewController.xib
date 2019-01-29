@@ -108,35 +108,65 @@
                                                 <rect key="frame" x="1" y="1" width="397" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zFd-NO-9TD">
+                                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GhC-XY-WsE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="74"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wMl-ma-CPb" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="319" y="50" width="68" height="10"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inB-bS-jLc" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="287" y="14" width="100" height="10"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrI-O9-8Rx" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="66" y="49" width="181" height="10"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5kR-vH-2aH" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="10" y="13" width="48" height="48"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oNR-oD-90b" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="66" y="14" width="181" height="10"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X4w-eD-xd9" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="66" y="32" width="321" height="10"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                        </subviews>
+                                                    </customView>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zFd-NO-9TD">
                                                         <rect key="frame" x="376" y="8" width="14" height="14"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusUnavailable" id="KHa-6k-Ywm"/>
                                                     </imageView>
-                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iej-Cg-0uI">
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="iej-Cg-0uI">
                                                         <rect key="frame" x="10" y="13" width="48" height="48"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="SDisk" id="4Jd-Su-kN0"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="4Jd-Su-kN0"/>
                                                     </imageView>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fL7-sI-kJv">
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="fL7-sI-kJv">
                                                         <rect key="frame" x="66" y="43" width="181" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" title="Disk Name" usesSingleLineMode="YES" id="Cbe-8c-NeG">
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" usesSingleLineMode="YES" id="Cbe-8c-NeG">
                                                             <font key="font" metaFont="systemSemibold" size="15"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8zh-pL-rb0">
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="8zh-pL-rb0">
                                                         <rect key="frame" x="66" y="10" width="181" height="11"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Capacity information" id="Ug2-4F-u7C">
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" id="Ug2-4F-u7C">
                                                             <font key="font" metaFont="miniSystem"/>
                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OO2-3d-YFH">
+                                                    <button fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="OO2-3d-YFH">
                                                         <rect key="frame" x="345" y="46" width="16" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MenuIcon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="sps-rx-Rdl">
@@ -148,7 +178,7 @@
                                                             <action selector="actionsPeriodically:" target="akr-2L-JXP" id="fHT-SU-DBn"/>
                                                         </connections>
                                                     </button>
-                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ktM-Ad-oo8">
+                                                    <button fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ktM-Ad-oo8">
                                                         <rect key="frame" x="319" y="46" width="16" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MenuIcon" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="vTl-nL-Sep">
@@ -160,11 +190,11 @@
                                                             <action selector="actionsOnMount:" target="akr-2L-JXP" id="TTm-Cy-f03"/>
                                                         </connections>
                                                     </button>
-                                                    <customView identifier="barView" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8oE-cT-iye" customClass="DiskCapacityBarView" customModule="SDisk" customModuleProvider="target">
+                                                    <customView identifier="barView" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="8oE-cT-iye" customClass="DiskCapacityBarView" customModule="SDisk" customModuleProvider="target">
                                                         <rect key="frame" x="68" y="27" width="319" height="12"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     </customView>
-                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9p2-zN-PsL">
+                                                    <button fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="9p2-zN-PsL">
                                                         <rect key="frame" x="371" y="46" width="16" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="MenuIcon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="fhx-cy-33A">
@@ -176,10 +206,10 @@
                                                             <action selector="actionsOnUnmount:" target="akr-2L-JXP" id="9MK-Dh-egJ"/>
                                                         </connections>
                                                     </button>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zO-Qs-leW">
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="6zO-Qs-leW">
                                                         <rect key="frame" x="256" y="10" width="119" height="11"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Not Mounted" id="dvW-4e-F4B">
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" id="dvW-4e-F4B">
                                                             <font key="font" metaFont="miniSystem"/>
                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -187,12 +217,16 @@
                                                     </textField>
                                                 </subviews>
                                                 <connections>
+                                                    <outlet property="actionMountButton" destination="ktM-Ad-oo8" id="sqe-pf-Ghh"/>
+                                                    <outlet property="actionPeriodicButton" destination="OO2-3d-YFH" id="piu-Qb-PMr"/>
+                                                    <outlet property="actionUnmountButton" destination="9p2-zN-PsL" id="txE-Qo-oJa"/>
                                                     <outlet property="diskAvailableImageView" destination="zFd-NO-9TD" id="tgg-aj-Ckm"/>
                                                     <outlet property="diskCapacityBarView" destination="8oE-cT-iye" id="7zO-c2-Kld"/>
                                                     <outlet property="diskCapacityLabel" destination="8zh-pL-rb0" id="j4e-3u-Qlf"/>
                                                     <outlet property="diskImageView" destination="iej-Cg-0uI" id="Gh7-Vz-Rqp"/>
                                                     <outlet property="diskMountStatusLabel" destination="6zO-Qs-leW" id="Jdk-pV-rHV"/>
                                                     <outlet property="diskNameLabel" destination="fL7-sI-kJv" id="EWW-z1-bP6"/>
+                                                    <outlet property="loadingView" destination="GhC-XY-WsE" id="Zem-Zx-uWe"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>

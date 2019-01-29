@@ -11,6 +11,7 @@ import Cocoa
 /// Handles selection from available mounted drives.
 class DiskSelectionViewController: NSViewController {
 
+    @IBOutlet weak var errorImageView: NSImageView!
     @IBOutlet weak var mainScrollView: NSScrollView!
     @IBOutlet weak var selectionTableView: NSTableView!
     @IBOutlet weak var driveFetchIndicator: NSProgressIndicator!
@@ -22,11 +23,6 @@ class DiskSelectionViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectionTableView.canDrawConcurrently = true
-        mainScrollView.isHidden = true
-        addButton.isHidden = true
-        driveFetchIndicator.startAnimation(self)
-        driveFetchLabel.stringValue = "Retrieving drives..."
         selectionTableView.dataSource = self
         selectionTableView.delegate = self
     }
@@ -34,7 +30,7 @@ class DiskSelectionViewController: NSViewController {
     private func reloadDisks() {
         actionPaneView.isHidden = true
         mainScrollView.isHidden = true
-        addButton.isHidden = true
+        errorImageView.isHidden = true
         driveFetchIndicator.startAnimation(self)
         driveFetchLabel.isHidden = false
         driveFetchLabel.stringValue = "Retrieving drives..."
@@ -43,10 +39,10 @@ class DiskSelectionViewController: NSViewController {
             DispatchQueue.main.async {
                 self.driveFetchIndicator.stopAnimation(self)
                 if !success || self.disks.count == 0 {
-                    self.driveFetchLabel.stringValue = "No External Drives Found"
+                    self.driveFetchLabel.stringValue = "No External Drives Found."
+                    self.errorImageView.isHidden = false
                 }
                 else {
-                    self.addButton.isHidden = false
                     self.mainScrollView.isHidden = false
                     self.driveFetchLabel.isHidden = true
                     self.selectionTableView.reloadData()
