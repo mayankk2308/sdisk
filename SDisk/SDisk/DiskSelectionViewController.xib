@@ -7,9 +7,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DiskSelectionViewController" customModule="SDisk" customModuleProvider="target">
             <connections>
+                <outlet property="actionPaneView" destination="Q8x-nt-QkO" id="WqY-Hc-RjB"/>
                 <outlet property="addButton" destination="ERC-ls-Pco" id="E6T-Sg-siW"/>
-                <outlet property="availableVolumesLabel" destination="sNx-ow-mgV" id="XCw-EO-6Q9"/>
-                <outlet property="dismissButton" destination="Z5T-kd-fNI" id="7EU-SX-1fD"/>
                 <outlet property="driveFetchIndicator" destination="wq2-xM-rLL" id="Xn4-HI-tYV"/>
                 <outlet property="driveFetchLabel" destination="Kpp-bG-j9J" id="Ave-4x-38O"/>
                 <outlet property="mainScrollView" destination="8Iq-On-0NF" id="eRG-EF-RWA"/>
@@ -70,12 +69,12 @@
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2W-nc-d9B">
                                                         <rect key="frame" x="10" y="3" width="38" height="44"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SDisk" id="eFm-Zn-8TZ"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="eFm-Zn-8TZ"/>
                                                     </imageView>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wbb-em-wJv">
                                                         <rect key="frame" x="54" y="26" width="196" height="17"/>
                                                         <autoresizingMask key="autoresizingMask"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Retrieving..." id="NGr-gA-L5t">
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" id="NGr-gA-L5t">
                                                             <font key="font" metaFont="systemSemibold" size="12"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -88,18 +87,41 @@
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nca-8I-6Jl">
                                                         <rect key="frame" x="54" y="3" width="196" height="10"/>
                                                         <autoresizingMask key="autoresizingMask"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Waiting..." id="Ue3-3G-Bpp">
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" id="Ue3-3G-Bpp">
                                                             <font key="font" metaFont="system" size="7"/>
                                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
+                                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NxK-ey-Wq3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="255" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <subviews>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5kD-6l-kMr" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="54" y="7" width="55" height="5"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgz-4p-0pC" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="54" y="22" width="196" height="5"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ePV-Qa-ett" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="54" y="37" width="130" height="5"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9dV-7q-B22" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="10" y="5" width="38" height="38"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                        </subviews>
+                                                    </customView>
                                                 </subviews>
                                                 <connections>
                                                     <outlet property="diskCapacityBar" destination="kV2-7h-R2E" id="yWH-7k-B2p"/>
                                                     <outlet property="diskCapacityLabel" destination="nca-8I-6Jl" id="EG1-bv-Tlp"/>
                                                     <outlet property="diskImageView" destination="w2W-nc-d9B" id="vCc-Rr-81x"/>
                                                     <outlet property="diskNameLabel" destination="wbb-em-wJv" id="ocF-tq-aZg"/>
+                                                    <outlet property="loadingView" destination="NxK-ey-Wq3" id="rJV-X9-9FV"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
@@ -121,37 +143,39 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q8x-nt-QkO">
+                <customView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q8x-nt-QkO" customClass="ActionPaneView" customModule="SDisk" customModuleProvider="target">
                     <rect key="frame" x="20" y="42" width="260" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z5T-kd-fNI">
                             <rect key="frame" x="27" y="3" width="25" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nOl-g8-UhC">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="nOl-g8-UhC">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="dismissView:" target="-2" id="SoL-j6-J7f"/>
+                                <action selector="reloadDisks:" target="-2" id="xJD-Ix-qPe"/>
                             </connections>
                         </button>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sNx-ow-mgV">
-                            <rect key="frame" x="168" y="6" width="87" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Add Volumes" id="Uke-pi-Rdw">
-                                <font key="font" metaFont="systemLight" size="13"/>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ERC-ls-Pco">
                             <rect key="frame" x="1" y="3" width="25" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KFD-2t-Q4N">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="KFD-2t-Q4N">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                        </button>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWv-54-dl9">
+                            <rect key="frame" x="235" y="3" width="25" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="abG-TW-M8n">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="dismissView:" target="-2" id="rMe-uy-ymy"/>
+                            </connections>
                         </button>
                     </subviews>
                 </customView>
@@ -161,7 +185,7 @@
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSStopProgressTemplate" width="11" height="11"/>
-        <image name="SDisk" width="245.75999450683594" height="245.75999450683594"/>
     </resources>
 </document>

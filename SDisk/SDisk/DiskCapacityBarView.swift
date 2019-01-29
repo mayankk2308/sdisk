@@ -22,7 +22,7 @@ class DiskCapacityBarView: NSView {
         if let oldGradient = layer as? CAGradientLayer {
             let colorAnimation = CABasicAnimation(keyPath: "colors")
             colorAnimation.duration = 1
-            colorAnimation.toValue = [availableColors[index % availableColors.count].cgColor, availableColors[index % availableColors.count].withAlphaComponent(0.6).cgColor, NSColor.quaternaryLabelColor.cgColor, NSColor.quaternaryLabelColor.cgColor]
+            colorAnimation.toValue = [availableColors[index % availableColors.count].cgColor, availableColors[index % availableColors.count].withAlphaComponent(0.6).cgColor, NSColor.scrollBarColor.withAlphaComponent(0.2).cgColor, NSColor.scrollBarColor.withAlphaComponent(0.2).cgColor]
             colorAnimation.isRemovedOnCompletion = false
             colorAnimation.fillMode = .forwards
             let progressAnimation = CABasicAnimation(keyPath: "locations")
@@ -35,9 +35,9 @@ class DiskCapacityBarView: NSView {
         } else {
             let gradient = CAGradientLayer()
             gradient.cornerRadius = 3.5
-            gradient.borderColor = NSColor.separatorColor.cgColor
+            gradient.borderColor = NSColor.quaternaryLabelColor.cgColor
             gradient.borderWidth = 1.0
-            gradient.colors = [availableColors[index % availableColors.count].cgColor, availableColors[index % availableColors.count].withAlphaComponent(0.6).cgColor, NSColor.quaternaryLabelColor.cgColor, NSColor.quaternaryLabelColor.cgColor]
+            gradient.colors = [availableColors[index % availableColors.count].cgColor, availableColors[index % availableColors.count].withAlphaComponent(0.6).cgColor, NSColor.scrollBarColor.withAlphaComponent(0.2).cgColor, NSColor.scrollBarColor.withAlphaComponent(0.2).cgColor]
             gradient.startPoint = CGPoint(x: 0, y: 0.5)
             gradient.endPoint = CGPoint(x: 1, y: 0.5)
             gradient.locations = [0, normal, normal, 1] as [NSNumber]

@@ -20,6 +20,8 @@
 		A8624C5A21F3B3F80088BFE1 /* DADiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8624C5921F3B3F80088BFE1 /* DADiskManager.swift */; };
 		A8624C6321F3E56B0088BFE1 /* DiskExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8624C6221F3E56B0088BFE1 /* DiskExtensions.swift */; };
 		A86B6BE621FB98AE007E1C8C /* SuperMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86B6BE521FB98AE007E1C8C /* SuperMap.swift */; };
+		A87389AB21FFEB6900966D76 /* ActionPaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87389AA21FFEB6900966D76 /* ActionPaneView.swift */; };
+		A87389AD21FFEE1E00966D76 /* CellWaitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87389AC21FFEE1E00966D76 /* CellWaitView.swift */; };
 		A87A568221F142B600B72611 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87A568121F142B600B72611 /* MenuManager.swift */; };
 		A8918C4621F280A600F434CC /* SDTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4521F280A600F434CC /* SDTaskManager.swift */; };
 		A8918C4821F2947700F434CC /* TaskLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8918C4721F2947700F434CC /* TaskLanguage.swift */; };
@@ -54,6 +56,8 @@
 		A8624C5921F3B3F80088BFE1 /* DADiskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DADiskManager.swift; sourceTree = "<group>"; };
 		A8624C6221F3E56B0088BFE1 /* DiskExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskExtensions.swift; sourceTree = "<group>"; };
 		A86B6BE521FB98AE007E1C8C /* SuperMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperMap.swift; sourceTree = "<group>"; };
+		A87389AA21FFEB6900966D76 /* ActionPaneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPaneView.swift; sourceTree = "<group>"; };
+		A87389AC21FFEE1E00966D76 /* CellWaitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWaitView.swift; sourceTree = "<group>"; };
 		A87A568121F142B600B72611 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		A8918C4521F280A600F434CC /* SDTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDTaskManager.swift; sourceTree = "<group>"; };
 		A8918C4721F2947700F434CC /* TaskLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLanguage.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 			children = (
 				A8308C6821FD0508001C7FD3 /* Extensions */,
 				A80FA60621F12F1B000A3CC4 /* XIBs */,
+				A87389AE21FFEE2F00966D76 /* Views */,
 				A87A568321F142BB00B72611 /* Controllers */,
 			);
 			name = "User Interface";
@@ -198,14 +203,23 @@
 			name = "Disk Management";
 			sourceTree = "<group>";
 		};
+		A87389AE21FFEE2F00966D76 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A8A4F24421F67D1D006FDEE6 /* SDiskCellView.swift */,
+				A8F0FE9921FC2915007D5D19 /* SDiskSelectCellView.swift */,
+				A8C6315121FA19B600E150A9 /* DiskCapacityBarView.swift */,
+				A87389AA21FFEB6900966D76 /* ActionPaneView.swift */,
+				A87389AC21FFEE1E00966D76 /* CellWaitView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		A87A568321F142BB00B72611 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				A87A568121F142B600B72611 /* MenuManager.swift */,
 				A8918C4D21F2C7E500F434CC /* SDWindowController.swift */,
-				A8A4F24421F67D1D006FDEE6 /* SDiskCellView.swift */,
-				A8F0FE9921FC2915007D5D19 /* SDiskSelectCellView.swift */,
-				A8C6315121FA19B600E150A9 /* DiskCapacityBarView.swift */,
 				A8F0FE9521FC0CDF007D5D19 /* DiskSelectionViewController.swift */,
 				A8918C4921F2C6D800F434CC /* HelpWindowController.swift */,
 				A8A4F24021F66F14006FDEE6 /* PreferencesViewController.swift */,
@@ -342,6 +356,7 @@
 				A860311D21F195C800EF7AE4 /* PreferencesWindowController.swift in Sources */,
 				A8918C4821F2947700F434CC /* TaskLanguage.swift in Sources */,
 				A80FA5F321F12C90000A3CC4 /* SDisk.xcdatamodeld in Sources */,
+				A87389AB21FFEB6900966D76 /* ActionPaneView.swift in Sources */,
 				A8918C4621F280A600F434CC /* SDTaskManager.swift in Sources */,
 				A8A4F24521F67D1D006FDEE6 /* SDiskCellView.swift in Sources */,
 				A86B6BE621FB98AE007E1C8C /* SuperMap.swift in Sources */,
@@ -357,6 +372,7 @@
 				A8918C4B21F2C6D800F434CC /* HelpWindowController.swift in Sources */,
 				A80FA60521F12E37000A3CC4 /* CDS.swift in Sources */,
 				A80FA5F021F12C90000A3CC4 /* AppDelegate.swift in Sources */,
+				A87389AD21FFEE1E00966D76 /* CellWaitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
