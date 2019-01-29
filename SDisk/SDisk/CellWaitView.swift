@@ -19,6 +19,7 @@ class CellWaitView: NSView {
         drawLayer()
     }
     
+    /// Draws a new layer, or updates existing layer.
     func drawLayer() {
         let gradient = CAGradientLayer()
         gradient.cornerRadius = 5

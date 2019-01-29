@@ -8,6 +8,10 @@
 
 import Foundation
 
+/// Describes available environments for tasks.
+///
+/// - bash: For shell scripts.
+/// - appleScript: For AppleScript configurations.
 enum TaskLanguage: Int16 {
     case bash = 1, appleScript = 2
 }

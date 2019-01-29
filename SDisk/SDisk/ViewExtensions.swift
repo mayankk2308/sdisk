@@ -10,6 +10,9 @@ import Cocoa
 
 extension NSImageView {
     
+    /// Creates a fade in/out transition from initial to final image.
+    ///
+    /// - Parameter img: Image to transition to.
     func transition(withImage img: NSImage?) {
         guard let image = img else { return }
         let transition = CATransition()

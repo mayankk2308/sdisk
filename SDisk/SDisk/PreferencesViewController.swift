@@ -33,15 +33,7 @@ class PreferencesViewController: NSViewController {
     /// - Parameter sender: The element responsible for the action.
     @IBAction func refreshAllDisks(_ sender: Any) {
         toggleUpdateMode()
-        DispatchQueue.global(qos: .default).async {
-            DADiskManager.shared.fetchExternalDisks()
-            DADiskManager.shared.fetchConfiguredDisks()
-            DispatchQueue.main.async {
-                self.toggleUpdateMode(enableItems: true)
-                self.diskTableView.reloadData()
-                self.manageWindow()
-            }
-        }
+        refreshDisks()
     }
     
     /// Ejects all disks.
@@ -55,6 +47,11 @@ class PreferencesViewController: NSViewController {
     ///
     /// - Parameter sender: The element responsible for the action.
     @IBAction func removeAllDisks(_ sender: Any) {
+        toggleUpdateMode()
+        DADiskManager.shared.removeAllConfiguredDisks {
+            MenuManager.shared.update(withStatus: "Volumes Configured: None")
+            self.refreshDisks()
+        }
     }
     
     /// Adds an available disk.
@@ -81,15 +78,9 @@ class PreferencesViewController: NSViewController {
 // MARK: - Handle disk events.
 extension PreferencesViewController: DADiskManagerDelegate {
     
-    func preDiskUnmount() {
-        toggleUpdateMode()
-    }
-    
-    func postDiskUnmount(unmountedDisk disk: DADisk?) {
-        toggleUpdateMode(enableItems: true)
-        diskTableView.reloadData()
-    }
-    
+    /// Manage tableview for changed disk.
+    ///
+    /// - Parameter disk: The changed disk.
     func postDiskDescriptionChanged(changedDisk disk: DADisk?) {
         diskTableView.reloadData()
     }
@@ -142,10 +133,30 @@ extension PreferencesViewController {
             removeAllDisksButton.isEnabled = false
             statusLabel.stringValue = "Volumes Configured: None"
             count += 1
+            changeWindowHeight(toHeight: CGFloat(count) * diskTableView.rowHeight + viewDelta)
         } else {
+            instructionView.isHidden = true
             removeAllDisksButton.isEnabled = true
             statusLabel.stringValue = "Volumes Configured: \(count)"
             changeWindowHeight(toHeight: CGFloat(count > maxCellsInView ? maxCellsInView : count) * diskTableView.rowHeight + viewDelta)
+        }
+    }
+    
+}
+
+// MARK: - Handle disk updates.
+extension PreferencesViewController {
+    
+    /// Refreshes all disks.
+    func refreshDisks() {
+        DispatchQueue.global(qos: .default).async {
+            DADiskManager.shared.fetchExternalDisks()
+            DADiskManager.shared.fetchConfiguredDisks()
+            DispatchQueue.main.async {
+                self.toggleUpdateMode(enableItems: true)
+                self.diskTableView.reloadData()
+                self.manageWindow()
+            }
         }
     }
     
@@ -166,7 +177,11 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
     
     func tableView(_ tableView: NSTableView, rowActionsForRow row: Int, edge: NSTableView.RowActionEdge) -> [NSTableViewRowAction] {
         if edge == .trailing {
-            let deleteAction = NSTableViewRowAction(style: .destructive, title: "") { _, _ in }
+            let deleteAction = NSTableViewRowAction(style: .destructive, title: "") { action, index in
+                tableView.removeRows(at: IndexSet(integer: index), withAnimation: .slideUp)
+                DADiskManager.shared.removeConfiguredDisk(DADiskManager.shared.configuredDisks[index])
+                self.manageWindow()
+            }
             deleteAction.image = NSImage(named: NSImage.Name("NSStopProgressFreestandingTemplate"))
             deleteAction.backgroundColor = NSColor.systemRed.withAlphaComponent(0.9)
             let resetAction = NSTableViewRowAction(style: .regular, title: "") { _, _ in

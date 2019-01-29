@@ -68,11 +68,12 @@ extension DADisk {
     /// Adds `DADisk` as configurable `Disk` to current CoreData context.
     ///
     /// - Returns: Added object.
-    func addAsConfigurableDisk(withDiskData data: NSDictionary) -> Disk? {
-        guard let capacityData = capacity(withDiskData: data),
+    func addAsConfigurableDisk() {
+        guard let data = diskData(),
+            let capacityData = capacity(withDiskData: data),
             let diskName = name(withDiskData: data),
             let diskUUID = uniqueID(withDiskData: data),
-            let image = icon(withDiskData: data) else { return nil }
+            let image = icon(withDiskData: data) else { return }
         let configuredDisk = Disk(context: CDS.persistentContainer.viewContext)
         configuredDisk.availableCapacity = capacityData.available
         configuredDisk.totalCapacity = capacityData.total
@@ -81,7 +82,7 @@ extension DADisk {
         configuredDisk.icon = image
         CDS.saveContext()
         DADiskManager.shared.diskMap[self] = configuredDisk
-        return configuredDisk
+        DADiskManager.shared.configuredDisks.append(configuredDisk)
     }
     
 }
@@ -109,8 +110,10 @@ extension Disk {
         availableCapacity = capacityData.available
         totalCapacity = capacityData.total
         DADiskManager.shared.diskMap[disk] = self
+        CDS.saveContext()
     }
     
+    /// Mount state of the disk.
     var mounted: Bool {
         return DADiskManager.shared.diskMap[self] != nil
     }

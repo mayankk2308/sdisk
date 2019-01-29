@@ -9,10 +9,13 @@
             <connections>
                 <outlet property="actionPaneView" destination="Q8x-nt-QkO" id="WqY-Hc-RjB"/>
                 <outlet property="addButton" destination="ERC-ls-Pco" id="E6T-Sg-siW"/>
+                <outlet property="addProgressIndicator" destination="CV8-IU-P9S" id="PK5-Ud-Wjy"/>
                 <outlet property="driveFetchIndicator" destination="wq2-xM-rLL" id="Xn4-HI-tYV"/>
                 <outlet property="driveFetchLabel" destination="Kpp-bG-j9J" id="Ave-4x-38O"/>
                 <outlet property="errorImageView" destination="GwN-YI-6sF" id="42W-D1-L11"/>
+                <outlet property="exitButton" destination="FWv-54-dl9" id="Lty-dD-IPX"/>
                 <outlet property="mainScrollView" destination="8Iq-On-0NF" id="eRG-EF-RWA"/>
+                <outlet property="reloadButton" destination="Z5T-kd-fNI" id="PRg-VR-87z"/>
                 <outlet property="selectionTableView" destination="Mhk-SK-iDh" id="MJy-DQ-ZAN"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -34,6 +37,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="addSelectedDisks:" target="-2" id="2fD-LT-jbQ"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWv-54-dl9">
                             <rect key="frame" x="235" y="2" width="25" height="25"/>
@@ -57,6 +63,10 @@
                                 <action selector="reloadDisks:" target="-2" id="xJD-Ix-qPe"/>
                             </connections>
                         </button>
+                        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="CV8-IU-P9S">
+                            <rect key="frame" x="187" y="7" width="16" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                        </progressIndicator>
                     </subviews>
                 </customView>
                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="52" horizontalPageScroll="10" verticalLineScroll="52" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Iq-On-0NF">

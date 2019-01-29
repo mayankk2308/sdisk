@@ -15,6 +15,7 @@ class ActionPaneView: NSView {
         return true
     }
     
+    /// Updates the layer.
     override func updateLayer() {
         layer?.borderWidth = 1.0
         layer?.borderColor = NSColor.quaternaryLabelColor.cgColor

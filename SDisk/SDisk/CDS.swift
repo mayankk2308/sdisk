@@ -12,6 +12,7 @@ import Foundation
 /// Defines the base `CoreData` stack.
 class CDS {
     
+    /// Reference to the CoreData peristent container.
     static var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "SDisk")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in

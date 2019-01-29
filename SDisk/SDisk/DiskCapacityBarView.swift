@@ -19,6 +19,7 @@ class DiskCapacityBarView: NSView {
     var index: Int = 0
     private let availableColors: [NSColor] = [.systemBlue, .systemGreen, .systemPink, .systemOrange, .systemRed]
     
+    /// Draws the layer, or updates if layer already drawn.
     func drawLayer() {
         if let oldGradient = layer as? CAGradientLayer {
             let colorAnimation = CABasicAnimation(keyPath: "colors")

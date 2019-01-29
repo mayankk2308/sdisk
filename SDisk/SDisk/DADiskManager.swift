@@ -136,15 +136,17 @@ class DADiskManager {
 extension DADiskManager {
     
     /// Removes all configured disks.
-    func removeAllConfiguredDisks() {
-        for disk in configuredDisks {
-            CDS.persistentContainer.viewContext.delete(disk)
-        }
-        CDS.saveContext {
-            self.configuredDisks.removeAll()
-            self.diskMap = SuperMap<DADisk, Disk>()
-            DispatchQueue.main.async {
-                MenuManager.shared.update(withStatus: "Volumes Configured: None")
+    func removeAllConfiguredDisks(doUITask task: @escaping () -> Void) {
+        DispatchQueue.global(qos: .default).async {
+            for disk in self.configuredDisks {
+                CDS.persistentContainer.viewContext.delete(disk)
+            }
+            CDS.saveContext {
+                self.configuredDisks.removeAll()
+                self.diskMap = SuperMap<DADisk, Disk>()
+                DispatchQueue.main.async {
+                    task()
+                }
             }
         }
     }
@@ -269,6 +271,13 @@ extension DADiskManager {
         return (capacity, tiers[tierCount])
     }
     
+    /// Computes a capacity string representation for given statistics.
+    ///
+    /// - Parameters:
+    ///   - available: Amount of disk capacity remaining.
+    ///   - total: Total disk capacity.
+    ///   - p: Decimal precision.
+    /// - Returns: Built capacity string.
     func capacityString(availableCapacity available: Double, totalCapacity total: Double, withPrecision p: Double! = 10) -> String? {
         let availableDiskCapacityStringData = diskSizeComputeHelper(available)
         let totalDiskCapacityStringData = diskSizeComputeHelper(total)

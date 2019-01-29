@@ -41,6 +41,9 @@ class DiskCellView: NSTableCellView {
     /// View shown while cell is updating.
     @IBOutlet weak var diskPreloadView: NSView?
     
+    /// Stores a reference to a disk for which to determine actions.
+    weak var actionableDisk: Disk?
+    
 }
 
 // MARK: - Manage cell actions.
