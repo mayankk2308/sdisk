@@ -7,4 +7,5 @@ target 'SDisk' do
 
   # Pods for SDisk
   pod 'Swipt'
+  pod 'HotKey'
 end

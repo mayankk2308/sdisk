@@ -1,16 +1,20 @@
 PODS:
+  - HotKey (0.1.1)
   - Swipt (1.1.0)
 
 DEPENDENCIES:
+  - HotKey
   - Swipt
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - HotKey
     - Swipt
 
 SPEC CHECKSUMS:
+  HotKey: 0be143fd015544a63c51be6dc2066dbf455ced72
   Swipt: 88dea3d81f5117ffad107d9c8668e68a993fef35
 
-PODFILE CHECKSUM: 3f63efe827d3c577fe7a9715e56c79861a918206
+PODFILE CHECKSUM: 44c52f05d138d37c1219ee76330f1828da7e28da
 
 COCOAPODS: 1.6.0.beta.1

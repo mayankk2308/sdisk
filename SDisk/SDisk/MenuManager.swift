@@ -8,6 +8,7 @@
 
 import Cocoa
 import Swipt
+import HotKey
 
 /// Manages the macOS menubar item for the application.
 class MenuManager {
@@ -24,6 +25,7 @@ class MenuManager {
     private let menu = NSMenu()
     
     private let ejectAllDisksItem = NSMenuItem(title: "Eject All Disks", action: #selector(initiateEject(_:)), keyEquivalent: "E")
+    let hotKeyEject = HotKey(key: .e, modifiers: [.command, .shift])
     
     /// Toggle open at login.
     ///
@@ -133,6 +135,9 @@ extension MenuManager {
             button.target = self
         }
         DADiskManager.shared.delegate = self
+        hotKeyEject.keyDownHandler = {
+            self.initiateEject(self)
+        }
     }
     
     /// Updates menu item status.

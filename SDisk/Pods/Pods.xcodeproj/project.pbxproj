@@ -3,97 +3,144 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05B262387EC83D015F08433044D5F472 /* SwiptCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C5ADD5F60C1502FFF698E9E08F1153 /* SwiptCore.swift */; };
-		1B92927A3C715E4D2B12871B99C46B1E /* SwiptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E57CE6A86C5429F7592E97A13263E79 /* SwiptManager.swift */; };
-		2CE71B51C1FFDFB18421DB590E32B5F4 /* Swipt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8DB02B9C152E892F050741A57BFD2 /* Swipt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5ADE09019EBC66EA10EDEC7F5BCED5CF /* Constants+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAFE4C450252FE7FF2F9D8339F0607C /* Constants+Aliases.swift */; };
-		6C08AC21D6824E2D804DC09F93533997 /* Privileges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0460D14BF289110B4A59EECFBE7674E7 /* Privileges.swift */; };
-		719F17F3E9BBC2F7851251E8A4E18383 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CC88E25F6D1F1785EE5E167F1D891 /* Errors.swift */; };
-		79215B6FF28858A46B7A489875F0A58A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
-		8000E5DD24D734CB2CB801CB88EE3E46 /* Pods-SDisk-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F3C91D21912FA7FD89CE3FBF102FB7 /* Pods-SDisk-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		88F4438265BD56E1AA1164323058B7AE /* Swipt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2715423C969EF2EEA98594D81FC598 /* Swipt-dummy.m */; };
-		96E6CB8246C88E46ED3FBB5ACDC359BF /* Pods-SDisk-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0C801844F8A105B84E576A901B6228 /* Pods-SDisk-dummy.m */; };
-		AFAD2D3E647FAFFBD14656D169B5F85C /* ShellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC8ED97FECED4A4974EF79BE638BBE /* ShellType.swift */; };
-		E5368FBA9E00F0CD8E8E96252F0E4B25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		05F4AC1B6E5E0ED8427475035B45F2C0 /* Constants+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A786A53367F0CB5CC8111B9FC0E639F7 /* Constants+Aliases.swift */; };
+		148C459BC9376C0E0C7B97AEF4DD06CD /* Swipt-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 466AC19083408E01C228ADF027EDA73A /* Swipt-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29479888C517584E06AEDACC2D468F0A /* Appkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AB35A0CC7D0EC7FAC38086EA585D1E /* Appkit.framework */; };
+		3B50801CB9F7B97A4E6C24A565EED9A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA4FF7011117549B1002928323C971C /* Carbon.framework */; };
+		47B87EA507C974985A5F36436A2BAC13 /* HotKey-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E050AF8E996DD2076323AE5D60F70BBC /* HotKey-dummy.m */; };
+		481A436AB326C0CD4958BD9E967A1C07 /* HotKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF2A5CA5F08E6381452C59E37F7C71D /* HotKey.swift */; };
+		61254557D176580607A0BBDA4AC42BE7 /* Pods-SDisk-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F3C91D21912FA7FD89CE3FBF102FB7 /* Pods-SDisk-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E9BA4967BC1CCC3121A0206AEEC6723 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6249A85AD92269D7A2C91BDD6BF6B8F0 /* Key.swift */; };
+		91A2FC12164D419F79AB77034C4B107E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE827E26782B0FDC57B2904F15F6E3EA /* Cocoa.framework */; };
+		9F5D6E463C136A37BDCF7B5DADD4C3B3 /* HotKeysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D3F250A35B235CFBA81CE6E87B3AAB /* HotKeysController.swift */; };
+		A6B1367C004074E80C0237EF1183EB50 /* KeyCombo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EA52DF7A4DC88F548B4BAE82B93AF /* KeyCombo.swift */; };
+		B2AE45C63ED45349E733E33E4B80CA8D /* NSEventModifierFlags+HotKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA5C227656D413FAABC5A263A279835 /* NSEventModifierFlags+HotKey.swift */; };
+		C1D1628FCBE1495402C9F294DEE613D6 /* Swipt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C67892E5C07C1EDC8908ED5DFE847B71 /* Swipt-dummy.m */; };
+		C7F3637EA4024958D69CF06B766B85A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE827E26782B0FDC57B2904F15F6E3EA /* Cocoa.framework */; };
+		C8FF2B1EC6283F971D424019EB63A5D3 /* ShellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FD34870DB8B39CFF9E5A148218A525 /* ShellType.swift */; };
+		D2EB9E899EE89215174A3D4138506448 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE827E26782B0FDC57B2904F15F6E3EA /* Cocoa.framework */; };
+		D98BBED62FA460826B23DC9E52FE6918 /* HotKey-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA02AF4D8B6A8A1A65DFA057293A18B5 /* HotKey-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D9905DDDC7A07D98087C9F4FC2EF32F7 /* SwiptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205399F40E58E220253F2D6606AA34F /* SwiptManager.swift */; };
+		E2DD64A0FC5E2A94A06A4D0BD6A65E8C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2078E0FDBE569305BC237BB4E7C69687 /* Errors.swift */; };
+		E352DC310534B9E249DAEBF5ED8D4595 /* SwiptCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C9DD409E1438CFCFB871819A98031A /* SwiptCore.swift */; };
+		F59070BE77D0FCB7015978AC18BF7FF8 /* Pods-SDisk-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0C801844F8A105B84E576A901B6228 /* Pods-SDisk-dummy.m */; };
+		FA7ABF1D176BFB1C54E07A8FCFB6CE8E /* Privileges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D753BCAD12B294EAD02696BC273022 /* Privileges.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9846C5EBFF1BAF9FC31937935FE0A1F6 /* PBXContainerItemProxy */ = {
+		9F343619A8941CEFC3F6A98B6864C329 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7C9B8764290F7C86934BFF01DB7D442F;
+			remoteGlobalIDString = 9C36B47346F672096EB78045242C8C3B;
+			remoteInfo = HotKey;
+		};
+		B640E3910EA7479A8A55DBE942013869 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9185F69B84C10F09E6EAF48FFF8976F3;
 			remoteInfo = Swipt;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0460D14BF289110B4A59EECFBE7674E7 /* Privileges.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Privileges.swift; path = Swipt/Privileges.swift; sourceTree = "<group>"; };
-		07ACC63ADE1DFDAC7018F4902EF3D367 /* Swipt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swipt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0733C9085DD2DEA57578BA52B86B3F74 /* Swipt-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Swipt-Info.plist"; sourceTree = "<group>"; };
+		07D753BCAD12B294EAD02696BC273022 /* Privileges.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Privileges.swift; path = Swipt/Privileges.swift; sourceTree = "<group>"; };
+		0BDC8CA913895BD969AE2D822746A707 /* Swipt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Swipt.framework; path = Swipt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F19464C720BC0F42894ED35B27AE11F /* Swipt-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swipt-prefix.pch"; sourceTree = "<group>"; };
 		1C0C801844F8A105B84E576A901B6228 /* Pods-SDisk-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SDisk-dummy.m"; sourceTree = "<group>"; };
-		1E57CE6A86C5429F7592E97A13263E79 /* SwiptManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiptManager.swift; path = Swipt/SwiptManager.swift; sourceTree = "<group>"; };
-		1EECD86C4E2CDAF88152E6ED748F478F /* Swipt-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swipt-prefix.pch"; sourceTree = "<group>"; };
+		1F0CCAF9BF373BCE6E1A2B00FA9FDC9C /* HotKey.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HotKey.xcconfig; sourceTree = "<group>"; };
+		2078E0FDBE569305BC237BB4E7C69687 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Swipt/Errors.swift; sourceTree = "<group>"; };
+		26BB50864213ED72A325BC10CA892C60 /* HotKey-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HotKey-prefix.pch"; sourceTree = "<group>"; };
 		2B2C6F0CDADF4A88E34786D22CE6C91E /* Pods-SDisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDisk.release.xcconfig"; sourceTree = "<group>"; };
+		2DA5C227656D413FAABC5A263A279835 /* NSEventModifierFlags+HotKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSEventModifierFlags+HotKey.swift"; path = "Sources/HotKey/NSEventModifierFlags+HotKey.swift"; sourceTree = "<group>"; };
 		2DFF979B231A9575C94AE85D7D933964 /* Pods-SDisk-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SDisk-acknowledgements.markdown"; sourceTree = "<group>"; };
-		2F2715423C969EF2EEA98594D81FC598 /* Swipt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Swipt-dummy.m"; sourceTree = "<group>"; };
-		37B58ED1B7A75C7217417D65A35B4C1C /* Swipt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Swipt.modulemap; sourceTree = "<group>"; };
-		37D8DB02B9C152E892F050741A57BFD2 /* Swipt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swipt-umbrella.h"; sourceTree = "<group>"; };
-		3F19379266B5CA69E92170976725FEF5 /* Swipt-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Swipt-Info.plist"; sourceTree = "<group>"; };
-		5AAFE4C450252FE7FF2F9D8339F0607C /* Constants+Aliases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Constants+Aliases.swift"; path = "Swipt/Constants+Aliases.swift"; sourceTree = "<group>"; };
-		6089630D6D4CEE0A024CAD0D16DCDC8F /* Swipt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swipt.xcconfig; sourceTree = "<group>"; };
-		768CC88E25F6D1F1785EE5E167F1D891 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Swipt/Errors.swift; sourceTree = "<group>"; };
+		3205399F40E58E220253F2D6606AA34F /* SwiptManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiptManager.swift; path = Swipt/SwiptManager.swift; sourceTree = "<group>"; };
+		466AC19083408E01C228ADF027EDA73A /* Swipt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swipt-umbrella.h"; sourceTree = "<group>"; };
+		59D3F250A35B235CFBA81CE6E87B3AAB /* HotKeysController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HotKeysController.swift; path = Sources/HotKey/HotKeysController.swift; sourceTree = "<group>"; };
+		61D5EC4C9041975AED83F3C23F00E5FD /* HotKey-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HotKey-Info.plist"; sourceTree = "<group>"; };
+		6249A85AD92269D7A2C91BDD6BF6B8F0 /* Key.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Key.swift; path = Sources/HotKey/Key.swift; sourceTree = "<group>"; };
 		8236420C8D246A562077780369231447 /* Pods-SDisk-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SDisk-frameworks.sh"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8C316204A3363DDEDFF12612BA10CA52 /* Pods_SDisk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SDisk.framework; path = "Pods-SDisk.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CA94660CCA3A841B615F2D1D0AC9787 /* Swipt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swipt.xcconfig; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		98A41849C28C021F81C1B557688D031A /* Pods-SDisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SDisk.debug.xcconfig"; sourceTree = "<group>"; };
-		A4CC8ED97FECED4A4974EF79BE638BBE /* ShellType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShellType.swift; path = Swipt/ShellType.swift; sourceTree = "<group>"; };
+		98FD34870DB8B39CFF9E5A148218A525 /* ShellType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShellType.swift; path = Swipt/ShellType.swift; sourceTree = "<group>"; };
+		A6AB35A0CC7D0EC7FAC38086EA585D1E /* Appkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Appkit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Appkit.framework; sourceTree = DEVELOPER_DIR; };
+		A786A53367F0CB5CC8111B9FC0E639F7 /* Constants+Aliases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Constants+Aliases.swift"; path = "Swipt/Constants+Aliases.swift"; sourceTree = "<group>"; };
+		AC97A1C3EDFF1BB94183FA609191B2DB /* Swipt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Swipt.modulemap; sourceTree = "<group>"; };
+		ACA4FF7011117549B1002928323C971C /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = DEVELOPER_DIR; };
 		B3C0E894339964C42F984EBFCFA924C7 /* Pods-SDisk-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDisk-Info.plist"; sourceTree = "<group>"; };
-		B9C5ADD5F60C1502FFF698E9E08F1153 /* SwiptCore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiptCore.swift; path = Swipt/SwiptCore.swift; sourceTree = "<group>"; };
+		BA02AF4D8B6A8A1A65DFA057293A18B5 /* HotKey-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HotKey-umbrella.h"; sourceTree = "<group>"; };
+		BBA029B84D8B6751282B058B94150623 /* HotKey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HotKey.framework; path = HotKey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBF2A5CA5F08E6381452C59E37F7C71D /* HotKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HotKey.swift; path = Sources/HotKey/HotKey.swift; sourceTree = "<group>"; };
 		C141E35A6ADF11BCC4334E1C6F0046C2 /* Pods-SDisk-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SDisk-acknowledgements.plist"; sourceTree = "<group>"; };
-		CDFA2538FC1BE1071A088302CE6C5AB6 /* Pods_SDisk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SDisk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C67892E5C07C1EDC8908ED5DFE847B71 /* Swipt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Swipt-dummy.m"; sourceTree = "<group>"; };
+		C8E1E26F7E25EC5711F0643D9D2AD7E8 /* HotKey.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = HotKey.modulemap; sourceTree = "<group>"; };
+		CE827E26782B0FDC57B2904F15F6E3EA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		D4F3C91D21912FA7FD89CE3FBF102FB7 /* Pods-SDisk-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SDisk-umbrella.h"; sourceTree = "<group>"; };
 		D94ED04BF89747681E60DE1EF964D9C6 /* Pods-SDisk.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SDisk.modulemap"; sourceTree = "<group>"; };
-		DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		E050AF8E996DD2076323AE5D60F70BBC /* HotKey-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HotKey-dummy.m"; sourceTree = "<group>"; };
+		E1C9DD409E1438CFCFB871819A98031A /* SwiptCore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiptCore.swift; path = Swipt/SwiptCore.swift; sourceTree = "<group>"; };
+		FB0EA52DF7A4DC88F548B4BAE82B93AF /* KeyCombo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyCombo.swift; path = Sources/HotKey/KeyCombo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F0D3640358FB1905C5B45D11E885EE3C /* Frameworks */ = {
+		36374CCBF5DAC2CEECD50CB9B00032FA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5368FBA9E00F0CD8E8E96252F0E4B25 /* Cocoa.framework in Frameworks */,
+				C7F3637EA4024958D69CF06B766B85A1 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FF8F62093F3EF2932011288F0B4F766B /* Frameworks */ = {
+		882CA148BF90BDE663E0150AA9C4B8DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79215B6FF28858A46B7A489875F0A58A /* Cocoa.framework in Frameworks */,
+				91A2FC12164D419F79AB77034C4B107E /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E1076834CA43955B50BAD37211B85B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29479888C517584E06AEDACC2D468F0A /* Appkit.framework in Frameworks */,
+				3B50801CB9F7B97A4E6C24A565EED9A6 /* Carbon.framework in Frameworks */,
+				D2EB9E899EE89215174A3D4138506448 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		28486D7BF652CD6F0BDC937B0074623C /* Products */ = {
+		03C48FC2D06EE73792ECE55C81EB244C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				CDFA2538FC1BE1071A088302CE6C5AB6 /* Pods_SDisk.framework */,
-				07ACC63ADE1DFDAC7018F4902EF3D367 /* Swipt.framework */,
+				AC97A1C3EDFF1BB94183FA609191B2DB /* Swipt.modulemap */,
+				8CA94660CCA3A841B615F2D1D0AC9787 /* Swipt.xcconfig */,
+				C67892E5C07C1EDC8908ED5DFE847B71 /* Swipt-dummy.m */,
+				0733C9085DD2DEA57578BA52B86B3F74 /* Swipt-Info.plist */,
+				0F19464C720BC0F42894ED35B27AE11F /* Swipt-prefix.pch */,
+				466AC19083408E01C228ADF027EDA73A /* Swipt-umbrella.h */,
 			);
-			name = Products;
+			name = "Support Files";
+			path = "../Target Support Files/Swipt";
 			sourceTree = "<group>";
 		};
-		39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */ = {
+		499DCF817A9A5B3DE403D9694ED528A9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FA7AC8429882A95AA0810A9DCDED54FF /* OS X */,
+				AB00FAD4014765A31095F7C4F48CE07B /* HotKey */,
+				92A69815EAE1BCF6ECD5D0B8B4FA4994 /* Swipt */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		6E858F86E366DB82426D044DD8E8591D /* Targets Support Files */ = {
@@ -104,13 +151,27 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		788F12D2F13074DCF1CDA981919E0B2C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C8E1E26F7E25EC5711F0643D9D2AD7E8 /* HotKey.modulemap */,
+				1F0CCAF9BF373BCE6E1A2B00FA9FDC9C /* HotKey.xcconfig */,
+				E050AF8E996DD2076323AE5D60F70BBC /* HotKey-dummy.m */,
+				61D5EC4C9041975AED83F3C23F00E5FD /* HotKey-Info.plist */,
+				26BB50864213ED72A325BC10CA892C60 /* HotKey-prefix.pch */,
+				BA02AF4D8B6A8A1A65DFA057293A18B5 /* HotKey-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/HotKey";
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */,
-				9ADA46DBAD74C358FF69DA26E58A4402 /* Pods */,
-				28486D7BF652CD6F0BDC937B0074623C /* Products */,
+				96D996393384F21972E2DD81788EE22C /* Frameworks */,
+				499DCF817A9A5B3DE403D9694ED528A9 /* Pods */,
+				98F4F9A3D4946E5499BD5DA81E40AAD0 /* Products */,
 				6E858F86E366DB82426D044DD8E8591D /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -132,80 +193,121 @@
 			path = "Target Support Files/Pods-SDisk";
 			sourceTree = "<group>";
 		};
-		9ADA46DBAD74C358FF69DA26E58A4402 /* Pods */ = {
+		92A69815EAE1BCF6ECD5D0B8B4FA4994 /* Swipt */ = {
 			isa = PBXGroup;
 			children = (
-				D2074067019A9E39AE97EDAB0CAD74E1 /* Swipt */,
+				A786A53367F0CB5CC8111B9FC0E639F7 /* Constants+Aliases.swift */,
+				2078E0FDBE569305BC237BB4E7C69687 /* Errors.swift */,
+				07D753BCAD12B294EAD02696BC273022 /* Privileges.swift */,
+				98FD34870DB8B39CFF9E5A148218A525 /* ShellType.swift */,
+				E1C9DD409E1438CFCFB871819A98031A /* SwiptCore.swift */,
+				3205399F40E58E220253F2D6606AA34F /* SwiptManager.swift */,
+				03C48FC2D06EE73792ECE55C81EB244C /* Support Files */,
 			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		D2074067019A9E39AE97EDAB0CAD74E1 /* Swipt */ = {
-			isa = PBXGroup;
-			children = (
-				5AAFE4C450252FE7FF2F9D8339F0607C /* Constants+Aliases.swift */,
-				768CC88E25F6D1F1785EE5E167F1D891 /* Errors.swift */,
-				0460D14BF289110B4A59EECFBE7674E7 /* Privileges.swift */,
-				A4CC8ED97FECED4A4974EF79BE638BBE /* ShellType.swift */,
-				B9C5ADD5F60C1502FFF698E9E08F1153 /* SwiptCore.swift */,
-				1E57CE6A86C5429F7592E97A13263E79 /* SwiptManager.swift */,
-				FDFB23B4BD28D620071423F516FAF774 /* Support Files */,
-			);
+			name = Swipt;
 			path = Swipt;
 			sourceTree = "<group>";
 		};
-		FA7AC8429882A95AA0810A9DCDED54FF /* OS X */ = {
+		96D996393384F21972E2DD81788EE22C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */,
+				B26A861583AAEC07701CA5E836B21759 /* OS X */,
 			);
-			name = "OS X";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FDFB23B4BD28D620071423F516FAF774 /* Support Files */ = {
+		98F4F9A3D4946E5499BD5DA81E40AAD0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				37B58ED1B7A75C7217417D65A35B4C1C /* Swipt.modulemap */,
-				6089630D6D4CEE0A024CAD0D16DCDC8F /* Swipt.xcconfig */,
-				2F2715423C969EF2EEA98594D81FC598 /* Swipt-dummy.m */,
-				3F19379266B5CA69E92170976725FEF5 /* Swipt-Info.plist */,
-				1EECD86C4E2CDAF88152E6ED748F478F /* Swipt-prefix.pch */,
-				37D8DB02B9C152E892F050741A57BFD2 /* Swipt-umbrella.h */,
+				BBA029B84D8B6751282B058B94150623 /* HotKey.framework */,
+				8C316204A3363DDEDFF12612BA10CA52 /* Pods_SDisk.framework */,
+				0BDC8CA913895BD969AE2D822746A707 /* Swipt.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Swipt";
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB00FAD4014765A31095F7C4F48CE07B /* HotKey */ = {
+			isa = PBXGroup;
+			children = (
+				BBF2A5CA5F08E6381452C59E37F7C71D /* HotKey.swift */,
+				59D3F250A35B235CFBA81CE6E87B3AAB /* HotKeysController.swift */,
+				6249A85AD92269D7A2C91BDD6BF6B8F0 /* Key.swift */,
+				FB0EA52DF7A4DC88F548B4BAE82B93AF /* KeyCombo.swift */,
+				2DA5C227656D413FAABC5A263A279835 /* NSEventModifierFlags+HotKey.swift */,
+				788F12D2F13074DCF1CDA981919E0B2C /* Support Files */,
+			);
+			name = HotKey;
+			path = HotKey;
+			sourceTree = "<group>";
+		};
+		B26A861583AAEC07701CA5E836B21759 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				A6AB35A0CC7D0EC7FAC38086EA585D1E /* Appkit.framework */,
+				ACA4FF7011117549B1002928323C971C /* Carbon.framework */,
+				CE827E26782B0FDC57B2904F15F6E3EA /* Cocoa.framework */,
+			);
+			name = "OS X";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		CA6FEF964B3241F5BE020C5E01FA5A98 /* Headers */ = {
+		6CCF0696A40EC47021A1A7E0874B6E4B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CE71B51C1FFDFB18421DB590E32B5F4 /* Swipt-umbrella.h in Headers */,
+				D98BBED62FA460826B23DC9E52FE6918 /* HotKey-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCA2E29A535045E732581D181605A623 /* Headers */ = {
+		B5A416AC45202AB3589C6EB918B881BF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8000E5DD24D734CB2CB801CB88EE3E46 /* Pods-SDisk-umbrella.h in Headers */,
+				148C459BC9376C0E0C7B97AEF4DD06CD /* Swipt-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2F629A5260CC3A8D4EA48C8394BB71B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61254557D176580607A0BBDA4AC42BE7 /* Pods-SDisk-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7C9B8764290F7C86934BFF01DB7D442F /* Swipt */ = {
+		47D6C7106148E89CE5795E5DA6426294 /* Pods-SDisk */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 398046E8668785ED36A68E2ED6207E7D /* Build configuration list for PBXNativeTarget "Swipt" */;
+			buildConfigurationList = 11DF1B38702A89CA418853F882B36E5F /* Build configuration list for PBXNativeTarget "Pods-SDisk" */;
 			buildPhases = (
-				CA6FEF964B3241F5BE020C5E01FA5A98 /* Headers */,
-				0CE837271B9A913C7654AC9D60A5F8C0 /* Sources */,
-				FF8F62093F3EF2932011288F0B4F766B /* Frameworks */,
-				7B5F32F689BF21A52250F71D46030ADB /* Resources */,
+				D2F629A5260CC3A8D4EA48C8394BB71B /* Headers */,
+				58A432BF18A12573F713EF52920FE65D /* Sources */,
+				882CA148BF90BDE663E0150AA9C4B8DA /* Frameworks */,
+				5FA8E87BABC59179C2D1EBBB26BBD27E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75A6AC341EB40A522E8EC2D6049C00BE /* PBXTargetDependency */,
+				4611099A8B96F80E4BC977404D607544 /* PBXTargetDependency */,
+			);
+			name = "Pods-SDisk";
+			productName = "Pods-SDisk";
+			productReference = 8C316204A3363DDEDFF12612BA10CA52 /* Pods_SDisk.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9185F69B84C10F09E6EAF48FFF8976F3 /* Swipt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A13E51DD85F8A76B20392A985DA5511B /* Build configuration list for PBXNativeTarget "Swipt" */;
+			buildPhases = (
+				B5A416AC45202AB3589C6EB918B881BF /* Headers */,
+				CD3F0D4124B6813A43B0A678B8841E2C /* Sources */,
+				36374CCBF5DAC2CEECD50CB9B00032FA /* Frameworks */,
+				EDFD346A003B0EDEE23ADD5A6F43ACB9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -213,26 +315,25 @@
 			);
 			name = Swipt;
 			productName = Swipt;
-			productReference = 07ACC63ADE1DFDAC7018F4902EF3D367 /* Swipt.framework */;
+			productReference = 0BDC8CA913895BD969AE2D822746A707 /* Swipt.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FD789FFFB8FA316C5519DBECDDFA85DA /* Pods-SDisk */ = {
+		9C36B47346F672096EB78045242C8C3B /* HotKey */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 33287A31F56C554A567335C073EEA7A7 /* Build configuration list for PBXNativeTarget "Pods-SDisk" */;
+			buildConfigurationList = F9CC6AD4D351D809B1A477A3663C9B48 /* Build configuration list for PBXNativeTarget "HotKey" */;
 			buildPhases = (
-				DCA2E29A535045E732581D181605A623 /* Headers */,
-				4D50123C2EED89DF1ADF023A7A2E2DA9 /* Sources */,
-				F0D3640358FB1905C5B45D11E885EE3C /* Frameworks */,
-				9CC2A8F3AE10DCBB6239918EE72F0435 /* Resources */,
+				6CCF0696A40EC47021A1A7E0874B6E4B /* Headers */,
+				A4B9B122A012829EB3FBF1A917FA8818 /* Sources */,
+				9E1076834CA43955B50BAD37211B85B6 /* Frameworks */,
+				192B452A0F99AA180120BAF21292F2FC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1655DADE40B6F993B68B7F9B4DD38FA3 /* PBXTargetDependency */,
 			);
-			name = "Pods-SDisk";
-			productName = "Pods-SDisk";
-			productReference = CDFA2538FC1BE1071A088302CE6C5AB6 /* Pods_SDisk.framework */;
+			name = HotKey;
+			productName = HotKey;
+			productReference = BBA029B84D8B6751282B058B94150623 /* HotKey.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -242,7 +343,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -252,25 +353,33 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 28486D7BF652CD6F0BDC937B0074623C /* Products */;
+			productRefGroup = 98F4F9A3D4946E5499BD5DA81E40AAD0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FD789FFFB8FA316C5519DBECDDFA85DA /* Pods-SDisk */,
-				7C9B8764290F7C86934BFF01DB7D442F /* Swipt */,
+				9C36B47346F672096EB78045242C8C3B /* HotKey */,
+				47D6C7106148E89CE5795E5DA6426294 /* Pods-SDisk */,
+				9185F69B84C10F09E6EAF48FFF8976F3 /* Swipt */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7B5F32F689BF21A52250F71D46030ADB /* Resources */ = {
+		192B452A0F99AA180120BAF21292F2FC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9CC2A8F3AE10DCBB6239918EE72F0435 /* Resources */ = {
+		5FA8E87BABC59179C2D1EBBB26BBD27E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDFD346A003B0EDEE23ADD5A6F43ACB9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -280,44 +389,64 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0CE837271B9A913C7654AC9D60A5F8C0 /* Sources */ = {
+		58A432BF18A12573F713EF52920FE65D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ADE09019EBC66EA10EDEC7F5BCED5CF /* Constants+Aliases.swift in Sources */,
-				719F17F3E9BBC2F7851251E8A4E18383 /* Errors.swift in Sources */,
-				6C08AC21D6824E2D804DC09F93533997 /* Privileges.swift in Sources */,
-				AFAD2D3E647FAFFBD14656D169B5F85C /* ShellType.swift in Sources */,
-				88F4438265BD56E1AA1164323058B7AE /* Swipt-dummy.m in Sources */,
-				05B262387EC83D015F08433044D5F472 /* SwiptCore.swift in Sources */,
-				1B92927A3C715E4D2B12871B99C46B1E /* SwiptManager.swift in Sources */,
+				F59070BE77D0FCB7015978AC18BF7FF8 /* Pods-SDisk-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D50123C2EED89DF1ADF023A7A2E2DA9 /* Sources */ = {
+		A4B9B122A012829EB3FBF1A917FA8818 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96E6CB8246C88E46ED3FBB5ACDC359BF /* Pods-SDisk-dummy.m in Sources */,
+				47B87EA507C974985A5F36436A2BAC13 /* HotKey-dummy.m in Sources */,
+				481A436AB326C0CD4958BD9E967A1C07 /* HotKey.swift in Sources */,
+				9F5D6E463C136A37BDCF7B5DADD4C3B3 /* HotKeysController.swift in Sources */,
+				6E9BA4967BC1CCC3121A0206AEEC6723 /* Key.swift in Sources */,
+				A6B1367C004074E80C0237EF1183EB50 /* KeyCombo.swift in Sources */,
+				B2AE45C63ED45349E733E33E4B80CA8D /* NSEventModifierFlags+HotKey.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD3F0D4124B6813A43B0A678B8841E2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F4AC1B6E5E0ED8427475035B45F2C0 /* Constants+Aliases.swift in Sources */,
+				E2DD64A0FC5E2A94A06A4D0BD6A65E8C /* Errors.swift in Sources */,
+				FA7ABF1D176BFB1C54E07A8FCFB6CE8E /* Privileges.swift in Sources */,
+				C8FF2B1EC6283F971D424019EB63A5D3 /* ShellType.swift in Sources */,
+				C1D1628FCBE1495402C9F294DEE613D6 /* Swipt-dummy.m in Sources */,
+				E352DC310534B9E249DAEBF5ED8D4595 /* SwiptCore.swift in Sources */,
+				D9905DDDC7A07D98087C9F4FC2EF32F7 /* SwiptManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1655DADE40B6F993B68B7F9B4DD38FA3 /* PBXTargetDependency */ = {
+		4611099A8B96F80E4BC977404D607544 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Swipt;
-			target = 7C9B8764290F7C86934BFF01DB7D442F /* Swipt */;
-			targetProxy = 9846C5EBFF1BAF9FC31937935FE0A1F6 /* PBXContainerItemProxy */;
+			target = 9185F69B84C10F09E6EAF48FFF8976F3 /* Swipt */;
+			targetProxy = B640E3910EA7479A8A55DBE942013869 /* PBXContainerItemProxy */;
+		};
+		75A6AC341EB40A522E8EC2D6049C00BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HotKey;
+			target = 9C36B47346F672096EB78045242C8C3B /* HotKey */;
+			targetProxy = 9F343619A8941CEFC3F6A98B6864C329 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3EE98F7F6380051FB2DBD21BB0F95F6C /* Release */ = {
+		07721F1AF4026256FEB804E98A8D3503 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6089630D6D4CEE0A024CAD0D16DCDC8F /* Swipt.xcconfig */;
+			baseConfigurationReference = 8CA94660CCA3A841B615F2D1D0AC9787 /* Swipt.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -333,7 +462,11 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Swipt/Swipt-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Swipt/Swipt-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = "Target Support Files/Swipt/Swipt.modulemap";
 				PRODUCT_MODULE_NAME = Swipt;
@@ -341,52 +474,20 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		569EE39FB6A5F23DE4C005BD113E9E0A /* Debug */ = {
+		88EBDBFE975397634A380AEEA4C0EEEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6089630D6D4CEE0A024CAD0D16DCDC8F /* Swipt.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/Swipt/Swipt-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Swipt/Swipt-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/Swipt/Swipt.modulemap";
-				PRODUCT_MODULE_NAME = Swipt;
-				PRODUCT_NAME = Swipt;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		58D7559C63B4C26E495EF7D047C31783 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B2C6F0CDADF4A88E34786D22CE6C91E /* Pods-SDisk.release.xcconfig */;
+			baseConfigurationReference = 98A41849C28C021F81C1B557688D031A /* Pods-SDisk.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -401,7 +502,11 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk.modulemap";
@@ -412,11 +517,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		9992CE2C5F65320F0081E9A0ACAFFF91 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -477,12 +583,11 @@
 			};
 			name = Release;
 		};
-		AD234315F0181E396356F4CC9A2CD262 /* Debug */ = {
+		9E4C421D6F4E5F7F46CD59576B1271AF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98A41849C28C021F81C1B557688D031A /* Pods-SDisk.debug.xcconfig */;
+			baseConfigurationReference = 1F0CCAF9BF373BCE6E1A2B00FA9FDC9C /* HotKey.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -494,25 +599,66 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/HotKey/HotKey-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/HotKey/HotKey-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULEMAP_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/HotKey/HotKey.modulemap";
+				PRODUCT_MODULE_NAME = HotKey;
+				PRODUCT_NAME = HotKey;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		D7253DAD9C142010FBB734B21A1674B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F0CCAF9BF373BCE6E1A2B00FA9FDC9C /* HotKey.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/HotKey/HotKey-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/HotKey/HotKey-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/HotKey/HotKey.modulemap";
+				PRODUCT_MODULE_NAME = HotKey;
+				PRODUCT_NAME = HotKey;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		D79C9CF82E0503B6800775A4C33DD9A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -578,9 +724,99 @@
 			};
 			name = Debug;
 		};
+		F515748CD8EA0D73450D32C759D59CED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CA94660CCA3A841B615F2D1D0AC9787 /* Swipt.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/Swipt/Swipt-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Swipt/Swipt-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Swipt/Swipt.modulemap";
+				PRODUCT_MODULE_NAME = Swipt;
+				PRODUCT_NAME = Swipt;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F7F313B6466ABBAC17C24FD336680E1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B2C6F0CDADF4A88E34786D22CE6C91E /* Pods-SDisk.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULEMAP_FILE = "Target Support Files/Pods-SDisk/Pods-SDisk.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		11DF1B38702A89CA418853F882B36E5F /* Build configuration list for PBXNativeTarget "Pods-SDisk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88EBDBFE975397634A380AEEA4C0EEEC /* Debug */,
+				F7F313B6466ABBAC17C24FD336680E1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -590,20 +826,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		33287A31F56C554A567335C073EEA7A7 /* Build configuration list for PBXNativeTarget "Pods-SDisk" */ = {
+		A13E51DD85F8A76B20392A985DA5511B /* Build configuration list for PBXNativeTarget "Swipt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD234315F0181E396356F4CC9A2CD262 /* Debug */,
-				58D7559C63B4C26E495EF7D047C31783 /* Release */,
+				F515748CD8EA0D73450D32C759D59CED /* Debug */,
+				07721F1AF4026256FEB804E98A8D3503 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		398046E8668785ED36A68E2ED6207E7D /* Build configuration list for PBXNativeTarget "Swipt" */ = {
+		F9CC6AD4D351D809B1A477A3663C9B48 /* Build configuration list for PBXNativeTarget "HotKey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				569EE39FB6A5F23DE4C005BD113E9E0A /* Debug */,
-				3EE98F7F6380051FB2DBD21BB0F95F6C /* Release */,
+				9E4C421D6F4E5F7F46CD59576B1271AF /* Debug */,
+				D7253DAD9C142010FBB734B21A1674B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
