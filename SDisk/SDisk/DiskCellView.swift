@@ -44,6 +44,9 @@ class DiskCellView: NSTableCellView {
     /// Stores a reference to a disk for which to determine actions.
     weak var actionableDisk: Disk?
     
+    /// Determines whether cell is eligible for selection or not.
+    var selectable: Bool = false
+    
 }
 
 // MARK: - Manage cell actions.
@@ -70,6 +73,7 @@ extension DiskCellView {
     /// - Parameter preload: State to set.
     func state(isPreloading preload: Bool) {
         let valueToSet = CGFloat(!preload)
+        selectable = !preload
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.75
             if let nameLabel = diskNameLabel {

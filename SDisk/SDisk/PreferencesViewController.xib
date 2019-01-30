@@ -79,6 +79,28 @@
                                                 <rect key="frame" x="1" y="0.0" width="397" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
+                                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sgb-kS-y3z">
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="74"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ftR-RK-vjU" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="10" y="13" width="48" height="48"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2qD-Qc-ssu" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="66" y="50" width="180" height="8"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fus-A5-f0V" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="66" y="13" width="110" height="8"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Nx-ca-cBa" customClass="CellWaitView" customModule="SDisk" customModuleProvider="target">
+                                                                <rect key="frame" x="68" y="32" width="312" height="8"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            </customView>
+                                                        </subviews>
+                                                    </customView>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zFd-NO-9TD">
                                                         <rect key="frame" x="376" y="8" width="14" height="12"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -167,6 +189,7 @@
                                                     <outlet property="diskMountLabel" destination="6zO-Qs-leW" id="Lr3-A5-fse"/>
                                                     <outlet property="diskMountStatusView" destination="zFd-NO-9TD" id="dCk-nT-La6"/>
                                                     <outlet property="diskNameLabel" destination="fL7-sI-kJv" id="VPy-FT-3Y7"/>
+                                                    <outlet property="diskPreloadView" destination="sgb-kS-y3z" id="lnm-qe-1Yg"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>

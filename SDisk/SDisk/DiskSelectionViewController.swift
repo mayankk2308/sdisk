@@ -65,6 +65,7 @@ class DiskSelectionViewController: NSViewController {
     
     @IBAction func addSelectedDisks(_ sender: Any) {
         let indexes = self.selectionTableView.selectedRowIndexes
+        selectionTableView.isEnabled = false
         addProgressIndicator.startAnimation(self)
         addButton.isEnabled = false
         exitButton.isEnabled = false
@@ -75,6 +76,7 @@ class DiskSelectionViewController: NSViewController {
             }
             DispatchQueue.main.async {
                 self.dismiss(self)
+                self.selectionTableView.isEnabled = true
                 self.addButton.isEnabled = true
                 self.exitButton.isEnabled = true
                 self.reloadButton.isEnabled = true
@@ -104,6 +106,11 @@ extension DiskSelectionViewController: NSTableViewDelegate, NSTableViewDataSourc
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "diskFetchCell"), owner: self) as! DiskCellView
         cell.update(fromDisk: disks[row], withRow: row)
         return cell
+    }
+    
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        guard let cell = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? DiskCellView else { return false }
+        return cell.selectable
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
