@@ -37,7 +37,7 @@ class DiskCapacityBarView: NSView {
         } else {
             let gradient = CAGradientLayer()
             gradient.cornerRadius = 3.5
-            gradient.borderColor = NSColor.quaternaryLabelColor.cgColor
+            gradient.borderColor = NSColor.scrollBarColor.withAlphaComponent(0.3).cgColor
             gradient.borderWidth = 1.0
             gradient.colors = [availableColors[index % availableColors.count].cgColor, availableColors[index % availableColors.count].withAlphaComponent(0.6).cgColor, NSColor.scrollBarColor.withAlphaComponent(0.2).cgColor, NSColor.scrollBarColor.withAlphaComponent(0.2).cgColor]
             gradient.startPoint = CGPoint(x: 0, y: 0.5)
