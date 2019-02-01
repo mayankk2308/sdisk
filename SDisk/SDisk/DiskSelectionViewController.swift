@@ -117,3 +117,18 @@ extension DiskSelectionViewController: NSTableViewDelegate, NSTableViewDataSourc
         addButton.isEnabled = selectionTableView.selectedRowIndexes.count > 0
     }
 }
+
+// MARK: - Handle keyboard shortcuts.
+extension DiskSelectionViewController {
+    
+    override func keyDown(with event: NSEvent) {
+        let eventFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        if eventFlags == [.command, .shift] && event.characters == "a" {
+            selectionTableView.deselectAll(self)
+        }
+        else if eventFlags == [.command] && event.characters == "a" {
+            selectionTableView.selectAll(self)
+        }
+    }
+    
+}
