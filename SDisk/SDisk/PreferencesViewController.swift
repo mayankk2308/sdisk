@@ -26,6 +26,8 @@ class PreferencesViewController: NSViewController {
     
     var window: NSWindow! = nil
     
+    var requested = false
+    
     let selectionViewController = DiskSelectionViewController()
     
     /// Refreshes list of configured disks.
@@ -78,11 +80,45 @@ class PreferencesViewController: NSViewController {
 // MARK: - Handle disk events.
 extension PreferencesViewController: DADiskManagerDelegate {
     
+    /// Requests tableview updates.
+    private func requestUpdates() {
+        if !requested {
+            requested = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [unowned self] in
+                self.diskTableView.reloadData()
+                self.requested = false
+            }
+        }
+    }
+    
     /// Manage tableview for changed disk.
     ///
     /// - Parameter disk: The changed disk.
     func postDiskDescriptionChanged(changedDisk disk: DADisk?) {
-        diskTableView.reloadData()
+        if !requested {
+            requested = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
+                self.diskTableView.reloadData()
+                self.requested = false
+            }
+        }
+    }
+    
+    /// Manage tableview for suddenly disappearing disks.
+    ///
+    /// - Parameter disk: The disappearing whole disk.
+    func postDiskDisappearence(disappearedDisk disk: DADisk) {
+        if !requested {
+            requested = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
+                self.diskTableView.isEnabled = false
+                DADiskManager.shared.fetchExternalDisks()
+                DADiskManager.shared.fetchConfiguredDisks()
+                self.diskTableView.reloadData()
+                self.diskTableView.isEnabled = true
+                self.requested = false
+            }
+        }
     }
     
 }

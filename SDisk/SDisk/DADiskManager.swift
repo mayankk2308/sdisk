@@ -63,6 +63,7 @@ class DADiskManager {
         DARegisterDiskUnmountApprovalCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidUnmount, nil)
         DARegisterDiskMountApprovalCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidMount, nil)
         DARegisterDiskDescriptionChangedCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), nil, diskDidChange, nil)
+        DARegisterDiskDisappearedCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidDisappear, nil)
         DASessionScheduleWithRunLoop(registeredSession, RunLoop.main.getCFRunLoop(), RunLoop.Mode.default as CFString)
         fetchExternalDisks()
         fetchConfiguredDisks()
@@ -130,6 +131,11 @@ class DADiskManager {
             for delegate in DADiskManager.shared.delegates { delegate.postDiskUnmount(unmountedDisk: disk) }
         }
     }
+    
+    /// Called after a whole disk is ejected or a disk suddenly disappears.
+    var diskDidDisappear: DADiskDisappearedCallback = { disk, _ in
+        for delegate in DADiskManager.shared.delegates { delegate.postDiskDisappearence(disappearedDisk: disk) }
+    }
 }
 
 // MARK: - Manages disk fetching, configuration, and more.
@@ -163,6 +169,7 @@ extension DADiskManager {
     /// Retrieves configured disks.
     func fetchConfiguredDisks(onCompletion handler: ((Bool) -> Void)? = nil) {
         var success = true
+        diskMap = SuperMap<DADisk, Disk>()
         DispatchQueue.global(qos: .default).async {
             let fetchRequest = NSFetchRequest<Disk>(entityName: "Disk")
             do {

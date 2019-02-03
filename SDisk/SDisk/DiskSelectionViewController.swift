@@ -30,6 +30,7 @@ class DiskSelectionViewController: NSViewController {
         selectionTableView.delegate = self
     }
     
+    /// Reloads all disks.
     private func reloadDisks() {
         actionPaneView.isHidden = true
         mainScrollView.isHidden = true
@@ -63,6 +64,9 @@ class DiskSelectionViewController: NSViewController {
         reloadDisks()
     }
     
+    /// Adds all selected disks for configuration.
+    ///
+    /// - Parameter sender: The element responsible for the action.
     @IBAction func addSelectedDisks(_ sender: Any) {
         let indexes = self.selectionTableView.selectedRowIndexes
         selectionTableView.isEnabled = false
@@ -86,10 +90,16 @@ class DiskSelectionViewController: NSViewController {
         }
     }
     
+    /// Reloads all disks.
+    ///
+    /// - Parameter sender: The element responsible for the action.
     @IBAction func reloadDisks(_ sender: Any) {
         reloadDisks()
     }
     
+    /// Dismisses the sheet view.
+    ///
+    /// - Parameter sender: The element responsible for the action.
     @IBAction func dismissView(_ sender: Any) {
         dismiss(self)
     }

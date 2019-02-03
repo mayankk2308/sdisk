@@ -126,30 +126,44 @@ protocol DADiskManagerDelegate {
     /// Notification for delegate after an unmount callback.
     func preDiskUnmount()
     
-    /// Notification for delegate after an unmount callback.
+    /// Notification for delegate after an unmount callback
+    ///
+    /// - Parameter disk: Unmounted disk.
     func postDiskUnmount(unmountedDisk disk: DADisk?)
     
     /// Notification for delegate after a disk mount.
+    ///
+    /// - Parameter disk: Mounted disk.
     func postDiskMount(mountedDisk disk: DADisk)
     
     /// Notification for delegate after a disk description changes.
+    ///
+    /// - Parameter disk: Changed disk.
     func postDiskDescriptionChanged(changedDisk disk: DADisk?)
     
+    /// Notification for delegate after a disk disappears.
+    ///
+    /// - Parameter disk: Disappearing disk.
+    func postDiskDisappearence(disappearedDisk disk: DADisk)
+    
 }
 
-// MARK: - Defaults for the delegate.
+// MARK: - Defaults for the delegate, making requirements optional.
 extension DADiskManagerDelegate {
     
-    func postDiskMount(mountedDisk disk: DADisk) {}
+    func postDiskMount(mountedDisk disk: DADisk) { return }
     
-    func postDiskDescriptionChanged(changedDisk disk: DADisk?) {}
+    func postDiskDescriptionChanged(changedDisk disk: DADisk?) { return }
     
-    func preDiskUnmount() {}
+    func preDiskUnmount() { return }
     
-    func postDiskUnmount(unmountedDisk disk: DADisk?) {}
+    func postDiskUnmount(unmountedDisk disk: DADisk?) { return }
+    
+    func postDiskDisappearence(disappearedDisk disk: DADisk) { return }
 
 }
 
+// MARK: - Convenience conversions for CGFloat values.
 extension CGFloat {
     
     init(_ bool: Bool) {

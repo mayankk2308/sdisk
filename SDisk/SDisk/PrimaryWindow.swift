@@ -11,6 +11,10 @@ import Cocoa
 /// Declares the primary window for SDisk.
 class PrimaryWindow: NSWindow {
     
+    /// Custom window animation resize time.
+    ///
+    /// - Parameter newFrame: The new frame to animate to.
+    /// - Returns: Time interval of the animation.
     override func animationResizeTime(_ newFrame: NSRect) -> TimeInterval {
         return 0.3
     }
