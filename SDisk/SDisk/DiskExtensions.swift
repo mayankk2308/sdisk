@@ -99,7 +99,6 @@ extension Disk {
         availableCapacity = capacityData.available
         totalCapacity = capacityData.total
         DADiskManager.shared.diskMap[self] = disk
-        CDS.saveContext()
     }
     
     /// Mount state of the disk.

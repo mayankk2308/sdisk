@@ -79,6 +79,7 @@ class DiskSelectionViewController: NSViewController {
             for index in indexes {
                 self.disks[index].addAsConfigurableDisk()
             }
+            CDS.saveContext()
             DispatchQueue.main.async {
                 self.dismiss(self)
                 self.selectionTableView.isEnabled = true

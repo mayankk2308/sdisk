@@ -42,7 +42,12 @@ class PreferencesViewController: NSViewController {
     ///
     /// - Parameter sender: The element responsible for the action.
     @IBAction func ejectAllDisks(_ sender: Any) {
+        let originalStatus = statusLabel.stringValue
+        statusLabel.stringValue = "All disk eject initiated."
         DADiskManager.shared.unmountAllDisks()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [unowned self] in
+            self.statusLabel.stringValue = originalStatus
+        }
     }
     
     /// Removes all configured disks.
@@ -91,17 +96,25 @@ extension PreferencesViewController: DADiskManagerDelegate {
         }
     }
     
+    /// Manage tableview for mounted disks.
+    ///
+    /// - Parameter disk: The mounted disk.
+    func postDiskMount(mountedDisk disk: DADisk) {
+        requestUpdates()
+    }
+    
+    /// Manage tableview for unmounted disks.
+    ///
+    /// - Parameter disk: The unmounted disk.
+    func postDiskUnmount(unmountedDisk disk: DADisk?) {
+        requestUpdates()
+    }
+    
     /// Manage tableview for changed disk.
     ///
     /// - Parameter disk: The changed disk.
     func postDiskDescriptionChanged(changedDisk disk: DADisk?) {
-        if !requested {
-            requested = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
-                self.diskTableView.reloadData()
-                self.requested = false
-            }
-        }
+        requestUpdates()
     }
     
     /// Manage tableview for suddenly disappearing disks.
@@ -221,7 +234,7 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
                 self.manageWindow()
                 var windowFrame = self.window.frame
                 windowFrame.size.height -= self.viewDelta
-                tableView.frame = windowFrame
+                tableView.setFrameSize(windowFrame.size)
             }
             deleteAction.image = NSImage(named: NSImage.Name("NSStopProgressFreestandingTemplate"))
             deleteAction.backgroundColor = NSColor.systemRed.withAlphaComponent(0.9)
