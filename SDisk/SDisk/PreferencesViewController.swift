@@ -217,6 +217,9 @@ extension PreferencesViewController: NSTableViewDelegate, NSTableViewDataSource 
                 }
                 DADiskManager.shared.removeConfiguredDisk(DADiskManager.shared.configuredDisks[index])
                 self.manageWindow()
+                var windowFrame = self.window.frame
+                windowFrame.size.height -= self.viewDelta
+                tableView.frame = windowFrame
             }
             deleteAction.image = NSImage(named: NSImage.Name("NSStopProgressFreestandingTemplate"))
             deleteAction.backgroundColor = NSColor.systemRed.withAlphaComponent(0.9)

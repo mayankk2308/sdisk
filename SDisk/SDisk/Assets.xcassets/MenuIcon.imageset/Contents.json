@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "SDisk Mini-1.png",
       "scale" : "1x"
     },
     {
@@ -20,6 +21,6 @@
   },
   "properties" : {
     "template-rendering-intent" : "template",
-    "auto-scaling" : "auto"
+    "preserves-vector-representation" : true
   }
 }
