@@ -43,10 +43,10 @@ class PreferencesViewController: NSViewController {
     /// - Parameter sender: The element responsible for the action.
     @IBAction func ejectAllDisks(_ sender: Any) {
         let originalStatus = statusLabel.stringValue
-        statusLabel.stringValue = "All disk eject initiated."
+        statusLabel.setStringValue("All disk eject initiated.")
         DADiskManager.shared.unmountAllDisks()
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [unowned self] in
-            self.statusLabel.stringValue = originalStatus
+            self.statusLabel.setStringValue(originalStatus)
         }
     }
     
