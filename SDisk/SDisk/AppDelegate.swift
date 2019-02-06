@@ -14,7 +14,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let preferencesWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 270), styleMask: [.closable, .miniaturizable, .titled], backing: .buffered, defer: false)
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        MenuManager.shared.prepare()
+        DispatchQueue.global(qos: .userInitiated).async {
+            DADiskManager.shared.fetchExternalDisks { _ in
+                DADiskManager.shared.fetchConfiguredDisks { _ in
+                    DispatchQueue.main.async {
+                        MenuManager.shared.prepare()
+                    }
+                }
+            }
+        }
     }
 
     func applicationWillFinishLaunching(_ notification: Notification) {

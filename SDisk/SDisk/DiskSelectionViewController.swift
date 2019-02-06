@@ -58,6 +58,7 @@ class DiskSelectionViewController: NSViewController {
     
     override func viewDidDisappear() {
         disks.removeAll()
+        addButton.isEnabled = false
     }
     
     override func viewWillAppear() {

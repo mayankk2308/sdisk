@@ -183,12 +183,14 @@ extension PreferencesViewController {
     /// Refreshes all disks.
     func refreshDisks() {
         DispatchQueue.global(qos: .default).async {
-            DADiskManager.shared.fetchExternalDisks()
-            DADiskManager.shared.fetchConfiguredDisks()
-            DispatchQueue.main.async {
-                self.toggleUpdateMode(enableItems: true)
-                self.diskTableView.reloadData()
-                self.manageWindow()
+            DADiskManager.shared.fetchExternalDisks { _ in
+                DADiskManager.shared.fetchConfiguredDisks { _ in
+                    DispatchQueue.main.async {
+                        self.toggleUpdateMode(enableItems: true)
+                        self.diskTableView.reloadData()
+                        self.manageWindow()
+                    }
+                }
             }
         }
     }

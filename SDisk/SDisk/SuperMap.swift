@@ -53,5 +53,5 @@ struct SuperMap<K: Hashable, V: Hashable> {
     subscript(_ key: K) -> V? {
         mutating get { return forward[key] }
         set { forward[key] = newValue }
-    }    
+    }
 }

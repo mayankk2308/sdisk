@@ -69,19 +69,8 @@ extension DADisk {
     ///
     /// - Returns: Added object.
     func addAsConfigurableDisk() {
-        guard let data = diskData(),
-            let capacityData = capacity(withDiskData: data),
-            let diskName = name(withDiskData: data),
-            let diskUUID = uniqueID(withDiskData: data),
-            let image = icon(withDiskData: data) else { return }
         let configuredDisk = Disk(context: CDS.persistentContainer.viewContext)
-        configuredDisk.availableCapacity = capacityData.available
-        configuredDisk.totalCapacity = capacityData.total
-        configuredDisk.uniqueID = diskUUID
-        configuredDisk.name = diskName
-        configuredDisk.icon = image
-        CDS.saveContext()
-        DADiskManager.shared.diskMap[self] = configuredDisk
+        configuredDisk.updateFrom(arbDisk: self)
         DADiskManager.shared.configuredDisks.append(configuredDisk)
     }
     
@@ -109,7 +98,7 @@ extension Disk {
         icon = image
         availableCapacity = capacityData.available
         totalCapacity = capacityData.total
-        DADiskManager.shared.diskMap[disk] = self
+        DADiskManager.shared.diskMap[self] = disk
         CDS.saveContext()
     }
     

@@ -65,8 +65,6 @@ class DADiskManager {
         DARegisterDiskDescriptionChangedCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), nil, diskDidChange, nil)
         DARegisterDiskDisappearedCallback(registeredSession, kDADiskDescriptionMatchVolumeMountable.takeUnretainedValue(), diskDidDisappear, nil)
         DASessionScheduleWithRunLoop(registeredSession, RunLoop.main.getCFRunLoop(), RunLoop.Mode.default as CFString)
-        fetchExternalDisks()
-        fetchConfiguredDisks()
     }
     
     deinit {
@@ -174,7 +172,9 @@ extension DADiskManager {
             let fetchRequest = NSFetchRequest<Disk>(entityName: "Disk")
             do {
                 self.configuredDisks = try CDS.persistentContainer.viewContext.fetch(fetchRequest)
-                MenuManager.shared.update(withStatus: "Volumes Configured: \(self.configuredDisks.count == 0 ? "None" : "\(self.configuredDisks.count)")")
+                DispatchQueue.main.async {
+                    MenuManager.shared.update(withStatus: "Volumes Configured: \(self.configuredDisks.count == 0 ? "None" : "\(self.configuredDisks.count)")")
+                }
                 for savedDisk in self.configuredDisks {
                     for disk in self.currentDisks {
                         guard let data = disk.diskData(),
@@ -241,7 +241,6 @@ extension DADiskManager {
         for del in delegates { del.preDiskUnmount() }
         fetchExternalDisks { success in
             if !success {
-                // error handling
                 self.ejectMode = false
                 return
             }
