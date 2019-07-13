@@ -67,7 +67,7 @@ class SDTaskManager {
     ///
     /// - Parameter task: `SDTask` to remove.
     func removeTask(_ task: SDTask) {
-        guard let index = tasks.index(of: task) else { return }
+        guard let index = tasks.firstIndex(of: task) else { return }
         managedContext.delete(tasks[index])
         CDS.saveContext {
             self.tasks.remove(at: index)

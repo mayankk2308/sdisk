@@ -76,7 +76,7 @@ class DADiskManager {
     var diskDidUnmount: DADiskUnmountApprovalCallback = { disk, _ in
         DADiskManager.shared.performTask(withDisk: disk, withTaskType: .onUnmount)
         DADiskManager.shared.diskMap[disk] = nil
-        if let index = DADiskManager.shared.currentDisks.index(of: disk) {
+        if let index = DADiskManager.shared.currentDisks.firstIndex(of: disk) {
             DADiskManager.shared.currentDisks.remove(at: index)
         }
         if !DADiskManager.shared.updateQueued && !DADiskManager.shared.ejectMode {
@@ -195,7 +195,7 @@ extension DADiskManager {
     ///
     /// - Parameter disk: `Disk` to remove.
     func removeConfiguredDisk(_ disk: Disk) {
-        guard let index = configuredDisks.index(of: disk) else { return }
+        guard let index = configuredDisks.firstIndex(of: disk) else { return }
         CDS.persistentContainer.viewContext.delete(configuredDisks[index])
         CDS.saveContext {
             self.configuredDisks.remove(at: index)
